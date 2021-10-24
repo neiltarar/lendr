@@ -10,7 +10,7 @@ function navBar() {
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
-          <a class="nav-link" href="#">Log in</a>
+          <a onClick="renderLogin()" class="nav-link" href="#">Log in</a>
           <a class="nav-link" href="#">Sign up</a>
           <a class="nav-link disabled">Product</a>
         </div>
