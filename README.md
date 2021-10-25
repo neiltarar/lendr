@@ -1,15 +1,14 @@
-# lendr
 <div id="top"></div>
 <br />
 <div align="center">
   <a href="https://github.com/aniltarar/lendr">
-    <img src="/Users/lucykendall/sei-projects/unit3project/Lendr.png" alt="Logo" width="80" height="80">
+    <img src="../lendr/client/Lendr.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">Lendr</h3>
+<h3 align="center">A world of devices at your door step</h3>
 
   <p align="center">
-    Lendr lets you find household items locally by reducing waste and upfront costs. Simply search for items within your local area to find what you need.
+    Lendr lets you find household items locally and sustainably. Why spend money on new products when someone nearby might have all you need to complete the job. Be conscious - reuse & reduce.
     <br />
     <a href="https://github.com/aniltarar/lendr"><strong>View the Project</strong></a>
   </p>
