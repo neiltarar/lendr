@@ -44,9 +44,13 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]]
+[![<img src="../lendr/client/Homepage_Lendr.png" alt="Figma" width="80" height="80">][Figma Homepage]]
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email`, `email_client`, `project_title`, `project_description`
+This project is designed to allow users to rent local household items that they may not have on hand at home in order to minimise waste. We want to create a single page application that allows users to add, update and delete products and view products locally using their location.
+
+Users can signup/login/logout securely and will only be able to add, update, delete products with an account. They should be able to leave reviews for other users and search products via category, price and availability.
+
+New products should be featured on the homepage with price/hr and the user hosting them, along with their current review.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -64,12 +68,10 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+How to get started using Lendr:
 
 ### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
+.
 * npm
   ```sh
   npm install npm@latest -g
@@ -80,7 +82,7 @@ This is an example of how to list things you need to use the software and how to
 1. Get a free API Key at [https://example.com](https://example.com)
 2. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/aniltarar/lendr
    ```
 3. Install NPM packages
    ```sh
@@ -108,15 +110,27 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [] Feature 1
-- [] Feature 2
-- [] Feature 3
-    - [] Nested Feature
+Need to have:
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
+- [] CRUD operations for products
+- [] Signup/Login/Logout
+    - [] Sessions
+    - [] Bcrypt passwords   
+- [] Find local products
+    - [] Use location API
+    - [] Find item based on availability, price & category
+- [] User Interface
+    - [] Leave reviews
+
+Nice to have:
+
+- [] UI
+    - [] Calendar selection  
+- [] User interface
+    - [] Message other users
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- CONTRIBUTING -->
