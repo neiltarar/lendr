@@ -46,7 +46,7 @@
 
 <a href="https://www.figma.com/file/Fe3t1ERs92GeCxssqmEZF1/Lendr?node-id=6%3A482"><strong>View the Project on Figma</strong></a>
 
-[![<img src="../lendr/client/Homepage_Lendr.png" alt="Figma" width="80" height="80">][Figma Homepage]]
+[<img src="../lendr/client/Homepage_Lendr.png" alt="Figma" width="80" height="80">][Figma Homepage]
 
 This project is designed to allow users to rent local household items that they may not have on hand at home in order to minimise waste. We want to create a single page application that allows users to add, update and delete products and view products locally using their location.
 
@@ -57,14 +57,12 @@ New products should be featured on the homepage with price/hr and the user hosti
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-
 ### Built With
 
 * [Express.js](https://expressjs.com/)
 * [Bootstrap](https://getbootstrap.com)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- GETTING STARTED -->
@@ -102,8 +100,6 @@ How to get started using Lendr:
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
 _For more examples, please refer to the [Documentation](https://example.com)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -114,22 +110,22 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 Need to have:
 
-- [] CRUD operations for products
-- [] Signup/Login/Logout
-    - [] Sessions
-    - [] Bcrypt passwords   
-- [] Find local products
-    - [] Use location API
-    - [] Find item based on availability, price & category
-- [] User Interface
-    - [] Leave reviews
+- CRUD operations for products
+- Signup/Login/Logout
+    - Sessions
+    - Bcrypt passwords   
+- Find local products
+    - Use location API
+    - Find item based on availability, price & category
+- User Interface
+    - Leave reviews
 
 Nice to have:
 
-- [] UI
-    - [] Calendar selection  
-- [] User interface
-    - [] Message other users
+- UI
+    - Calendar selection  
+- User interface
+    - Message other users
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
