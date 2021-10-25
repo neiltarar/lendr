@@ -1,2 +1,5 @@
 navBar();
-home();
+renderHome();
+renderFooter();
+// renderLogin();
+// renderSignUp();
