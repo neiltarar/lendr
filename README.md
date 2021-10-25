@@ -44,9 +44,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<a href="https://www.figma.com/file/Fe3t1ERs92GeCxssqmEZF1/Lendr?node-id=6%3A482"><strong>View the Project on Figma</strong></a>
+<a href="https://www.figma.com/file/Fe3t1ERs92GeCxssqmEZF1/Lendr?node-id=6%3A482"><strong>Figma Design</strong></a>
 
-[<img src="../lendr/client/Homepage_Lendr.png" alt="Figma" width="80" height="80">][Figma Homepage]
+<img src="../lendr/client/Homepage_Lendr.png" alt="Figma" width="80" height="80">
 
 This project is designed to allow users to rent local household items that they may not have on hand at home in order to minimise waste. We want to create a single page application that allows users to add, update and delete products and view products locally using their location.
 
