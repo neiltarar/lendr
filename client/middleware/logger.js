@@ -6,6 +6,7 @@ router.use((req, res, next) => {
   let method = req.method;
   let url = req.url;
   let status;
+  
   if (res.statusCode !== 200) {
     status = colorFormat.red(res.statusCode);
   } else {
