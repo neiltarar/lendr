@@ -1,10 +1,8 @@
 <div id="top"></div>
 <br />
 <div align="center">
-  <a href="https://github.com/aniltarar/lendr">
-    ![Logo](client/src/Lendr.png)
-  </a>
-
+  <a href="https://github.com/aniltarar/lendr"></a>
+    ![Figma Screenshot](client/src/Lendr.png)
 <h3 align="center">A world of devices at your door step</h3>
 
   <p align="center">
