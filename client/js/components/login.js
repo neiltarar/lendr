@@ -33,7 +33,7 @@ const renderLogin = () => {
                 setTimeout(function() {
                     page.innerHTML = "";
                     renderLoggednavBar();
-                    home();
+                    renderHome();
                 }, 1000);
             })
             .catch((err) => {
