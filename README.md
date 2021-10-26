@@ -2,7 +2,7 @@
 <br />
 <h3 align="center">A world of devices at your door step</h3>
 
-![Lender]](client/src/Lendr.png)
+![Lender](client/src/Lendr.png)
 
   <p align="center">
     Lendr lets you find household items locally and sustainably. Why spend money on new products when someone nearby might have all you need to complete the job. Be conscious - reuse & reduce.
