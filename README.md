@@ -1,7 +1,7 @@
 <div id="top"></div>
 <br />
 <div align="center">
-    ![Logo](client/src/Lendr.png)
+    ![Logo](https://github.com/aniltarar/lendr/blob/283ec7ea9a1b4140e1c865259b80587cd8b839a0/client/src/Lendr.png)
 <h3 align="center">A world of devices at your door step</h3>
 
   <p align="center">
