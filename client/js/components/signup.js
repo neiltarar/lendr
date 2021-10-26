@@ -9,7 +9,7 @@ const renderSignUp = () => {
             <input type="text" name="username">
         </fieldset>
         <fieldset>
-            <label for="email">email:</label><br>
+            <label for="email" placeholder="me@example.com">email:</label><br>
             <input type="text" name="email">
         </fieldset>
         <fieldset>
