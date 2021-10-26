@@ -1,3 +1,4 @@
+
 const renderSignUp = () => {
     const page = document.getElementById("page");
     const loginForm = document.createElement("form");
@@ -46,3 +47,4 @@ loginForm.addEventListener("submit" , (event) => {
 });
 page.replaceChildren(loginForm);
 };
+
