@@ -1,8 +1,10 @@
 <div id="top"></div>
 <br />
-<h3 align="center">A world of devices at your door step</h3>
+<div align="center">
 
-![Lender](client/src/Lendr.png)
+![Logo](client/src/Lendr.png)
+
+<h3 align="center">A world of devices at your door step</h3>
 
   <p align="center">
     Lendr lets you find household items locally and sustainably. Why spend money on new products when someone nearby might have all you need to complete the job. Be conscious - reuse & reduce.
