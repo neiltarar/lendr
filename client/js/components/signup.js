@@ -1,4 +1,3 @@
-
 const renderSignUp = () => {
     const page = document.getElementById("page");
     const loginForm = document.createElement("form");
@@ -18,11 +17,12 @@ const renderSignUp = () => {
             <input type="password" name="password">
         </fieldset>
         <fieldset>
-            <label for="repeat_password">repeat password:</label><br>
-            <input type="password" name="repeat_password">
+            <label for="confirm_password">confirm password:</label><br>
+            <input type="password" name="confirm_password">
         </fieldset>
         <input type="submit" value="sign up"></input>
     `;
+    //do we need a comments section for users?
 
     loginMessage.innerHTML = `
     <h3 style="color: green"> Successfully Logged In </h3>
@@ -35,14 +35,16 @@ loginForm.addEventListener("submit" , (event) => {
     const formData = new FormData(loginForm);
     const data = Object.fromEntries(formData.entries());
     // making post request to see if the user exists in the db
-    axios.post('/api/login' , data)
+    axios.post('/api/signup' , data)
         .then((res) => {
+            console.log(res.status(200), "user successfully signed up")
             page.innerHTML='';
             navBar();
-            home();
+            renderHome();
         })
         .catch((err) => {
-            alert("wrong username or password");
+            alert(`${err.response.data.error}`);
+            console.log(err.response.data)
     });
 });
 page.replaceChildren(loginForm);
