@@ -1,2 +1,2 @@
-navBar();
-home();
+renderNavBar();
+renderHome();

@@ -12,7 +12,7 @@ const renderLogin = () => {
             <label for="password">password:</label><br>
             <input type="password" name="password">
         </fieldset>
-        <input type="submit"></input>
+        <input type="submit" value="login"></input>
     `;
     
     loginMessage.innerHTML = `
@@ -31,7 +31,7 @@ const renderLogin = () => {
                 page.replaceChildren(loginMessage);
                 setTimeout(function() {
                     page.innerHTML = "";
-                    navBar();
+                    renderLoggednavBar();
                     home();
                 }, 1000);
             })
@@ -41,3 +41,14 @@ const renderLogin = () => {
     });
     page.replaceChildren(loginForm);
 };
+
+function renderLogout() {
+    axios.delete("/api/sessions").then((res) => {
+      page.innerHTML = `<p style="color: red">You are logged out!</p>`;
+      setTimeout(function () {
+        page.innerHTML = "";
+        renderNavBar();
+        renderHome();
+      }, 1000);
+    });
+  }
