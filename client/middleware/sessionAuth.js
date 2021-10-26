@@ -1,6 +1,7 @@
 const express = require("express");
 const sessionAuth = express();
 const dbModels = require('../models/users');
+const bcrypt = require("bcrypt");
 
 // Session Authentication Handled By Middleware Handler:
 sessionAuth.use((req, res, next) => {

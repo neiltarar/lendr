@@ -43,8 +43,9 @@ loginForm.addEventListener("submit" , (event) => {
             renderHome();
         })
         .catch((err) => {
-            alert(`${err.response.data.error}`);
-            console.log(err.response.data)
+            console.log(data)
+            alert("Could not add user");
+            console.log(err.res.data)
     });
 });
 page.replaceChildren(loginForm);
