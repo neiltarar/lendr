@@ -1,4 +1,4 @@
-function home() {
+function renderHome() {
     const page = document.getElementById('page');
     //Search Form 
     page.classList.add("container");
