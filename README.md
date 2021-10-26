@@ -2,7 +2,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/aniltarar/lendr">
-    ![Logo](/lendr/client/Lendr.png)
+    ![Logo](/Users/lucykendall/sei-projects/unit3project/lendr/client/src/Lendr.png)
   </a>
 
 <h3 align="center">A world of devices at your door step</h3>
@@ -48,7 +48,7 @@
 
 <a href="https://trello.com/b/axePQPg6/lendr"><strong>Trello Board</strong></a>
 
-![Figma Screenshot](/lendr/client/Homepage_Lendr.png)
+![Figma Screenshot](/Users/lucykendall/sei-projects/unit3project/lendr/client/src/Homepage_Lendr.png)
 
 This project is designed to allow users to rent local household items that they may not have on hand at home in order to minimise waste. We want to create a single page application that allows users to add, update and delete products and view products locally using their location.
 
