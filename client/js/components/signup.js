@@ -34,18 +34,25 @@ loginForm.addEventListener("submit" , (event) => {
     // capturing input data in the form
     const formData = new FormData(loginForm);
     const data = Object.fromEntries(formData.entries());
+
     // making post request to see if the user exists in the db
-    axios.post('/api/signup' , data)
+    axios.post('/api/users', data) //redirects to this signup
         .then((res) => {
-            console.log(res.status(200), "user successfully signed up")
-            page.innerHTML='';
-            navBar();
-            renderHome();
+            console.log(res.status, "user successfully signed up")
+            setTimeout(function() {
+                page.innerHTML = "";
+                renderLoggednavBar();
+                renderHome();
+            }, 1000);
         })
         .catch((err) => {
-            console.log(data)
             alert("Could not add user");
-            console.log(err.res.data)
+
+            setTimeout(function() {
+                page.innerHTML = "";
+                renderSignUp();
+                renderNavBar();
+            }, 1000);
     });
 });
 page.replaceChildren(loginForm);

@@ -1,13 +1,13 @@
 const express = require("express");
 const sessionAuth = express();
-const dbModels = require('../models/users');
+const usersDB = require('../models/users');
 const bcrypt = require("bcrypt");
 
 // Session Authentication Handled By Middleware Handler:
 sessionAuth.use((req, res, next) => {
   const { email, password } = req.body;
   // Get user's name from request, look up in the database, check the password etc. 
-  dbModels.getUser(email, password).then((response) => {
+  usersDB.getUser(email, password).then((response) => {
     const password_hash = response['password']
     console.log(password_hash)
     // res is our sql enquiry to see if there is a user with the 
