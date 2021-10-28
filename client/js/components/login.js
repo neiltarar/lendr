@@ -27,7 +27,7 @@ const renderLogin = () => {
         const formData = new FormData(loginForm);
         const data = Object.fromEntries(formData.entries());
         // making post request to see if the user exists in the db
-        axios.post('/api/sessionAuth' , data)
+        axios.post('/api/users/login' , data) //endpoint
             .then((res) => {
                 page.replaceChildren(loginMessage);
                 setTimeout(function() {

@@ -5,7 +5,7 @@ const port = process.env.PORT || 3000;
 const sessionAuth = require('./client/middleware/sessionAuth');
 const sessionLogger = require('./client/middleware/logger');
 const sessionController = require('./client/controllers/sessions');
-const signUpController = require('./client/controllers/signup');
+const usersController = require('./client/controllers/users');
 const db = require('./client/database/db');
 const dotenv = require("dotenv");
 dotenv.config();
@@ -26,9 +26,9 @@ app.use(
       secret: process.env.EXPRESS_SESSION_SECRET_KEY,
     })
   );
-app.use("/api/sessionAuth" , sessionAuth);
+// app.use("/api/sessionAuth" , sessionAuth);
 app.use("/" , sessionLogger);
-app.use("/api/login" , signUpController);
+app.use("/api/users" , usersController);
 app.use("/api/sessions" , sessionController);
 
 app.listen(port, () => {

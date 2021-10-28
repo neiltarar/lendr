@@ -1,16 +1,15 @@
-
 const renderSignUp = () => {
     const page = document.getElementById("page");
-    const loginForm = document.createElement("form");
-    const loginMessage = document.createElement("div");
+    const signupForm = document.createElement("form");
+    const signupMessage = document.createElement("div");
 
-    loginForm.innerHTML = `
+    signupForm.innerHTML = `
         <fieldset>
             <label for="username">username:</label><br>
             <input type="text" name="username">
         </fieldset>
         <fieldset>
-            <label for="email">email:</label><br>
+            <label for="email" placeholder="me@example.com">email:</label><br>
             <input type="text" name="email">
         </fieldset>
         <fieldset>
@@ -18,33 +17,44 @@ const renderSignUp = () => {
             <input type="password" name="password">
         </fieldset>
         <fieldset>
-            <label for="repeat_password">repeat password:</label><br>
-            <input type="password" name="repeat_password">
+            <label for="confirm_password">confirm password:</label><br>
+            <input type="password" name="confirm_password">
         </fieldset>
         <input type="submit" value="sign up"></input>
     `;
+    //do we need a comments section for users?
 
-    loginMessage.innerHTML = `
+    signupMessage.innerHTML = `
     <h3 style="color: green"> Successfully Logged In </h3>
 `;
 
-loginForm.addEventListener("submit" , (event) => {
+signupForm.addEventListener("submit" , (event) => {
     // preventDefault function prevents refreshing the page
     event.preventDefault();
     // capturing input data in the form
-    const formData = new FormData(loginForm);
+    const formData = new FormData(signupForm);
     const data = Object.fromEntries(formData.entries());
+
     // making post request to see if the user exists in the db
-    axios.post('/api/login' , data)
+    axios.post('/api/users/signup', data) //redirects to this signup
         .then((res) => {
-            page.innerHTML='';
-            navBar();
-            home();
+            console.log(res.status, "user successfully signed up")
+            setTimeout(function() {
+                page.innerHTML = "";
+                renderLoggednavBar();
+                renderHome();
+            }, 1000);
         })
         .catch((err) => {
-            alert("wrong username or password");
+            alert("Could not add user");
+
+            setTimeout(function() {
+                page.innerHTML = "";
+                renderSignUp();
+                renderNavBar();
+            }, 1000);
     });
 });
-page.replaceChildren(loginForm);
+page.replaceChildren(signupForm);
 };
 

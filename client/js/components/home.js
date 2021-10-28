@@ -8,8 +8,6 @@ function renderHome() {
     
     formRow.classList.add('hero');
 
-    
-
     formRow.innerHTML = `
     <div class="container"> 
         <div class="row">
@@ -55,7 +53,6 @@ function renderHome() {
     </div>
     
     `
-
     page.append(formRow);
     page.append(productsRow);
 

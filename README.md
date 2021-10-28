@@ -1,9 +1,8 @@
 <div id="top"></div>
 <br />
 <div align="center">
-  <a href="https://github.com/aniltarar/lendr">
-    <img src="../lendr/client/Lendr.png" alt="Logo" width="80" height="80">
-  </a>
+
+![Logo](client/src/Lendr.png)
 
 <h3 align="center">A world of devices at your door step</h3>
 
@@ -48,7 +47,7 @@
 
 <a href="https://trello.com/b/axePQPg6/lendr"><strong>Trello Board</strong></a>
 
-<img src="../lendr/client/Homepage_Lendr.png" alt="Figma" width="80" height="80">
+![Figma Screenshot](client/src/Homepage_Lendr.png)
 
 This project is designed to allow users to rent local household items that they may not have on hand at home in order to minimise waste. We want to create a single page application that allows users to add, update and delete products and view products locally using their location.
 
