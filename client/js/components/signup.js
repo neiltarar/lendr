@@ -1,9 +1,9 @@
 const renderSignUp = () => {
     const page = document.getElementById("page");
-    const loginForm = document.createElement("form");
-    const loginMessage = document.createElement("div");
+    const signupForm = document.createElement("form");
+    const signupMessage = document.createElement("div");
 
-    loginForm.innerHTML = `
+    signupForm.innerHTML = `
         <fieldset>
             <label for="username">username:</label><br>
             <input type="text" name="username">
@@ -24,19 +24,19 @@ const renderSignUp = () => {
     `;
     //do we need a comments section for users?
 
-    loginMessage.innerHTML = `
+    signupMessage.innerHTML = `
     <h3 style="color: green"> Successfully Logged In </h3>
 `;
 
-loginForm.addEventListener("submit" , (event) => {
+signupForm.addEventListener("submit" , (event) => {
     // preventDefault function prevents refreshing the page
     event.preventDefault();
     // capturing input data in the form
-    const formData = new FormData(loginForm);
+    const formData = new FormData(signupForm);
     const data = Object.fromEntries(formData.entries());
 
     // making post request to see if the user exists in the db
-    axios.post('/api/users', data) //redirects to this signup
+    axios.post('/api/users/signup', data) //redirects to this signup
         .then((res) => {
             console.log(res.status, "user successfully signed up")
             setTimeout(function() {
@@ -55,6 +55,6 @@ loginForm.addEventListener("submit" , (event) => {
             }, 1000);
     });
 });
-page.replaceChildren(loginForm);
+page.replaceChildren(signupForm);
 };
 

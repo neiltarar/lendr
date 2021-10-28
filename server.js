@@ -26,7 +26,7 @@ app.use(
       secret: process.env.EXPRESS_SESSION_SECRET_KEY,
     })
   );
-app.use("/api/sessionAuth" , sessionAuth);
+// app.use("/api/sessionAuth" , sessionAuth);
 app.use("/" , sessionLogger);
 app.use("/api/users" , usersController);
 app.use("/api/sessions" , sessionController);
