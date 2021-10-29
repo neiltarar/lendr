@@ -1,13 +1,12 @@
 function renderHome() {
     const page = document.getElementById('page');
+    // Clear the contents of the page element before we rerender the new content
+    page.innerHTML = '';
     //Search Form 
     page.classList.add("container");
-    
     //Form div
     const formRow = document.createElement('div');
-    
     formRow.classList.add('hero');
-
     formRow.innerHTML = `
     <div class="container"> 
         <div class="row">
