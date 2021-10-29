@@ -8,6 +8,10 @@ function renderHome() {
     
     formRow.classList.add('hero');
 
+
+    axios.get(`/api/products`).then((response) => {
+        console.log('data', response.data)
+
     formRow.innerHTML = `
     <div class="container"> 
         <div class="row">
