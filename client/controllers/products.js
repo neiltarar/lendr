@@ -69,7 +69,7 @@ productsController.post("/", sessionAuth, (req, res) => { //add product
     }
 }); //do we need an error handler here?
 
-productsController.post("/:id", ensureAuth, (req, res) => { //update product all parameters
+productsController.post("/:id", sessionAuth, (req, res) => { //update product all parameters
     const { name, description, address, availability, category } = req.body
 
     const product_id = req.params.id

@@ -2,10 +2,10 @@ function renderHome() {
     const page = document.getElementById('page');
     //Search Form 
     page.classList.add("container");
-    
+
     //Form div
     const formRow = document.createElement('div');
-    
+
     formRow.classList.add('hero');
 
     formRow.innerHTML = `
@@ -54,12 +54,34 @@ function renderHome() {
     page.append(formRow);
     page.append(productsRow);
 
-    axios.get(`/api/products`).then((response) => {
+    axios.get(`/api/products`).then((response) => { //showing all products
         console.log('data', response.data)
 
-        response.data.forEach(key => {
-            console.log(key)
-        })
+        response.data.forEach(product => {
+            const productBox = document.createElement('div')
+            productsContainer.append(productBox)
+            productBox.className = 'productsBox'
 
+            const productName = document.createElement('h2')
+            productName.textContent = product["name"]
+            productBox.append(productName)
+
+            const productDescription = document.createElement('p')
+            productDescription.textContent = product["description"]
+            productBox.append(productDescription)
+
+            const productAddress = document.createElement('h3')
+            productAddress.textContent = product["address"]
+            productBox.append(productAddress)
+
+            const productImage = document.createElement('a')
+            productBox.append(productImage)
+            productImage.innerHTML = `<button type="button" class="button">Image</button>`;
+            productImage.addEventListener("click", (event) => {
+                id = product["id"]
+                // productPage(id) - link to rpoduct page
+            })
+
+        });
     });
 };
