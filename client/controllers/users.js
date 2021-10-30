@@ -7,6 +7,7 @@ usersController.post('/login', (req, res) => {
   const { email, password } = req.body
   // Get user's name from request, look up in the database, check the password etc. 
   usersDB.getUser(email).then((response) => {
+    console.log(response)
     const password_hash = response[0]['password']
     console.log(password_hash)
     //   // res is our sql enquiry to see if there is a user with the 
