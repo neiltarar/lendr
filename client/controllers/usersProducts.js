@@ -17,14 +17,11 @@ usersProductsController.post('/review', sessionAuth, (req, res) => {
 });
 usersProductsController.delete("/:id", sessionAuth, (req, res) => { //delete product by id
     const id = req.params.id
+    const userId = req.session.userId
 
-    usersProductsDB.deleteProduct(id).then((products) => {
-        if (products) {
-            res.json(products)
-            console.log(`delete product: ${id}`)
-        } else {
-            res.status(500).json({ message: `Cannot delete product_id: ${id}` });
-        }
+    usersProductsDB.deleteProduct(id, userId).then(() => {
+            res.status(200).send()
+            console.log(`deleted product: ${id}`)
     })
 });
 
@@ -49,7 +46,7 @@ usersProductsController.post("/add", sessionAuth, (req, res) => { //add product
         res.status(400).json({ message: 'category not defined' })
     } else {
         usersProductsDB.addNewProduct(name, description, address, availability, category, user_id).then((products) => {
-            res.status(201)
+            res.status(201).send()
             res.json(products);
             console.log(`added product: ${name}`);
         })
@@ -60,6 +57,7 @@ usersProductsController.post("/:id", sessionAuth, (req, res) => { //update produ
     const { name, description, address, availability, category } = req.body
 
     const product_id = req.params.id
+    const userId = req.session.userId
 
     if (name === undefined || name === '' || name.length > 20) {
         res.status(400).json({ message: 'name not defined' })
@@ -76,8 +74,8 @@ usersProductsController.post("/:id", sessionAuth, (req, res) => { //update produ
     } else if (category === undefined || category === '') { //category will just be a drop down option?
         res.status(400).json({ message: 'category not defined' })
     } else {
-        usersProductsDB.addNewProduct(name, description, address, availability, category, product_id).then((products) => {
-            res.status(201)
+        usersProductsDB.addNewProduct(name, description, address, availability, category, product_id, userId).then((products) => {
+            res.status(201).send()
             res.json(products);
             console.log(`updated product: ${name}`);
         });

@@ -41,9 +41,6 @@ app.use(
     })
   );
 
-  
-
-
 // app.use("/api/sessionAuth" , sessionAuth);
 app.use("/" , sessionLogger);
 app.use("/api/users" , usersController);

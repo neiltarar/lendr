@@ -3,8 +3,6 @@ const usersController = express.Router();
 const usersDB = require("../models/users");
 const bcrypt = require("bcrypt");
 
-let user_id = undefined;
-
 usersController.post('/login', (req, res) => {
   
   const { email, password } = req.body
@@ -12,7 +10,7 @@ usersController.post('/login', (req, res) => {
   usersDB.getUser(email).then((response) => {
     console.log(response)
     const password_hash = response[0]['password']
-    const user_id = response[0]['user_id'];
+    const userId = response[0]['user_id'];
     console.log(password_hash)
     //   // res is our sql enquiry to see if there is a user with the 
     //   // same email and password, which comes as a list,
@@ -26,8 +24,8 @@ usersController.post('/login', (req, res) => {
 
       if (isValidPassword(password, password_hash)) {
         req.session.username = email;
-        req.session.userId = user_id;
-        console.log(user_id);
+        req.session.userId = userId;
+        console.log(userId);
         res.json({ message: `Logged in as ${email}` });
         console.log("correct login")
       } else {
