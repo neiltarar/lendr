@@ -33,7 +33,6 @@ function renderLoggednavBar() {
           <div class="navbar-nav justify-content-end w-100">
           <a class="nav-link" aria-current="page" onClick="renderHome()">Home</a>
           <a onClick="renderLogout()" class="nav-link" href="#">Log Out</a>
-          <a class="nav-link" onClick="renderSignUp()">Sign up</a>
           </div>
       </div>
       </div>

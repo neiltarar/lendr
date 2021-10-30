@@ -50,7 +50,10 @@ function renderLogout() {
         page.innerHTML = "";
         renderNavBar();
         renderHome();
-      }, 1000);
+      }, 1000)
+      .then((res) => {
+          console.log(res.data);
+      });
     });
   }
 

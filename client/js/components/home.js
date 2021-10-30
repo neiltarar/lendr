@@ -44,7 +44,7 @@ function renderHome() {
             <img width=388 height=250  src="./src/001.jpg" class="rounded-top" alt="Product Title"/>
             <div class="px-3 py-3">
             <p class="cat-tag">Category</p>
-            <h4 class="pt-1 pb-1">Product Title</h4>
+            <h4 class="pt-1 pb-1" onClick="renderProduct()">Product Title</h4>
             <p class="pb-3"><span class="bold ">Available:</span> <span>1/11/2021 </span> </p>
             <p class="price-tag text-end border-top pt-3"><span class="bold"> $35</span><span>/hour</span> </p>
             </div>
