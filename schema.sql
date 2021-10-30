@@ -26,14 +26,16 @@ CREATE TABLE IF NOT EXISTS products (
     description VARCHAR(50),
     address VARCHAR(100),
     availability DATE,
+    imageURL VARCHAR(100),
     category VARCHAR(50),
-    user_id INTEGER UNIQUE,
+    price INTEGER,
+    user_id INTEGER,
     CONSTRAINT FK_products_users FOREIGN KEY (user_id)
             REFERENCES users(user_id)
 );
 
-INSERT INTO products(name, description, address, availability, category, user_id) 
-    VALUES ('Lawnmower', 'Tool for gardening','1 Brisbane City', '1/11/2021', 'gardening','1' );
+INSERT INTO products(name, description, address, availability, imageURL, category, user_id) 
+    VALUES ('Lawnmower', 'Tool for gardening','1 Brisbane City', '1/11/2021','./src/001.jpg' ,'gardening','1' );
 
 INSERT INTO products(name, description, address, availability, category, user_id) 
     VALUES ('Lawnmower2', 'Tool for gardening sfgdfg','3 Brisbane City', '2021-11-15', 'gardening','2' );
@@ -44,6 +46,7 @@ DROP TABLE IF EXISTS messages;
 
 CREATE TABLE IF NOT EXISTS messages (
     message_id serial PRIMARY KEY,
+    date timestamp,
     content VARCHAR(200),
     user_id INTEGER,
     conversation_id INTEGER  REFERENCES conversations(conversation_id)
@@ -57,9 +60,9 @@ DROP TABLE IF EXISTS conversations;
 CREATE TABLE  conversations (
     conversation_id serial PRIMARY KEY,
     subject VARCHAR(200),
-    date timestamp,
-    productOwner_id INTEGER REFERENCES products(user_id),
-    sessionUser_id INTEGER
+    productOwner_id INTEGER REFERENCES users(user_id),
+    sessionUser_id INTEGER REFERENCES users(user_id),
+    productID INTEGER
 );
 
 INSERT INTO conversations(subject, date, productOwner_id, sessionUser_id) 
@@ -69,3 +72,14 @@ INSERT INTO conversations(subject, date, productOwner_id, sessionUser_id)
     VALUES ('is this landmower available', '2021-10-30','1', '3');
  
  
+--***** REVIEWS ******
+DROP TABLE IF EXISTS reviews;
+
+CREATE TABLE IF NOT EXISTS reviews (
+    id serial PRIMARY KEY,
+    review VARCHAR(150),
+    rating INTEGER,
+    authorID INTEGER,
+    productID INTEGER
+);
+

@@ -6,6 +6,9 @@ const sessionAuth = require('./client/middleware/sessionAuth');
 const sessionLogger = require('./client/middleware/logger');
 const sessionController = require('./client/controllers/sessions');
 const usersController = require('./client/controllers/users');
+const productsController = require('./client/controllers/products')
+const usersProductsController = require('./client/controllers/usersProducts');
+
 const db = require('./client/database/db');
 const dotenv = require("dotenv");
 dotenv.config();
@@ -45,6 +48,8 @@ app.use(
 app.use("/" , sessionLogger);
 app.use("/api/users" , usersController);
 app.use("/api/sessions" , sessionController);
+app.use("/api/products", productsController);
+app.use("/api/users/products" , usersProductsController);
 
 //Conversations
 app.use("/api/conversations", conversationsController);

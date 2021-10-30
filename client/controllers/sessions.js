@@ -9,7 +9,8 @@ session.get("/", (req, res) => {
 })
 
 session.delete("/" , (req, res) => {  
-    res.json({"status":"ok"});
+    req.session.destroy();
+    res.json({"message":"You have successfully logged out"});
 });
 
 module.exports = session;

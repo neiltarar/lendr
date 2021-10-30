@@ -2,7 +2,7 @@ const express = require("express");
 const conversationsController = express.Router();
 const Conversations = require("../models/conversations");
 
-conversationsController.get("/", (req, res)=>{
+conversationsController.get("/product/:id", (req, res)=>{
     console.log("getting convo by users id");
     Conversations.getByUserId(productrowner_id, sessionuser_id).then((conversation) => {
         res.json(conversation);

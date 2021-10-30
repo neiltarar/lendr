@@ -18,14 +18,13 @@ let user_id = undefined;
 
 function renderHome() {
     const page = document.getElementById('page');
+    // Clear the contents of the page element before we rerender the new content
+    page.innerHTML = '';
     //Search Form 
     page.classList.add("container");
-    
     //Form div
     const formRow = document.createElement('div');
-    
     formRow.classList.add('hero');
-
     formRow.innerHTML = `
     <div class="container"> 
         <div class="row">
@@ -44,8 +43,6 @@ function renderHome() {
             </div>
         </div>
     </div>
-    
-    
     `
     //Products div
     const productsRow = document.createElement('div');
@@ -77,58 +74,36 @@ function renderHome() {
     page.append(formRow);
     page.append(productsRow);
 
-}
+    axios.get(`/api/products`).then((response) => { //showing all products
+        console.log('data', response.data)
 
-function renderMessages(){
-    
-   //Get the product owner id 
-    const productrowner_id  = document.getElementById('openConversation').value;
-    console.log(productrowner_id);
+        response.data.forEach(product => {
+            const productBox = document.createElement('div')
+            productsContainer.append(productBox)
+            productBox.className = 'productsBox'
 
-    console.log(user_id);
-    
-    if(productrowner_id !== undefined) {
-        axios.get(`/api/conversations`)
-        .then((res)=>{
-            const conversations = res.data;
-            
-            console.log(conversations);
-            // const conversationDiv = document.createElement('div');
-            // conversationDiv.innerHTML = `
-            //     <div class="">
-            //         <h4> ${conversation.subject}</h4>
-            //         <p>${conversation.date}</p>
-            //         <p>Message</p>
-            //         <p>Message</p>
-            //         <form id="postMessageForm">
-            //         <textarea id="w3review" name="w3review" rows="4" cols="50">
-            //         </textarea>
-            //         <input type="submit" value="Post Message"/>
-            //         </form>
-            //     </div>
-            // `
-            // page.appendChild(conversationDiv);
-           
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
+            const productName = document.createElement('h2')
+            productName.textContent = product["name"]
+            productBox.append(productName)
 
-    }
+            const productImage = document.createElement('a')
+            productBox.append(productImage)
+            productImage.innerHTML = `<button type="button" class="button">Product Page[Image]</button>`;
+            productImage.addEventListener("click", (event) => { //takes us to product page
+                id = product["id"]
+                console.log(id)
 
-    
-    
+                axios.get(`/api/products/${id}`).then((response) => {
+                    console.log(response)
+                    productPage(1)
+                })
+            })
 
-}
+            const productAddress = document.createElement('h3')
+            productAddress.textContent = product["address"]
+            productBox.append(productAddress)
 
-const postMessageForm = document.getElementById('postMessageForm');
+        });
+    });
+};
 
-if(postMessageForm){
-    postMessageForm.addEventListener("submit", (event)=> {
-        event.preventDefault();
-        const formData = new FormData(signupForm);
-        const data = Object.fromEntries(formData.entries());
-        console.log(data);
-
-    })
-}
