@@ -21,7 +21,7 @@ productsController.get("/:id", (req, res) => { //getting product by id
     productsDB.getById(id).then((products) => {
         if (products.length > 0) {
             res.json(products)
-            console.log(`getting single product_id: ${id}`)
+            console.log(`getting a single product, product_id: ${id}`)
         } else {
             res.status(500).json({ message: `Cannot fetch product_id: ${id}` });
         }
@@ -41,7 +41,7 @@ productsController.delete("/:id", sessionAuth, (req, res) => { //delete product 
     })
 });
 
-productsController.post("/", sessionAuth, (req, res) => { //add product
+productsController.post("/add", sessionAuth, (req, res) => { //add product
     const { name, description, address, availability, category } = req.body
 
     const user_id = req.session.userId //getting user_id from sessions

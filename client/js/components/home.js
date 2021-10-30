@@ -66,6 +66,14 @@ function renderHome() {
             productName.textContent = product["name"]
             productBox.append(productName)
 
+            const productImage = document.createElement('a')
+            productBox.append(productImage)
+            productImage.innerHTML = `<button type="button" class="button">Product Page[Image]</button>`;
+            productImage.addEventListener("click", (event) => { //takes us to product page
+                id = product["id"]
+                productPage(id)
+            })
+
             const productDescription = document.createElement('p')
             productDescription.textContent = product["description"]
             productBox.append(productDescription)
@@ -74,14 +82,12 @@ function renderHome() {
             productAddress.textContent = product["address"]
             productBox.append(productAddress)
 
-            const productImage = document.createElement('a')
-            productBox.append(productImage)
-            productImage.innerHTML = `<button type="button" class="button">Image</button>`;
-            productImage.addEventListener("click", (event) => {
-                id = product["id"]
-                // productPage(id) - link to rpoduct page
-            })
-
         });
     });
+    const addNewProduct = document.createElement('button') //Add button to link to add product page
+    page.append(addNewProduct) //may need to append to different html element
+
+    addNewProduct.addEventListener("click", (event) => {
+        addNewProduct()
+    })
 };
