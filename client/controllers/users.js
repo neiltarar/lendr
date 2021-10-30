@@ -7,6 +7,7 @@ usersController.post('/login', (req, res) => {
   const { email, password } = req.body
   // Get user's name from request, look up in the database, check the password etc. 
   usersDB.getUser(email).then((response) => {
+    console.log(response)
     const password_hash = response[0]['password']
     console.log(password_hash)
     //   // res is our sql enquiry to see if there is a user with the 
@@ -21,10 +22,12 @@ usersController.post('/login', (req, res) => {
       if (isValidPassword(password, password_hash)) {
         req.session.username = email;
         res.json({ message: `Logged in as ${email}` });
+        console.log("correct login")
       } else {
         // if the username/password is not found in the db we throw an error
         // and we manage the error in login.js (component) by giving an alert
         // 403 means "forbidden"
+        console.log("incorrect login")
         res.status(403).json({ message: "Password or Email not valid" });
       };
     };
