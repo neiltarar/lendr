@@ -8,10 +8,6 @@ function renderHome() {
     
     formRow.classList.add('hero');
 
-
-    axios.get(`/api/products`).then((response) => {
-        console.log('data', response.data)
-
     formRow.innerHTML = `
     <div class="container"> 
         <div class="row">
@@ -30,8 +26,6 @@ function renderHome() {
             </div>
         </div>
     </div>
-    
-    
     `
     //Products div
     const productsRow = document.createElement('div');
@@ -60,4 +54,12 @@ function renderHome() {
     page.append(formRow);
     page.append(productsRow);
 
-}
+    axios.get(`/api/products`).then((response) => {
+        console.log('data', response.data)
+
+        response.data.forEach(key => {
+            console.log(key)
+        })
+
+    });
+};

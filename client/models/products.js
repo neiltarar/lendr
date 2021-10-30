@@ -15,9 +15,14 @@ const ProductsList = {
     const values = [name, description, address, availability, category, user_id];
     return db.query(sql, values).then((dbRes) => dbRes.rows[0]);
   },
-  deleteProducts(id) {
+  deleteProduct(id) {
     const sql = "DELETE FROM products WHERE id = $1";
     const values = [id];
+    return db.query(sql, values).then((dbRes) => dbRes.rows[0]);
+  },
+  updateProductParameters(name, description, address, availability, product_id) {
+    const sql = "UPDATE products SET name = $1, description = $2, address = $3, availability = $4 WHERE id = $6";
+    const values = [name, description, address, availability, product_id];
     return db.query(sql, values).then((dbRes) => dbRes.rows[0]);
   }
 };
