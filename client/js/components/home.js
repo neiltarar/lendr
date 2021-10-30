@@ -71,7 +71,12 @@ function renderHome() {
             productImage.innerHTML = `<button type="button" class="button">Product Page[Image]</button>`;
             productImage.addEventListener("click", (event) => { //takes us to product page
                 id = product["id"]
-                productPage(id)
+                console.log(id)
+
+                axios.get(`/api/products/${id}`).then((response) => {
+                    console.log(response)
+                    productPage(id)
+                })
             })
 
             const productDescription = document.createElement('p')
@@ -85,6 +90,7 @@ function renderHome() {
         });
     });
     const addNewProduct = document.createElement('button') //Add button to link to add product page
+    addNewProduct.innerHTML = `<button type="button" class="button">Add Product</button` 
     page.append(addNewProduct) //may need to append to different html element
 
     addNewProduct.addEventListener("click", (event) => {
