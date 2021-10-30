@@ -46,6 +46,7 @@ DROP TABLE IF EXISTS reviews;
 CREATE TABLE IF NOT EXISTS reviews (
     id serial PRIMARY KEY,
     review VARCHAR(150),
+    rating INTEGER,
     authorID INTEGER,
     productID INTEGER
 );

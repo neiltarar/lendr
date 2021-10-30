@@ -1,8 +1,8 @@
 const db = require('../database/db');
 
 const productsDB = {
-    getProductAll(user_id) {
-        const sql = "select * from users join products ON users.user_id = products.user_id;";
+    getProductAll(email) {
+        const sql = "SELECT * FROM users JOIN PRODUCTS ON users.user_id = products.user_id;";
         return db
              .query(sql, [email])
              .then((dbRes) => dbRes.rows);
@@ -13,9 +13,14 @@ const productsDB = {
             .query(sql , [user_id])
             .then((dbRes) => dbRes.rows);
     },
-    insertReview(review, authorid, productid) {
-        const sql = "INSERT INTO reviews (review , authorid , productid) VALUES ($1 , $2 , $3);";
-        db.query(sql, [review, authorid, productid]);
+    insertReview(review, rating, authorID, productID) {
+        const sql = "INSERT INTO reviews (review , rating, authorid , productid) VALUES ($1 , $2 , $3, $4);";
+        db.query(sql, [review, rating, authorID, productID]);
+    },
+    getProductRatings(productID) {
+        const sql = "SELECT rating FROM reviews";
+        return db
+            .query(sql)
     }
  };
  

@@ -21,6 +21,18 @@ function renderProduct() {
 
     reviewForm.innerHTML = `
     <fieldset>
+        <label for="1star">1Star</label>
+        <input type="radio" id="1star" name="rating" value=1>
+        <label for="2star">2Star</label>
+        <input type="radio" id="1star" name="rating" value=2>
+        <label for="3star">3Star</label>
+        <input type="radio" id="3star" name="rating" value=3>
+        <label for="4star">4Star</label>
+        <input type="radio" id="4star" name="rating" value=4>
+        <label for="5star">5Star</label>
+        <input type="radio" id="5star" name="rating" value=5>
+    </fieldset>
+    <fieldset>
         <label for="review">review</label><br>
         <input type="text" name="review">
     </fieldset>
