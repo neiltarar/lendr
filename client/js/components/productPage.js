@@ -30,6 +30,13 @@ const productPage = (id) => {
         productAddress.textContent = product["address"]
         productBox.append(productAddress)
 
+        ownerButton = document.createElement("button")
+        ownerButton.innerHTML = `
+        <button type="button" class="link" id="openConversation" data-toggle="modal" data-target="#exampleModal" onClick="renderMessages()" value="1">
+                Contact Owner Name
+            </button>
+        `
+
         const deleteProduct = document.createElement('button') //delete product
         page.append(deleteProduct) //may need to append to different html element
         deleteProduct.innerHTML = `<button type="button" class="button">Delete Product</button`
@@ -39,29 +46,30 @@ const productPage = (id) => {
             console.log(id)
 
             axios.delete(`/api/users/products/${id}`).then((res) => {
-                page.innerHTML = `<p style="color: green">You successfully deleted the product</p>`;
-                setTimeout(function () {
-                    page.innerHTML = "";
-                    renderHome();
-                }, 1000)
-                    .then((res) => {
-                        page.innerHTML = `<p style="color: red">You are not logged in</p>`;
-                        console.log(res.data);
-                    });
+                if (res.status(200)) {
+                    page.innerHTML = `<p style="color: green">You successfully deleted the product</p>`;
+                    setTimeout(function () {
+                        page.innerHTML = "";
+                        renderHome();
+                    }, 1000)
+                } else {
+                    page.innerHTML = `<p style="color: red">You are not logged in</p>`;
+                    console.log(res.data);
+                };
             });
         });
     });
 
-    const addNewProduct = document.createElement('button') //Add button to link to add product page
-    addNewProduct.innerHTML = `<button type="button" class="button">Add Product</button`
-    page.append(addNewProduct) //may need to append to different html element
+const addNewProduct = document.createElement('button') //Add button to link to add product page
+addNewProduct.innerHTML = `<button type="button" class="button">Add Product</button`
+page.append(addNewProduct) //may need to append to different html element
 
-    addNewProduct.addEventListener("click", (event) => {
-        addNewProduct()
-    });
-    const reviewForm = document.createElement("form")
+addNewProduct.addEventListener("click", (event) => {
+    addNewProduct()
+});
+const reviewForm = document.createElement("form")
 
-    reviewForm.innerHTML = `
+reviewForm.innerHTML = `
             <fieldset>
                 <label for="1star">1Star</label>
                 <input type="radio" id="1star" name="rating" value=1>
@@ -82,24 +90,24 @@ const productPage = (id) => {
             </div>
             `;
 
-    productBox.appendChild(reviewForm);
+productBox.appendChild(reviewForm);
 
-    reviewForm.addEventListener("submit", (event) => {
-        // preventDefault function prevents refreshing the page
-        event.preventDefault();
-        // capturing input data in the form
-        const reviewData = new FormData(reviewForm);
-        const data = Object.fromEntries(reviewData.entries());
-        console.log(data);
-        // making post request to see if the user exists in the db
-        axios.post('/api/products/review', data) //endpoint
-            .then((res) => {
-                page.innerHTML = '';
-            })
-            .catch((err) => {
-                alert("You need to login to write a review");
-            });
-    });
-    productsRow.append(productBox)
-    page.append(productsRow);
+reviewForm.addEventListener("submit", (event) => {
+    // preventDefault function prevents refreshing the page
+    event.preventDefault();
+    // capturing input data in the form
+    const reviewData = new FormData(reviewForm);
+    const data = Object.fromEntries(reviewData.entries());
+    console.log(data);
+    // making post request to see if the user exists in the db
+    axios.post('/api/products/review', data) //endpoint
+        .then((res) => {
+            page.innerHTML = '';
+        })
+        .catch((err) => {
+            alert("You need to login to write a review");
+        });
+});
+productsRow.append(productBox)
+page.append(productsRow);
 };

@@ -14,8 +14,6 @@ let user_id = undefined;
 
     })
 
-
-
 function renderHome() {
     const page = document.getElementById('page');
     // Clear the contents of the page element before we rerender the new content
@@ -95,7 +93,7 @@ function renderHome() {
 
                 axios.get(`/api/products/${id}`).then((response) => {
                     console.log(response)
-                    productPage(1)
+                    productPage(id)
                 })
             })
 

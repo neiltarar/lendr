@@ -33,7 +33,7 @@ const addNewProduct = () => {
         const formData = new FormData(form)
         const data = Object.fromEntries(formData.entries())
 
-        axios.post(`/api/products/add`, data).then((res) => {
+        axios.post(`/api/users/products`, data).then((res) => {
           console.log(res.status(200))
           console.log("Product Added")
           page.innerHTML = `<p>Product Added</p>`
