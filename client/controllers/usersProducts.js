@@ -18,8 +18,8 @@ usersProductsController.post('/review', sessionAuth, (req, res) => {
 usersProductsController.delete("/:id", sessionAuth, (req, res) => { //delete product by id
     const id = req.params.id
 
-    usersProductsDB.getById(id).then((products) => {
-        if (products.length > 0) {
+    usersProductsDB.deleteProduct(id).then((products) => {
+        if (products) {
             res.json(products)
             console.log(`delete product: ${id}`)
         } else {

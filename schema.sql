@@ -40,6 +40,38 @@ INSERT INTO products(name, description, address, availability, imageURL, categor
 INSERT INTO products(name, description, address, availability, category, user_id) 
     VALUES ('Lawnmower2', 'Tool for gardening sfgdfg','3 Brisbane City', '2021-11-15', 'gardening','2' );
 
+
+-- ****** MESSAGES ******
+DROP TABLE IF EXISTS messages;
+
+CREATE TABLE IF NOT EXISTS messages (
+    message_id serial PRIMARY KEY,
+    date timestamp,
+    content VARCHAR(200),
+    user_id INTEGER,
+    conversation_id INTEGER  REFERENCES conversations(conversation_id)
+    
+);
+INSERT INTO messages(content, user_id, conversation_id) VALUES ('HI Fred do you have the landmower', '1', '1');
+
+-- ****** CONVERSATIONS ******
+DROP TABLE IF EXISTS conversations;
+
+CREATE TABLE  conversations (
+    conversation_id serial PRIMARY KEY,
+    subject VARCHAR(200),
+    productOwner_id INTEGER REFERENCES users(user_id),
+    sessionUser_id INTEGER REFERENCES users(user_id),
+    productID INTEGER
+);
+
+INSERT INTO conversations(subject, date, productOwner_id, sessionUser_id) 
+    VALUES ('I want this landmower', '2021-10-29','1', '2');
+
+INSERT INTO conversations(subject, date, productOwner_id, sessionUser_id) 
+    VALUES ('is this landmower available', '2021-10-30','1', '3');
+ 
+ 
 --***** REVIEWS ******
 DROP TABLE IF EXISTS reviews;
 

@@ -13,6 +13,7 @@ const renderLogin = () => {
             <label for="password">password:</label><br>
             <input type="password" name="password">
         </fieldset>
+        
         <input type="submit" value="login"></input>
     `;
     
@@ -28,7 +29,8 @@ const renderLogin = () => {
         const data = Object.fromEntries(formData.entries());
         // making post request to see if the user exists in the db
         axios.post('/api/users/login' , data) //endpoint
-            .then((res) => {
+            .then((req,res) => {
+                console.log(req)
                 page.replaceChildren(loginMessage);
                 setTimeout(function() {
                     page.innerHTML = "";

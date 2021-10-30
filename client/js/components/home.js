@@ -1,3 +1,21 @@
+// const { default: axios } = require("axios");
+
+//Get Current user 
+let user_id = undefined;
+    //Get the current user id ;
+    axios.get(`/api/sessions`).then((res) => {
+        const sessions = res.data;
+        if(sessions) {
+            sessions.forEach(session => {
+                console.log(session.sess.userId);
+                user_id = session.sess.userId;
+            });
+        }
+
+    })
+
+
+
 function renderHome() {
     const page = document.getElementById('page');
     // Clear the contents of the page element before we rerender the new content
@@ -44,6 +62,9 @@ function renderHome() {
             <p class="cat-tag">Category</p>
             <h4 class="pt-1 pb-1">Product Title</h4>
             <p class="pb-3"><span class="bold ">Available:</span> <span>1/11/2021 </span> </p>
+            <button type="button" class="link" id="openConversation" data-toggle="modal" data-target="#exampleModal" onClick="renderMessages()" value="1">
+                Contact Owner Name
+            </button>
             <p class="price-tag text-end border-top pt-3"><span class="bold"> $35</span><span>/hour</span> </p>
             </div>
         </a>
@@ -85,3 +106,4 @@ function renderHome() {
         });
     });
 };
+
