@@ -91,14 +91,14 @@ footer {
 }
 
 /* Form */
-input[type="text"] {
+/* input[type="text"] {
     border-color: #f7f7f7f7;
     border-style: none;
     border-width: 1px;
     color: inherit;
     background-color: #fff;
     padding: 15px 20px;
-}
+} */
 /* Buttons */
 .btn {
     padding: 10px 20px;

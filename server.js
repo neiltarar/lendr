@@ -15,8 +15,16 @@ const expressSession = require("express-session");
 const connectPgSimple = require("connect-pg-simple");
 const pgSession = connectPgSimple(expressSession);
 
+//conversations controller
+const conversationsController = require("./client/controllers/conversations");
+const messagesController = require("./client/controllers/messages");
+
 app.use(express.static("client"));
 app.use(express.json());
+
+// creating 24 hours from milliseconds
+const oneDay = 1000 * 60 * 60 * 24;
+
 app.use(
     expressSession({
       store: new pgSession({
@@ -24,12 +32,26 @@ app.use(
         createTableIfMissing: true, // Creates a session table in your database (go look at it!)
       }),
       secret: process.env.EXPRESS_SESSION_SECRET_KEY,
+      cookie: { maxAge: oneDay },
+      resave: false
+
     })
   );
+
+  
+
+
 // app.use("/api/sessionAuth" , sessionAuth);
 app.use("/" , sessionLogger);
 app.use("/api/users" , usersController);
 app.use("/api/sessions" , sessionController);
+
+//Conversations
+app.use("/api/conversations", conversationsController);
+//Messages
+// app.use("api/messages", messagesController);
+
+
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`);
