@@ -1,13 +1,12 @@
 function renderHome() {
     const page = document.getElementById('page');
+    // Clear the contents of the page element before we rerender the new content
+    page.innerHTML = '';
     //Search Form 
     page.classList.add("container");
-
     //Form div
     const formRow = document.createElement('div');
-
     formRow.classList.add('hero');
-
     formRow.innerHTML = `
     <div class="container"> 
         <div class="row">
@@ -75,13 +74,9 @@ function renderHome() {
 
                 axios.get(`/api/products/${id}`).then((response) => {
                     console.log(response)
-                    productPage(id)
+                    productPage(1)
                 })
             })
-
-            const productDescription = document.createElement('p')
-            productDescription.textContent = product["description"]
-            productBox.append(productDescription)
 
             const productAddress = document.createElement('h3')
             productAddress.textContent = product["address"]
@@ -89,11 +84,4 @@ function renderHome() {
 
         });
     });
-    const addNewProduct = document.createElement('button') //Add button to link to add product page
-    addNewProduct.innerHTML = `<button type="button" class="button">Add Product</button` 
-    page.append(addNewProduct) //may need to append to different html element
-
-    addNewProduct.addEventListener("click", (event) => {
-        addNewProduct()
-    })
 };
