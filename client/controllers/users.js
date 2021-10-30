@@ -18,7 +18,7 @@ usersController.post('/login', (req, res) => {
       };
       console.log(isValidPassword(password, password_hash))
 
-      if (isValidPassword) {
+      if (isValidPassword(password, password_hash)) {
         req.session.username = email;
         res.json({ message: `Logged in as ${email}` });
       } else {

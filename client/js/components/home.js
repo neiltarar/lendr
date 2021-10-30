@@ -1,13 +1,12 @@
 function renderHome() {
     const page = document.getElementById('page');
+    // Clear the contents of the page element before we rerender the new content
+    page.innerHTML = '';
     //Search Form 
     page.classList.add("container");
-    
     //Form div
     const formRow = document.createElement('div');
-    
     formRow.classList.add('hero');
-
     formRow.innerHTML = `
     <div class="container"> 
         <div class="row">
@@ -45,7 +44,7 @@ function renderHome() {
             <img width=388 height=250  src="./src/001.jpg" class="rounded-top" alt="Product Title"/>
             <div class="px-3 py-3">
             <p class="cat-tag">Category</p>
-            <h4 class="pt-1 pb-1">Product Title</h4>
+            <h4 class="pt-1 pb-1" onClick="renderProduct()">Product Title</h4>
             <p class="pb-3"><span class="bold ">Available:</span> <span>1/11/2021 </span> </p>
             <p class="price-tag text-end border-top pt-3"><span class="bold"> $35</span><span>/hour</span> </p>
             </div>
