@@ -1,18 +1,15 @@
-// const { default: axios } = require("axios");
-
 //Get Current user 
 let user_id = undefined;
-    //Get the current user id ;
-    axios.get(`/api/sessions`).then((res) => {
-        const sessions = res.data;
-        if(sessions) {
-            sessions.forEach(session => {
-                console.log(session.sess.userId);
-                user_id = session.sess.userId;
-            });
-        }
-
-    })
+//Get the current user id ;
+axios.get(`/api/sessions`).then((res) => {
+    const sessions = res.data;
+    if (sessions) {
+        sessions.forEach(session => {
+            console.log(session.sess.userId);
+            user_id = session.sess.userId;
+        });
+    }
+});
 
 function renderHome() {
     const page = document.getElementById('page');
@@ -32,12 +29,9 @@ function renderHome() {
                 <form class="home-search mt-5">
                     <input type="text" class="rounded" placeholder="Enter name" />
                     <button class="btn btn-primary rounded-pill"><i class="fa fa-search"></i></button>
-                    
                 </form>
-            
             </div>
-             <div class="col-md-8 d-flex justify-content-center  hero-col"> 
-            
+            <div class="col-md-8 d-flex justify-content-center  hero-col"> 
             </div>
         </div>
     </div>
@@ -74,7 +68,6 @@ function renderHome() {
 
     axios.get(`/api/products`).then((response) => { //showing all products
         console.log('data', response.data)
-
         response.data.forEach(product => {
             const productBox = document.createElement('div')
             productsContainer.append(productBox)

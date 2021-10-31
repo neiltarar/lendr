@@ -37,7 +37,5 @@ function renderLoggednavBar() {
       </div>
       </div>
 </nav>
-  
   `;
 };
-

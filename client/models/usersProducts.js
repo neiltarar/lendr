@@ -28,14 +28,14 @@ const usersProductsDB = {
             .query(sql, [userId])
             .then((dbRes) => dbRes.rows);
     },
-    insertReview(review, rating, authorID, productID) {
-        const sql = "INSERT INTO reviews (review , rating, authorid , productid) VALUES ($1 , $2 , $3, $4);";
-        db.query(sql, [review, rating, authorID, productID]);
+    addReview(review, rating, date, authorID, productID) {
+        const sql = "INSERT INTO reviews (review , rating, date, authorid , productid) VALUES ($1 , $2 , $3, $4, $5);";
+        db.query(sql, [review, rating, date, authorID, productID]);
     },
     getProductRatings(productID) {
         const sql = "SELECT rating FROM reviews";
         return db
-            .query(sql)
+            .query(sql);
     }
 };
 

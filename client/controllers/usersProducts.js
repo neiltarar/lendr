@@ -3,17 +3,21 @@ const usersDB = require("../models/users");
 const usersProductsDB = require("../models/usersProducts");
 const express = require("express");
 const usersProductsController = express.Router();
+// Get date and time to use in reviews
+const today = new Date();
+const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
 usersProductsController.post('/review', sessionAuth, (req, res) => {
-    const { rating, review } = req.body;
+    dateTime = date+" "+time;
+    const { rating, productId, review } = req.body;
     const userEmail = req.session.username;
     usersDB.getUser(userEmail).then((res) => {
-        const userID = res[0].user_id;
-        usersProductsDB.getProductID(userID).then((res) => {
-            const productID = res[0].id;
-            productsDB.insertReview(review, rating, userID, productID);
-        })
+        const userId = res[0].user_id;
+        usersProductsDB.addReview(review, rating, dateTime, userId, productId);
     });
+    
+    res.json({"status":"review added"});
 });
 usersProductsController.delete("/:id", sessionAuth, (req, res) => { //delete product by id
     const id = req.params.id

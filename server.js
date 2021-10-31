@@ -29,32 +29,29 @@ app.use(express.json());
 const oneDay = 1000 * 60 * 60 * 24;
 
 app.use(
-    expressSession({
-      store: new pgSession({
-        pool: db, // Connects to our postgres db
-        createTableIfMissing: true, // Creates a session table in your database (go look at it!)
-      }),
-      secret: process.env.EXPRESS_SESSION_SECRET_KEY,
-      cookie: { maxAge: oneDay },
-      resave: false
+  expressSession({
+    store: new pgSession({
+      pool: db, // Connects to our postgres db
+      createTableIfMissing: true, // Creates a session table in your database (go look at it!)
+    }),
+    secret: process.env.EXPRESS_SESSION_SECRET_KEY,
+    cookie: { maxAge: oneDay },
+    resave: false,
+    saveUninitialized: false
+  })
+);
 
-    })
-  );
-
-// app.use("/api/sessionAuth" , sessionAuth);
-app.use("/" , sessionLogger);
-app.use("/api/users" , usersController);
-app.use("/api/sessions" , sessionController);
+app.use("/", sessionLogger);
+app.use("/api/users", usersController);
+app.use("/api/sessions", sessionController);
 app.use("/api/products", productsController);
-app.use("/api/users/products" , usersProductsController);
+app.use("/api/users/products", usersProductsController);
 
 //Conversations
 app.use("/api/conversations", conversationsController);
 //Messages
 // app.use("api/messages", messagesController);
 
-
-
 app.listen(port, () => {
-    console.log(`listening on port ${port}`);
+  console.log(`listening on port ${port}`);
 });
