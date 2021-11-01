@@ -51,7 +51,7 @@ app.use("/api/users/products" , usersProductsController);
 //Conversations
 app.use("/api/conversations", conversationsController);
 //Messages
-// app.use("api/messages", messagesController);
+app.use("/api/messages", messagesController);
 
 
 

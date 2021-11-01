@@ -1,53 +1,56 @@
-function renderMessages(){
+
+
+function renderMessages() {
+    console.log("rendering messages");
+    const conversationId = 1;
+    const page = document.getElementById("page");
+    const messageBody = document.createElement("div");
+    messageBody.classList.add("row");
+
+  
     
-    //Get the product owner id 
-     const productrowner_id  = document.getElementById('openConversation').value;
-     console.log(productrowner_id);
- 
-     console.log(user_id);
-     
-     if(productrowner_id !== undefined) {
-         axios.get(`/api/conversations`)
-         .then((res)=>{
-             const conversations = res.data;
-             
-             console.log(conversations);
-             // const conversationDiv = document.createElement('div');
-             // conversationDiv.innerHTML = `
-             //     <div class="">
-             //         <h4> ${conversation.subject}</h4>
-             //         <p>${conversation.date}</p>
-             //         <p>Message</p>
-             //         <p>Message</p>
-             //         <form id="postMessageForm">
-             //         <textarea id="w3review" name="w3review" rows="4" cols="50">
-             //         </textarea>
-             //         <input type="submit" value="Post Message"/>
-             //         </form>
-             //     </div>
-             // `
-             // page.appendChild(conversationDiv);
-            
-         })
-         .catch(function (error) {
-             console.log(error);
-         })
- 
-     }
- 
-     
-     
- 
- }
- 
- const postMessageForm = document.getElementById('postMessageForm');
- 
- if(postMessageForm){
-     postMessageForm.addEventListener("submit", (event)=> {
-         event.preventDefault();
-         const formData = new FormData(signupForm);
-         const data = Object.fromEntries(formData.entries());
-         console.log(data);
- 
-     })
- }
+    
+    axios.get(`/api/messages/conversation/${conversationId}`)
+        .then((res) => {
+            console.log(res.data);
+            const messages = res.data;
+            messages.forEach(message => {
+                const messageDiv = document.createElement("div");
+                messageDiv.innerHTML = `
+                <p class="text-muted text-end">${message.date}</>
+                <p class="message">${message.content}</p>
+                <p class="sent-by"> ${message.username}</p>
+                `
+                messageBody.appendChild(messageDiv);
+            });
+
+        }) 
+        
+        page.appendChild(messageBody);
+        
+           
+}
+
+
+
+
+
+
+function postMessages(){
+    const page = document.getElementById("page");
+
+    const messageFormRow = document.createElement("div");
+    messageFormRow.classList.add("row");
+
+    messageFormRow.innerHTML = `
+    <div class="col">
+        <form class="post-message d-flex flex-column">
+            <textarea class="rounded"> </textarea>
+            <button class=" btn btn-primary rounded-pill"><i class="fa fa-search"></i> </button>
+        </form>
+    </div>
+    
+    `
+    page.appendChild(messageFormRow);
+
+}
