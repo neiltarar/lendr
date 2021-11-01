@@ -4,7 +4,7 @@
 
 /*  Color Palette 
 
-Primary : #558564
+Primary : #4c9492
 Primary Dark : #26474A
 Black: #0B110D
 Light Grey : #f7f7f7;
@@ -21,17 +21,25 @@ Light Grey : #f7f7f7;
 }
 
 .bg-primary {
-    background-color: #558564 !important;
+    background-color: #4c9492 !important;
+}
+.bg-primary {
+    background-color: #1B2845 !important;
 }
 
 .btn-primary {
     color: #fff;
-    background-color: #558564;
-    border-color: #558564;
+    background-color: #4c9492;
+    border-color: #4c9492;
+}
+.btn-blue {
+    color: #fff;
+    background-color: #1B2845;
+    border-color: #1B2845;
 }
 
 .bg-row {
-    background-color: #558564;
+    background-color: #4c9492;
     height: 400px;
     position: relative;
 }
@@ -79,7 +87,7 @@ header {
 }
 
 .navbar-light .navbar-nav .nav-link:hover {
-    color: #558564;
+    color: #4c9492;
 }
 
 .nav-link {
@@ -89,7 +97,7 @@ header {
 }
 
 .nav-link:hover {
-    color: #558564;
+    color: #4c9492;
 }
 
 /* Footer */
