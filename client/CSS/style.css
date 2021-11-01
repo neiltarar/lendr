@@ -221,12 +221,12 @@ p.price-tag {
 }
 
 .message {
-    padding: 20px;
+    padding: 20px 30px;
     background-color: rgba(76, 146, 148, 0.5);
     margin-bottom: 30px;
-    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 60px;
     /* border-bottom-right-radius: 30px; */
-    border-top-right-radius: 30px;
+    border-top-left-radius: 45px;
 }
 
 .border-bottom {
@@ -256,4 +256,7 @@ p.sent-by {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    top: -26px;
+    left: -26px;
 }

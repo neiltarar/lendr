@@ -20,7 +20,6 @@ function renderHome() {
                 <form class="home-search mt-5">
                     <input type="text" class="rounded" placeholder="Enter name" />
                     <button class="btn btn-primary rounded-pill"><i class="fa fa-search"></i></button>
-                    
                 </form>
             
             </div>
@@ -89,6 +88,18 @@ function renderHome() {
             productAddress.textContent = product["address"]
             productBox.append(productAddress)
 
+            //Conversation button
+            const conversationButton = document.createElement("button");
+            conversationButton.textContent = "Contact Owner";
+            conversationButton.setAttribute("id", "contact-owner-button");
+            conversationButton.value = product["id"];
+            productBox.append(conversationButton);
+            //open messages page
+            conversationButton.addEventListener("click", (event)=> {
+                const productid = product["id"];
+                const sessionUserId = req.session.userId;
+                renderConversation(productid, sessionUserId);
+            })
         });
     });
 };

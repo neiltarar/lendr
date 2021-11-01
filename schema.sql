@@ -16,6 +16,9 @@ INSERT INTO users(username, email, password, comments)
 INSERT INTO users(username, email, password, comments) 
     VALUES ('fred', 'fred@gmail.com', '123password', 'comment' );
 
+INSERT INTO users(username, email, password, comments) 
+    VALUES ('Lucy', 'lucy@example.com', '123password', 'comment' );
+
 
 -- ****** PRODUCTS ******
 DROP TABLE IF EXISTS products;
@@ -37,6 +40,8 @@ CREATE TABLE IF NOT EXISTS products (
 INSERT INTO products(name, description, address, availability, imageURL, category, price, user_id) 
     VALUES ('Lawnmower', 'Tool for gardening','1 Brisbane City', '1/11/2021','./src/001.jpg' ,'gardening', '35','1' );
 
+INSERT INTO products(name, description, address, availability, imageURL, category, price, user_id) 
+    VALUES ('Boat', 'Trip','2 Brisbane City', '2021-11-16','./src/001.jpg' ,'gardening', '35','3' );
 
 
 
@@ -82,13 +87,13 @@ INSERT INTO conversations(subject, productOwner_id, sessionUser_id, productID)
 
 
 -- Get the product owner name and session current user name and messages
-SELECT conversations.conversation_id, conversations.subject, conversations.productid, products.id as productId, products.name as productName, users.user_id as productOwner_id, users.username as productOwner
+SELECT conversations.conversation_id, conversations.subject, conversations.productid, conversations.sessionUser_id , products.id as productId, products.name as productName, users.user_id as productOwner_id, users.username as productOwner
         FROM conversations
         JOIN products 
             ON conversations.productID=products.id 
         JOIN users
             ON conversations.productOwner_id= users.user_id
-        WHERE products.id = 1;
+        WHERE products.id = 1 AND productOwner_id = 1 AND conversations.sessionUser_id = 1 ;
 
  
 --***** REVIEWS ******

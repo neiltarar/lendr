@@ -13,28 +13,23 @@ const Conversations = {
         
     },
     //Join conversation, products and users table for messages functionality
-    getConvoData(id){
+    getConvoData(id, sessionUser_id){
         const sql = `SELECT conversations.conversation_id, conversations.subject, conversations.productid, products.id as productId, products.name as productName, users.user_id as productOwner_id, users.username as productOwner
         FROM conversations
         JOIN products 
             ON conversations.productID=products.id 
         JOIN users
             ON conversations.productOwner_id= users.user_id
-        WHERE products.id = $1 `;
+        WHERE products.id = $1 AND sessionUser_id = $2 `;
         
         return db   
-               .query(sql, [id])
-               .then((dbRes) => dbRes); 
+               .query(sql, [id, sessionUserId ])
+               .then((dbRes) => dbRes.rows); 
         
     },
-    create(subject, date, productowner_id, sessionuser_id ){
+    insertConversation(subject, date, productowner_id, sessionuser_id ){
         const sql = "INSERT INTO conversations(subject, date, producrowner_id, sessionuser_id) VALUES($1, $2, $3, $4)";
         const values = [subject, date, productowner_id, sessionuser_id];
-        return db.query(sql,values)
-               .then((dbRes)=> {
-                   console.log(dbRes);
-                   dbRes;
-               });
     }
 }
 

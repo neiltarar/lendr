@@ -1,4 +1,5 @@
 const productPage = (id) => {
+    console.log(id)
     page.innerHTML = '';
 
     //Products div
