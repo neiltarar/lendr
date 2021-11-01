@@ -46,6 +46,7 @@ const productPage = (id) => {
             console.log(id)
 
             axios.delete(`/api/users/products/${id}`).then((res) => {
+                console.log(res)
                 if (res.status(200)) {
                     page.innerHTML = `<p style="color: green">You successfully deleted the product</p>`;
                     setTimeout(function () {

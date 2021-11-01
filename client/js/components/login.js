@@ -1,4 +1,3 @@
-
 const renderLogin = () => {
     const page = document.getElementById("page");
     const loginForm = document.createElement("form");

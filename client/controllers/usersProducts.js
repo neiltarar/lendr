@@ -25,7 +25,7 @@ usersProductsController.delete("/:id", sessionAuth, (req, res) => { //delete pro
     })
 });
 
-usersProductsController.post("/add", sessionAuth, (req, res) => { //add product
+usersProductsController.post("/host", sessionAuth, (req, res) => { //add product
     const { name, description, address, availability, category } = req.body
 
     const user_id = req.session.userId //getting user_id from sessions
