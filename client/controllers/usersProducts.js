@@ -2,6 +2,7 @@ const sessionAuth = require("../middleware/sessionAuth");
 const usersDB = require("../models/users");
 const usersProductsDB = require("../models/usersProducts");
 const express = require("express");
+const connectPgSimple = require("connect-pg-simple");
 const usersProductsController = express.Router();
 
 usersProductsController.post('/review', sessionAuth, (req, res) => {
@@ -18,6 +19,7 @@ usersProductsController.post('/review', sessionAuth, (req, res) => {
 usersProductsController.delete("/:id", sessionAuth, (req, res) => { //delete product by id
     const id = req.params.id
     const userId = req.session.userId
+    console.log(userId)
 
     usersProductsDB.deleteProduct(id, userId).then(() => {
             res.status(200).send()
@@ -25,7 +27,7 @@ usersProductsController.delete("/:id", sessionAuth, (req, res) => { //delete pro
     })
 });
 
-usersProductsController.post("/add", sessionAuth, (req, res) => { //add product
+usersProductsController.post("/host", sessionAuth, (req, res) => { //add product
     const { name, description, address, availability, category } = req.body
 
     const user_id = req.session.userId //getting user_id from sessions

@@ -11,13 +11,12 @@ const productPage = (id) => {
 
     axios.get(`/api/products/${id}`).then((response) => {
         const product = response.data
-        console.log(`This is the product: ${product}`)
 
         const productName = document.createElement('h2')
         productName.textContent = product["name"]
         productBox.append(productName)
 
-        // const productImage = document.createElement('h2')
+        // const productImage = document.createElement('image')
         // productName.textContent = product["name"]
         // productBox.append(productName)
         //ADDING THE PRODUCT IMAGE
@@ -46,7 +45,8 @@ const productPage = (id) => {
             console.log(id)
 
             axios.delete(`/api/users/products/${id}`).then((res) => {
-                if (res.status(200)) {
+                console.log(res)
+                if (res.status === 200) {
                     page.innerHTML = `<p style="color: green">You successfully deleted the product</p>`;
                     setTimeout(function () {
                         page.innerHTML = "";
