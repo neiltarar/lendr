@@ -50,7 +50,7 @@ function renderHome() {
             <p class="cat-tag">Category</p>
             <h4 class="pt-1 pb-1">Product Title</h4>
             <p class="pb-3"><span class="bold ">Available:</span> <span>1/11/2021 </span> </p>
-            <button type="button" class="link" id="openConversation" data-toggle="modal" data-target="#exampleModal" onClick="renderMessages()" value="1">
+            <button type="button" class="link" id="openConversation" data-toggle="modal" data-target="#exampleModal" onClick="renderConversation()" value="1">
                 Contact Owner Name
             </button>
             <p class="price-tag text-end border-top pt-3"><span class="bold"> $35</span><span>/hour</span> </p>
@@ -90,6 +90,17 @@ function renderHome() {
             productAddress.textContent = product["address"]
             productBox.append(productAddress)
 
+            //Conversation button
+            const conversationButton = document.createElement("button");
+            conversationButton.textContent = "Contact Owner";
+            conversationButton.setAttribute("id", "contact-owner-button");
+            conversationButton.value = product["id"];
+            productBox.append(conversationButton);
+            //open messages page
+            conversationButton.addEventListener("click", (event)=> {
+                const productId = product["id"];
+                renderConversation(productId);
+            })
         });
     });
 };

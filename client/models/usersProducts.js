@@ -35,7 +35,14 @@ const usersProductsDB = {
     getProductRatings(productID) {
         const sql = "SELECT rating FROM reviews";
         return db
-            .query(sql);
+            .query(sql)
+    },
+    getUserWithProductId(productId){
+        const sql = `SELECT products.user_id, users.user_id, users.username from products join users on products.user_id = users.user_id where products.id = $1;`
+        return db
+            .query(sql, [productId])
+            .then((dbRes) => dbRes.rows);
+
     }
 };
 

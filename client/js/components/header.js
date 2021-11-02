@@ -1,7 +1,7 @@
 function renderNavBar() {
     const header = document.getElementById('header-nav');
     header.innerHTML=`
-    <nav class="navbar navbar-expand-lg navbar-light bg-transparent pt-3 pb-3">
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary pt-3 pb-3">
         <div class="container">
         <a class="navbar-brand" onClick="renderHome()">Logo</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">

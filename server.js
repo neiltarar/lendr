@@ -19,6 +19,21 @@ const expressSession = require("express-session");
 const connectPgSimple = require("connect-pg-simple");
 const pgSession = connectPgSimple(expressSession);
 
+
+//conversations controller
+const conversationsController = require("./client/controllers/conversations");
+const messagesController = require("./client/controllers/messages");
+
+//Cloudinary 
+const cloudinary = require('cloudinary');
+cloudinary.config({ 
+  cloud_name: process.env.CLOUD_NAME, 
+  api_key: process.env.API_KEY, 
+  api_secret: process.env.API_SECRET,
+  secure: true
+});
+
+
 app.use(express.static("client"));
 app.use(express.json());
 
@@ -50,7 +65,7 @@ const messagesController = require("./client/controllers/messages");
 //Conversations
 app.use("/api/conversations", conversationsController); //Which controller to use?
 //Messages
-// app.use("api/messages", messagesController);
+app.use("/api/messages", messagesController);
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`);
