@@ -35,6 +35,7 @@ usersProductsController.post("/host", sessionAuth, (req, res) => { //add product
     const { name, description, address, availability, image, category, price } = req.body
     console.log(req.body)
     const userId = req.session.userId //getting user_id from sessions
+    console.log(userId)
 
     if (name === undefined || name === '' || name.length > 20) {
         res.status(400).json({ message: 'name not defined' })
@@ -53,19 +54,18 @@ usersProductsController.post("/host", sessionAuth, (req, res) => { //add product
         return
     } else if (category === undefined || category === '') { 
         res.status(400).json({ message: 'category not defined' })
-    } else if (price === undefined || price === '') { 
-        res.status(400).json({ message: 'category not defined' })
+    } else if (price === undefined || price === '' ) { 
+        res.status(400).json({ message: 'price not defined' })
     } else {
         usersProductsDB.addNewProduct(name, description, address, availability, image, category, price, userId).then((products) => {
-            res.status(201).send()
-            res.json(products);
+            res.status(201).send(products)
             console.log(`added product: ${name}`);
         })
     }
-}); //do we need an error handler here?
+}); 
 
 usersProductsController.post("/:id", sessionAuth, (req, res) => { //update product all parameters
-    const { name, description, address, availability, category } = req.body
+    const { name, description, address, availability, image, category, price } = req.body
 
     const product_id = req.params.id
     const userId = req.session.userId
@@ -82,12 +82,16 @@ usersProductsController.post("/:id", sessionAuth, (req, res) => { //update produ
     } else if (availability === undefined || availability === '') {
         res.status(400).json({ message: 'availbility not defined' })
         return
-    } else if (category === undefined || category === '') { //category will just be a drop down option?
+    } else if (image === undefined || image === '') {
+        res.status(400).json({ message: 'imageurl not defined' })
+        return
+    } else if (category === undefined || category === '') { 
         res.status(400).json({ message: 'category not defined' })
+    } else if (price === undefined || price === '' ) { 
+        res.status(400).json({ message: 'price not defined' })
     } else {
-        usersProductsDB.addNewProduct(name, description, address, availability, category, product_id, userId).then((products) => {
-            res.status(201).send()
-            res.json(products);
+        usersProductsDB.addNewProduct(name, description, address, availability, image, category, price, userId).then((products) => {
+            res.status(201).send(products);
             console.log(`updated product: ${name}`);
         });
     }

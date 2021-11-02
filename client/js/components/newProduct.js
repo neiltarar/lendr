@@ -1,10 +1,10 @@
 const renderNewProduct = () => {
-    const page = document.getElementById("page");
-    page.innerHTML = ''
+  const page = document.getElementById("page");
+  page.innerHTML = ''
 
-    const form = document.createElement("form");
-    form.className = 'Form'
-    form.innerHTML = `
+  const form = document.createElement("form");
+  form.className = 'Form'
+  form.innerHTML = `
       <fieldset>
         <label for="name">Name:</label><br>
         <input type="text" name="name">
@@ -41,25 +41,24 @@ const renderNewProduct = () => {
       <input type="submit" class="button">
       `;
 
-    form.addEventListener("submit", (event) => {
-        event.preventDefault()
-        const formData = new FormData(form)
-        const data = Object.fromEntries(formData.entries())
-        console.log(data)
+  form.addEventListener("submit", (event) => {
+    event.preventDefault()
+    const formData = new FormData(form)
+    const data = Object.fromEntries(formData.entries())
 
-        axios.post(`/api/users/products/host`, data).then((res) => {
-          console.log(res.status(200))
-          console.log("Product Added")
-          page.innerHTML = `<p>Product Added</p>`
-          setTimeout(function() {
-            page.innerHTML = "";
-            renderLoggednavBar();
-            renderHome();
-        }, 1000);
-        }).catch(err => {
-          console.log("You need to be logged in")
-        })
-        renderHome()
+    axios.post(`/api/users/products/host`, data).then((res) => {
+      console.log(res.status(200))
+      console.log("Product Added")
+      page.innerHTML = `<p>${message}/p>`
+      setTimeout(function () {
+        page.innerHTML = "";
+        renderLoggednavBar();
+        renderHome();
+      }, 1000);
+    }).catch(err => {
+      console.log("You need to be logged in")
     })
-    page.replaceChildren(form);
+    renderHome()
+  })
+  page.replaceChildren(form);
 };

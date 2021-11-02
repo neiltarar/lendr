@@ -4,16 +4,15 @@ function renderHome() {
     // Clear the contents of the page element before we rerender the new content
     page.innerHTML = '';
     //Search Form 
-    page.classList.add("container");
 
     axios.get(`/api/sessions`).then((res) => {
-        const loginMessage = document.createElement("h2")
-        page.append(loginMessage)
-        loginMessage.innerHTML = `${res.data.message}`
+        const paragraph = document.getElementsByTagName("p")
+        paragraph[0].innerHTML = `${res.data.message}`
+        console.log(res.data)
+
+        res.data.userId = userId
+        res.data.username = username
     })
-    req.session.username = username
-    req.session.userid = userId
-    console.log(username)
     
     //Form div
     const formRow = document.createElement('div');

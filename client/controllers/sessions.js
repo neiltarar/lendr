@@ -3,8 +3,8 @@ const session = express.Router();
 
 session.get("/", (req, res) => {
     if (req.session.username) {
-        res.json({message: `You are logged in as ${req.session.username}`});
-        console.log(req.session.username)
+        res.status(200).json({message: `Welcome back, ${req.session.username}`, username: req.session.username, userId: req.session.userId});
+        
     } else {
         res.json({message: "You are not logged in"});
     }
