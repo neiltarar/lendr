@@ -1,21 +1,24 @@
 const express = require('express');
 const session = express.Router();
-const Sessions = require("../models/sessions");
 
 session.get("/", (req, res) => {
-    Sessions.getSession().then((sessions)=> {
+    if (req.session.username) {
+        console.log(req.session.username)
+    }
 
-        if (sessions) {
-            for (const [key,value] of Object.entries(sessions)) {
+    // Sessions.getSession().then((sessions)=> {
 
-                if (key, value["username"] && value["userId"]) {
-                    return res.json(sessions)
-                } 
-            }
-        } else {
-            console.log("no user in session")
-        }
-    });
+    //     if (sessions) {
+    //         for (const [key,value] of Object.entries(sessions)) {
+
+    //             if (key, value["username"] && value["userId"]) {
+    //                 return res.json(sessions)
+    //             } 
+    //         }
+    //     } else {
+    //         console.log("no user in session")
+    //     }
+    // });
 })
 
 session.delete("/" , (req, res) => {  
