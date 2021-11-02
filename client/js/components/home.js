@@ -1,18 +1,20 @@
-// const { default: axios } = require("axios");
-
-//Get the current user id ;
-axios.get(`/api/sessions`).then((res) => {
-    console.log(res.data)
-    // userId = session.sess.userId;
-    // console.log(userId)
-})
-
 function renderHome() {
+
     const page = document.getElementById('page');
     // Clear the contents of the page element before we rerender the new content
     page.innerHTML = '';
     //Search Form 
     page.classList.add("container");
+
+    axios.get(`/api/sessions`).then((res) => {
+        const loginMessage = document.createElement("h2")
+        page.append(loginMessage)
+        loginMessage.innerHTML = `${res.data.message}`
+    })
+    req.session.username = username
+    req.session.userid = userId
+    console.log(username)
+    
     //Form div
     const formRow = document.createElement('div');
     formRow.classList.add('hero');

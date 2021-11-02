@@ -46,16 +46,20 @@ const productPage = (id) => {
         // Delete button event listener
         deleteProduct.addEventListener("click", (event) => {
             id = product["id"];
+           
             axios.delete(`/api/users/products/${id}`).then((res) => {
-                console.log(res)
                 if (res.status === 200) {
-                    page.innerHTML = `<p style="color: green">You successfully deleted the product</p>`;
+                    page.innerHTML = `<p style="color: green">Product deleted</p>`;
                     setTimeout(function () {
                         page.innerHTML = "";
                         renderHome();
                     }, 1000)
                 } else {
                     page.innerHTML = `<p style="color: red">You are not logged in</p>`;
+                    setTimeout(function () {
+                        page.innerHTML = "";
+                        renderHome();
+                    }, 1000)
                 };
             });
         });

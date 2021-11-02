@@ -25,8 +25,8 @@ usersController.post('/login', (req, res) => {
       if (isValidPassword(password, password_hash)) {
         req.session.username = email;
         req.session.userId = userId;
-        console.log(userId);
-        res.json({ message: `Logged in as ${email}` });
+        
+        res.status(200).json({ message: `Logged in as ${email}` });
         console.log("correct login")
       } else {
         // if the username/password is not found in the db we throw an error
@@ -39,20 +39,17 @@ usersController.post('/login', (req, res) => {
   });
 });
 
-usersController.post('/signup', (req, res) => {
-  console.log("lets add a new user!");
-  console.log(req.body);
-  res.json({ "status": "post req received" });
+usersController.post('/signup', (req, res) => { 
   const { username, email, password, confirm_password } = req.body;
 
   if (username === undefined || username === '' || username.length > 20) {
-    res.status(400).json({ error: 'username not defined' });
+    res.status(400).json({ message: 'username not defined' });
     return;
   } else if (email === undefined || email === '' || email.length > 50 || !email.includes('@')) {
-    res.status(400).json({ error: 'email not defined' });
+    res.status(400).json({ message: 'email not defined' });
     return;
   } else if (password === undefined || password === '') {
-    res.status(400).json({ error: 'password not defined' })
+    res.status(400).json({ message: 'password not defined' })
     return;
   } else if (password === confirm_password) {
     console.log("Passwords match");
@@ -60,12 +57,15 @@ usersController.post('/signup', (req, res) => {
       return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
     };
     let password_hash = generateHash(confirm_password);
-    usersDB.create(username, email, password_hash).then((users) => {
-      res.status(201).json(users)
-      console.log('added user successfully')
+    usersDB.create(username, email, password_hash).then((res) => {
+      console.log(res)
+      res.status(200).json({message: "Welcome to lendr!"})
+      req.session.username = username
+      
     });
-    
-  };
+  } else {
+    res.status(400).json({ message: 'passwords do not match' })
+  }
 });
 
 module.exports = usersController;
