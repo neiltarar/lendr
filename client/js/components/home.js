@@ -1,6 +1,11 @@
 // const { default: axios } = require("axios");
 
-
+//Get the current user id ;
+axios.get(`/api/sessions`).then((res) => {
+    console.log(res.data)
+    // userId = session.sess.userId;
+    // console.log(userId)
+})
 
 function renderHome() {
     const page = document.getElementById('page');
@@ -21,10 +26,8 @@ function renderHome() {
                     <input type="text" class="rounded" placeholder="Enter name" />
                     <button class="btn btn-primary rounded-pill"><i class="fa fa-search"></i></button>
                 </form>
-            
             </div>
-             <div class="col-md-8 d-flex justify-content-center  hero-col"> 
-            
+            <div class="col-md-8 d-flex justify-content-center  hero-col"> 
             </div>
         </div>
     </div>
@@ -61,7 +64,6 @@ function renderHome() {
 
     axios.get(`/api/products`).then((response) => { //showing all products
         console.log('data', response.data)
-
         response.data.forEach(product => {
             const productBox = document.createElement('div')
             productsContainer.append(productBox)
