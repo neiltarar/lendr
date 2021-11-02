@@ -60,8 +60,6 @@ app.use("/api/products", productsController);
 app.use("/api/users/products" , usersProductsController);
 //conversations controller
 
-// const messagesController = require("./client/controllers/messages");
-
 //Conversations
 app.use("/api/conversations", conversationsController); //Which controller to use?
 //Messages
