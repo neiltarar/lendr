@@ -41,7 +41,7 @@ signupForm.addEventListener("submit" , (event) => {
             console.log(res.status, "user successfully signed up")
             setTimeout(function() {
                 page.innerHTML = "";
-                renderLoggednavBar();
+                renderNavBar();
                 renderHome();
             }, 1000);
         })

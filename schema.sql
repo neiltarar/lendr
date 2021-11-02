@@ -46,7 +46,7 @@ DROP TABLE IF EXISTS messages;
 
 CREATE TABLE IF NOT EXISTS messages (
     message_id serial PRIMARY KEY,
-    date timestamp,
+    date TIMESTAMP,
     content VARCHAR(200),
     user_id INTEGER,
     conversation_id INTEGER  REFERENCES conversations(conversation_id)
@@ -79,6 +79,7 @@ CREATE TABLE IF NOT EXISTS reviews (
     id serial PRIMARY KEY,
     review VARCHAR(150),
     rating INTEGER,
+    date TIMESTAMP,
     authorID INTEGER,
     productID INTEGER
 );

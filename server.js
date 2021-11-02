@@ -52,8 +52,6 @@ app.use("/api/conversations", conversationsController); //Which controller to us
 //Messages
 // app.use("api/messages", messagesController);
 
-
-
 app.listen(port, () => {
-    console.log(`listening on port ${port}`);
+  console.log(`listening on port ${port}`);
 });
