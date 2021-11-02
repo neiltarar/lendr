@@ -45,7 +45,7 @@ const renderLogin = () => {
 };
 
 function renderLogout() {
-    axios.delete("/api/sessions").then((res) => {
+    axios.delete("/api/sessions").then((req, res) => {
       page.innerHTML = `<p style="color: red">You are logged out!</p>`;
       setTimeout(function () {
         page.innerHTML = "";

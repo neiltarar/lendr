@@ -14,13 +14,10 @@ const dotenv = require("dotenv");
 dotenv.config();
 const expressSession = require("express-session");
 
+
 // Connect to the DB and create session Table
 const connectPgSimple = require("connect-pg-simple");
 const pgSession = connectPgSimple(expressSession);
-
-//conversations controller
-const conversationsController = require("./client/controllers/conversations");
-const messagesController = require("./client/controllers/messages");
 
 app.use(express.static("client"));
 app.use(express.json());
@@ -36,20 +33,22 @@ app.use(
       }),
       secret: process.env.EXPRESS_SESSION_SECRET_KEY,
       cookie: { maxAge: oneDay },
-      resave: false
-
+      resave: false, //gets rid of deprecated messages
+      saveUninitialized: false //gets rid of deprecated messages
     })
   );
 
-// app.use("/api/sessionAuth" , sessionAuth);
 app.use("/" , sessionLogger);
 app.use("/api/users" , usersController);
 app.use("/api/sessions" , sessionController);
 app.use("/api/products", productsController);
 app.use("/api/users/products" , usersProductsController);
+//conversations controller
+const conversationsController = require("./client/controllers/conversations"); //Which controller to use?
+const messagesController = require("./client/controllers/messages");
 
 //Conversations
-app.use("/api/conversations", conversationsController);
+app.use("/api/conversations", conversationsController); //Which controller to use?
 //Messages
 // app.use("api/messages", messagesController);
 

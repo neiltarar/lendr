@@ -66,14 +66,6 @@ usersController.post('/signup', (req, res) => {
       res.status(201).json(users)
       console.log('added user successfully')
     })
-    usersDB.getUser(email).then((user) => {
-      res.status(201).json(user)
-      const userId = response[0]['user_id'];
-      console.log(userId)
-      req.session.username = email;
-      req.session.userId = userId;
-
-    })
   }
 })
 
