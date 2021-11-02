@@ -59,8 +59,8 @@ app.use("/api/sessions" , sessionController);
 app.use("/api/products", productsController);
 app.use("/api/users/products" , usersProductsController);
 //conversations controller
-const conversationsController = require("./client/controllers/conversations"); //Which controller to use?
-const messagesController = require("./client/controllers/messages");
+
+// const messagesController = require("./client/controllers/messages");
 
 //Conversations
 app.use("/api/conversations", conversationsController); //Which controller to use?
