@@ -17,7 +17,8 @@ productsController.get("/:id", (req, res) => { //getting product by id
     const id = req.params.id;
     productsDB.getById(id).then((products) => {
         if (products) {
-            res.json(products);
+
+            res.json(products)
             console.log(`getting a single product, product_id: ${id}`);
         } else {
             res.status(500).json({ message: `Cannot fetch product_id: ${id}`});

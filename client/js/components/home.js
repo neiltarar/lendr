@@ -1,15 +1,11 @@
-//Get Current user 
-let user_id = undefined;
+// const { default: axios } = require("axios");
+
 //Get the current user id ;
 axios.get(`/api/sessions`).then((res) => {
-    const sessions = res.data;
-    if (sessions) {
-        sessions.forEach(session => {
-            console.log(session.sess.userId);
-            user_id = session.sess.userId;
-        });
-    }
-});
+    console.log(res.data)
+    // userId = session.sess.userId;
+    // console.log(userId)
+})
 
 function renderHome() {
     const page = document.getElementById('page');

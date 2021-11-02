@@ -13,7 +13,7 @@ const productPage = (id) => {
         productName.textContent = product["name"];
         productBox.append(productName);
 
-        // const productImage = document.createElement('h2')
+        // const productImage = document.createElement('image')
         // productName.textContent = product["name"]
         // productBox.append(productName)
         //ADDING THE PRODUCT IMAGE
@@ -46,7 +46,8 @@ const productPage = (id) => {
         deleteProduct.addEventListener("click", (event) => {
             id = product["id"];
             axios.delete(`/api/users/products/${id}`).then((res) => {
-                if (res.status(200)) {
+                console.log(res)
+                if (res.status === 200) {
                     page.innerHTML = `<p style="color: green">You successfully deleted the product</p>`;
                     setTimeout(function () {
                         page.innerHTML = "";
