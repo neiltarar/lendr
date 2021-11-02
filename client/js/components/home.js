@@ -96,9 +96,8 @@ function renderHome() {
             productBox.append(conversationButton);
             //open messages page
             conversationButton.addEventListener("click", (event)=> {
-                const productid = product["id"];
-                const sessionUserId = req.session.userId;
-                renderConversation(productid, sessionUserId);
+                const productId = product["id"];
+                renderConversation(productId);
             })
         });
     });

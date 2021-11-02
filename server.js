@@ -22,6 +22,15 @@ const pgSession = connectPgSimple(expressSession);
 const conversationsController = require("./client/controllers/conversations");
 const messagesController = require("./client/controllers/messages");
 
+//Cloudinary 
+const cloudinary = require('cloudinary');
+cloudinary.config({ 
+  cloud_name: process.env.CLOUD_NAME, 
+  api_key: process.env.API_KEY, 
+  api_secret: process.env.API_SECRET,
+  secure: true
+});
+
 app.use(express.static("client"));
 app.use(express.json());
 

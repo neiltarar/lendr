@@ -1,14 +1,14 @@
 
 
-function renderMessages() {
+function renderMessages(productId) {
     console.log("rendering messages");
-    const conversationId = 1;
+    // const id = 1;
     const page = document.getElementById("page");
     const messageBody = document.createElement("div");
     messageBody.classList.add("row");
     messageBody.classList.add("justify-content-center");
 
-    axios.get(`/api/messages/conversation/${conversationId}`)
+    axios.get(`/api/messages/product/${productId}`)
         .then((res) => {
             console.log(res.data);
             const messages = res.data;
@@ -18,7 +18,7 @@ function renderMessages() {
                 messageDiv.innerHTML = `
                 <p class="text-muted text-end">${message.date}</>
                 <p class="message">${message.content}</p>
-                <p class="sent-by"> ${message.username}</p>
+                <p class="sent-by"> ${message.author}</p>
                 `
                 messageBody.appendChild(messageDiv);
             });

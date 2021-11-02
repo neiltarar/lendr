@@ -1,4 +1,6 @@
 
+
+
 function renderConversation(productId) {
     const page = document.getElementById('page');
     page.innerHTML = '';
@@ -32,7 +34,7 @@ function renderConversation(productId) {
                 smallContainer.textContent = "no convo"
             }
             // 
-            renderMessages();
+            renderMessages(productId);
             postMessages();
             
 

@@ -9,11 +9,11 @@ messagesController.get("/", (req, res)=> {
     })
 })
 
-messagesController.get("/conversation/:id", (req, res)=>{
+messagesController.get("/product/:id", (req, res)=>{
     const id = req.params.id;
     console.log("getting messages by convo id", id);
-    Messages.getMessagesByConvoId(id).then((conversation) => {
-        res.json(conversation);
+    Messages.getMessagesByProductId(id).then((messages) => {
+        res.json(messages);
       })
       .catch((err)=> console.log(err))
 });

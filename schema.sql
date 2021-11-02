@@ -66,6 +66,11 @@ SELECT messages.message_id, messages.date, messages.content, messages.author_id,
             ON messages.author_id = users.user_id
         WHERE messages.conversation_id = 1;
 
+SELECT conversations.conversation_id, conversations.productowner_id, conversations.productid, conversations.sessionuser_id, messages.message_id, messages.date, messages.content, messages.author_id
+ FROM conversations 
+    JOIN messages 
+        ON messages.author_id = conversations.productowner_id OR messages.author_id = conversations.sessionuser_id;
+
 
 
 
