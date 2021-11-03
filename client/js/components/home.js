@@ -1,18 +1,18 @@
+axios.get(`/api/sessions`).then((res) => {
+    const paragraph = document.getElementsByTagName("p")
+    paragraph[0].innerHTML = `${res.data.message}`
+    console.log(res.data)
+
+    res.data.userId = userId
+    res.data.username = username
+})
+
 function renderHome() {
 
     const page = document.getElementById('page');
     // Clear the contents of the page element before we rerender the new content
     page.innerHTML = '';
     //Search Form 
-
-    axios.get(`/api/sessions`).then((res) => {
-        const paragraph = document.getElementsByTagName("p")
-        paragraph[0].innerHTML = `${res.data.message}`
-        console.log(res.data)
-
-        res.data.userId = userId
-        res.data.username = username
-    })
     
     //Form div
     const formRow = document.createElement('div');
