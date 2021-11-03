@@ -17,9 +17,9 @@ const usersProductsDB = {
         const values = [id, userId];
         return db.query(sql, values);
     },
-    updateProductParameters(name, description, address, availability, product_id, userId) {
-        const sql = "UPDATE products SET name = $1, description = $2, address = $3, availability = $4 WHERE id = $6 AND user_id = $7";
-        const values = [name, description, address, availability, product_id, userId];
+    updateProductParameters(name, description, address, availability, image, category, price, productId, userId) {
+        const sql = "UPDATE products SET name = $1, description = $2, address = $3, availability = $4, imageurl = $5, category = $6, price = $7 WHERE id = $8 AND user_id = $9";
+        const values = [name, description, address, availability, image, category, price, productId, userId];
         return db.query(sql, values).then((dbRes) => dbRes.rows[0]);
     },
     getProductID(userId) {

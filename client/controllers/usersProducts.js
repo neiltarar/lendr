@@ -64,11 +64,13 @@ usersProductsController.post("/host", sessionAuth, (req, res) => { //add product
     }
 }); 
 
-usersProductsController.post("/:id", sessionAuth, (req, res) => { //update product all parameters
+usersProductsController.patch("/:id", sessionAuth, (req, res) => { //update product all parameters
     const { name, description, address, availability, image, category, price } = req.body
-
-    const product_id = req.params.id
+    console.log(req.body)
+    const productId = req.params.id
+    console.log(productId)
     const userId = req.session.userId
+    console.log(userId)
 
     if (name === undefined || name === '' || name.length > 20) {
         res.status(400).json({ message: 'name not defined' })
@@ -90,8 +92,8 @@ usersProductsController.post("/:id", sessionAuth, (req, res) => { //update produ
     } else if (price === undefined || price === '' ) { 
         res.status(400).json({ message: 'price not defined' })
     } else {
-        usersProductsDB.addNewProduct(name, description, address, availability, image, category, price, userId).then((products) => {
-            res.status(201).send(products);
+        usersProductsDB.addNewProduct(name, description, address, availability, image, category, price, productId, userId).then((products) => {
+            res.status(201).json( {message: "Product updated" } );
             console.log(`updated product: ${name}`);
         });
     }

@@ -2,7 +2,7 @@ const renderSignUp = () => {
     const page = document.getElementById("page");
     const signupForm = document.createElement("form");
     const signupMessage = document.createElement("h3");
-    page.append(signupMessage)
+    signupForm.append(signupMessage)
 
     signupForm.innerHTML = `
         <fieldset>
@@ -37,13 +37,13 @@ signupForm.addEventListener("submit" , (event) => {
             console.log(res)
             console.log(res.status, "user successfully signed up")
             signupMessage.innerHTML = `
-            <h3 style="color: green"> ${res.data.message} </h3>
+            <h3 style="color: green"> ${req.data.message} </h3>
         `;
             setTimeout(function() {
                 page.innerHTML = "";
+                renderLogin();
                 renderNavBar();
-                renderHome();
-            }, 1000);
+            }, 2000);
         })
         .catch((err) => {
             signupMessage.innerHTML = `
@@ -53,7 +53,7 @@ signupForm.addEventListener("submit" , (event) => {
                 page.innerHTML = "";
                 renderSignUp();
                 renderNavBar();
-            }, 1000);
+            }, 2000);
     });
 });
 page.replaceChildren(signupForm);

@@ -1,3 +1,5 @@
+const { default: axios } = require("axios");
+
 const productPage = (id) => {
     console.log(id)
     page.innerHTML = '';
@@ -31,13 +33,19 @@ const productPage = (id) => {
                 Contact Owner Name
             </button>
         `;
-        
-        // Add New Product Button
-        const addNewProduct = document.createElement('button') //Add button to link to add product page
-        addNewProduct.innerHTML = `<button type="button" class="button">Add Product</button`
-        productBox.append(addNewProduct) //may need to append to different html element
-        addNewProduct.addEventListener("click", (event) => {
-            addNewProduct()
+
+        // Update Product Button
+        const updateProduct = document.createElement('button') //Add button to link to add product page
+        updateProduct.innerHTML = `<button type="button" class="button">Add Product</button`
+        productBox.append(updateProduct) //may need to append to different html element
+        updateProduct.addEventListener("click", (event) => {
+            id = product["id"]
+            console.log(id)
+
+            axios.get(`/api/products/${id}`).then((response) => {
+                console.log(response)
+                renderUpdateProduct(id)
+            })
         });
         // Delete Product Button
         const deleteProduct = document.createElement('button'); //delete product
@@ -46,7 +54,7 @@ const productPage = (id) => {
         // Delete button event listener
         deleteProduct.addEventListener("click", (event) => {
             id = product["id"];
-           
+
             axios.delete(`/api/users/products/${id}`).then((res) => {
                 if (res.status === 200) {
                     page.innerHTML = `<p style="color: green">Product deleted</p>`;
@@ -67,7 +75,7 @@ const productPage = (id) => {
 
     // --------------- REVIEW SECTION OF THE PRODUCT --------------------------------
     // Axios get request to get all reviews
-    axios.get(`/api/products/reviews/${id}`).then((response) => {        
+    axios.get(`/api/products/reviews/${id}`).then((response) => {
         const reviewForm = document.createElement("form");
         const productReview = response.data;
         console.log(productReview)
@@ -122,7 +130,7 @@ const productPage = (id) => {
                     // alert("You need to login to write a review");
                 });
         });
-    });    
+    });
     productsRow.append(productBox);
     page.append(productsRow);
 };
