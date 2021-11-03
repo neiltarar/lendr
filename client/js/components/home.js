@@ -1,14 +1,13 @@
 axios.get(`/api/sessions`).then((res) => {
     const paragraph = document.getElementsByTagName("p")
     paragraph[0].innerHTML = `${res.data.message}`
-    console.log(res.data)
-
-    res.data.userId = userId
-    res.data.username = username
+    const username = res.data.username //giving us the username variable
+    console.log(username)
+    const userId = res.data.userId //giving us the userId variable
+    console.log(userId)
 })
 
 function renderHome() {
-
     const page = document.getElementById('page');
     // Clear the contents of the page element before we rerender the new content
     page.innerHTML = '';
