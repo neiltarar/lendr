@@ -57,14 +57,11 @@ usersController.post('/signup', (req, res) => {
       return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
     };
     let password_hash = generateHash(confirm_password);
-    usersDB.create(username, email, password_hash) 
-      console.log(res)
-      res.status(200).json({message: "Welcome to lendr!"})
-      req.session.username = username
-      
-  } else {
-    res.status(400).json({ message: 'passwords do not match' })
-  }
-});
 
+    usersDB.create(username, email, password_hash).then((response) => {
+      res.status(201).json(response)
+      console.log('added user successfully')
+    });
+  };
+});
 module.exports = usersController;

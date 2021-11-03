@@ -2,7 +2,6 @@ const renderSignUp = () => {
     const page = document.getElementById("page");
     const signupForm = document.createElement("form");
     const signupMessage = document.createElement("h3");
-    signupForm.append(signupMessage)
 
     signupForm.innerHTML = `
         <fieldset>
@@ -33,27 +32,26 @@ signupForm.addEventListener("submit" , (event) => {
 
     // making post request to see if the user exists in the db
     axios.post('/api/users/signup', data) //redirects to this signup
-        .then((res) => {
-            console.log(res)
-            console.log(res.status, "user successfully signed up")
-            signupMessage.innerHTML = `
-            <h3 style="color: green"> ${req.data.message} </h3>
-        `;
+        .then((response) => {
+            console.log(response)
+            page.innerHTML = `
+                <h3 style="color: green"> Welcome to lendr! </h3>
+                `
+            console.log(signupMessage)
             setTimeout(function() {
                 page.innerHTML = "";
                 renderLogin();
                 renderNavBar();
-            }, 2000);
+            }, 1000);
         })
         .catch((err) => {
-            signupMessage.innerHTML = `
-            <h3 style="color: red"> Please try again </h3>
-        `;
+            page.innerHTML = `
+                <h3 style="color: red"> Could not add user </h3>`
             setTimeout(function() {
                 page.innerHTML = "";
                 renderSignUp();
                 renderNavBar();
-            }, 2000);
+            }, 1000);
     });
 });
 page.replaceChildren(signupForm);

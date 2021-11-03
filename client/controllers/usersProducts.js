@@ -59,6 +59,7 @@ usersProductsController.post("/host", sessionAuth, (req, res) => { //add product
     } else {
         usersProductsDB.addNewProduct(name, description, address, availability, image, category, price, userId).then((products) => {
             res.status(201).send(products)
+            console.log(products)
             console.log(`added product: ${name}`);
         })
     }
@@ -93,7 +94,7 @@ usersProductsController.patch("/:id", sessionAuth, (req, res) => { //update prod
         res.status(400).json({ message: 'price not defined' })
     } else {
         usersProductsDB.addNewProduct(name, description, address, availability, image, category, price, productId, userId).then((products) => {
-            res.status(201).json( {message: "Product updated" } );
+            res.status(201).json( products, {message: "Product updated" } );
             console.log(`updated product: ${name}`);
         });
     }

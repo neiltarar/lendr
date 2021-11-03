@@ -36,7 +36,7 @@ const productPage = (id) => {
 
         // Update Product Button
         const updateProduct = document.createElement('button') //Add button to link to add product page
-        updateProduct.innerHTML = `<button type="button" class="button">Add Product</button`
+        updateProduct.innerHTML = `<button type="button" class="button">Update Product</button`
         productBox.append(updateProduct) //may need to append to different html element
         updateProduct.addEventListener("click", (event) => {
             id = product["id"]

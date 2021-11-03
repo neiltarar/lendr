@@ -55,12 +55,18 @@ function renderLogout() {
       page.innerHTML = `<p style="color: red">${req.data.message}</p>`;
       setTimeout(function () {
         page.innerHTML = "";
-        renderNavBar();
+        renderLoggednavBar();
         renderHome();
       }, 1000)
-      .then((res) => {
-          console.log(res.data);
-      });
-    });
-  }
+    })
+    .catch((res) => {
+        page.innerHTML = `
+        <h3 style="color: red"> Could not logout </h3>`
+        setTimeout(function() {
+            page.innerHTML = "";
+            renderLoggednavBar();
+            renderHome();
+        }, 1000);
+  });
+}
 

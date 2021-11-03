@@ -47,9 +47,9 @@ const renderNewProduct = () => {
     const data = Object.fromEntries(formData.entries())
 
     axios.post(`/api/users/products/host`, data).then((res) => {
-      console.log(res.status(200))
       console.log("Product Added")
-      page.innerHTML = `<p>${message}/p>`
+      console.log(res)
+      page.innerHTML = `<p style="color: green">Product successfully added!</p>`;
       setTimeout(function () {
         page.innerHTML = "";
         renderLoggednavBar();
@@ -57,6 +57,12 @@ const renderNewProduct = () => {
       }, 1000);
     }).catch(err => {
       console.log("You need to be logged in")
+      page.innerHTML = `<p style="color: red">You need to be logged in to add a product</p>`;
+      setTimeout(function () {
+        page.innerHTML = "";
+        renderNavBar();
+        renderHome();
+      }, 1000);
     })
     renderHome()
   })
