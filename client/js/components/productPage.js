@@ -1,7 +1,6 @@
 // const { default: axios } = require("axios");
 
 const productPage = (id) => {
-    console.log(id)
     page.innerHTML = '';
     //Products div
     const productsRow = document.createElement('div');
@@ -46,11 +45,13 @@ const productPage = (id) => {
                 console.log(response)
                 renderUpdateProduct(id)
             })
+
         });
         // Delete Product Button
         const deleteProduct = document.createElement('button'); //delete product
+        deleteProduct.classList.add("btn", "btn-primary");
         productBox.append(deleteProduct); //may need to append to different html element
-        deleteProduct.innerHTML = `<button type="button" class="button">Delete Product</button`;
+        deleteProduct.innerText = `Delete Product`;
         // Delete button event listener
         deleteProduct.addEventListener("click", (event) => {
             id = product["id"];
@@ -77,14 +78,30 @@ const productPage = (id) => {
     // Axios get request to get all reviews
     axios.get(`/api/products/reviews/${id}`).then((response) => {
         const reviewForm = document.createElement("form");
+        const overallRating = document.createElement("p");
+        const reviewUl = document.createElement("ul");
+        reviewUl.classList.add("list-group", "list-group-flush");
+        productBox.appendChild(overallRating);
         const productReview = response.data;
-        console.log(productReview)
-        productReview.forEach(productReview => {
-            console.log(productReview.row)
-            const review = document.createElement("p");
-            review.innerText = productReview.row;
-            productBox.append(review);
+        const reviewRatings = [];
+        productReview.forEach(review => {
+            const productReviewDateTime = review.row.split(",")[0].replace(/['"]+/g, '');
+            const productReview = review.row.split(",")[1].replace(/['"]+/g, '');
+            const productReviewRating = review.row.split(",")[2].replace(/['")]+/g, '');
+            reviewRatings.push(parseInt(productReviewRating));
+            const reviewElement = document.createElement("li");
+            reviewElement.classList.add("list-group-item");
+            reviewElement.innerText = productReview;
+            reviewUl.append(reviewElement);
+            
         });
+        productBox.append(reviewUl)
+        const ratingTotal = reviewRatings.reduce((curr, acc) => {
+                acc += curr
+                return acc
+            },0);
+        ratingSum = ratingTotal/reviewRatings.length;
+        overallRating.innerText = ratingSum;
         reviewForm.innerHTML = `
                 <fieldset>
                     <label for="1star">1Star</label>
@@ -117,7 +134,6 @@ const productPage = (id) => {
             // making post request to see if the user exists in the db
             axios.post('/api/users/products/review', data) //endpoint
                 .then((res) => {
-                    console.log("review response: " + res)
                     page.innerHTML = '';
                     page.innerHTML = `<p style="color: green"> Review is submitted.</p>`;
                     setTimeout(function () {
@@ -130,7 +146,8 @@ const productPage = (id) => {
                     // alert("You need to login to write a review");
                 });
         });
-    });
+        
+    });    
     productsRow.append(productBox);
     page.append(productsRow);
 };

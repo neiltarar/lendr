@@ -85,8 +85,7 @@ CREATE TABLE  conversations (
     productID INTEGER
 );
 
-INSERT INTO conversations(subject, productOwner_id, sessionUser_id, productID) 
-    VALUES ('I want this landmower', '1', '2', '1');
+
 
 
 

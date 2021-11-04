@@ -28,7 +28,7 @@ productsController.get("/:id", (req, res) => { //getting product by id
 
 productsController.get("/reviews/:id" , (req, res) => { //getting review by product id
     const productId = req.params.id;
-    productsDB.getAllReviews(productId).then((productInfo) => {
+    productsDB.getAllReviewsAndRatings(productId).then((productInfo) => {
         console.log(productInfo);
         res.json(productInfo);
     });
