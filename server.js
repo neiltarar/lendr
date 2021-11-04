@@ -9,11 +9,11 @@ const secret = speakeasy.generateSecret({
   name: "Lendr.com",
 });
 
-console.log(secret);
+// console.log(secret);
 // Create a QR code of the secretkey generated above
 qrcode.toDataURL(secret.otpauth_url, function (err, data) {
   if (err) throw err;
-  console.log(data);
+  // console.log(data);
 });
 
 const sessionAuth = require("./client/middleware/sessionAuth");
@@ -22,7 +22,6 @@ const sessionController = require("./client/controllers/sessions");
 const usersController = require("./client/controllers/users");
 const productsController = require("./client/controllers/products");
 const usersProductsController = require("./client/controllers/usersProducts");
-
 const db = require("./client/database/db");
 const dotenv = require("dotenv");
 dotenv.config();
