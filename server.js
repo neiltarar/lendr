@@ -87,7 +87,7 @@ app.use("/api/users" , usersController);
 app.use("/api/sessions" , sessionController);
 app.use("/api/products", productsController);
 app.use("/api/users/products" , usersProductsController);
-app.use("/api/users/location", geocoderController);
+// app.use("/api/users/location", geocoderController);
 app.use("/api/conversations", conversationsController);
 app.use("/api/messages", messagesController);
 
