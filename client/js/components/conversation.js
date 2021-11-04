@@ -6,10 +6,8 @@ function renderConversation(productId) {
     smallContainer.classList.add("justify-content-center");
     smallContainer.classList.add("my-5");
    
-<<<<<<< HEAD
-=======
     console.log(productId)
->>>>>>> 0df82043b550c8253f688cb4c0e3aaf1ba028441
+
     axios.get(`/api/conversations/product/${productId}`)
         .then((res) => {
             const conversation = res.data[0];
