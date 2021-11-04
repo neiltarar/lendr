@@ -19,7 +19,6 @@ const expressSession = require("express-session");
 const connectPgSimple = require("connect-pg-simple");
 const pgSession = connectPgSimple(expressSession);
 
-
 //conversations controller
 const conversationsController = require("./client/controllers/conversations");
 const messagesController = require("./client/controllers/messages");
@@ -33,6 +32,25 @@ cloudinary.config({
   secure: true
 });
 
+//Google Maps // https://github.com/googlemaps/google-maps-services-js
+const {Client} = require("@googlemaps/google-maps-services-js");
+
+// const client = new Client({});
+
+// client
+//   .elevation({
+//     params: {
+//       locations: [{ lat: 45, lng: -110 }],
+//       key: process.env.GOOGLE_MAPS_API_KEY
+//     },
+//     timeout: 1000 // milliseconds
+//   }, axiosInstance)
+//   .then(r => {
+//     console.log(r.data.results[0].elevation);
+//   })
+//   .catch(e => {
+//     console.log(e);
+//   });
 
 app.use(express.static("client"));
 app.use(express.json());
