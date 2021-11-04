@@ -1,6 +1,10 @@
+<<<<<<< HEAD
+function renderMessages(productId) {
+=======
 
 
 function renderMessages(conversationId) {
+>>>>>>> 0df82043b550c8253f688cb4c0e3aaf1ba028441
     console.log("rendering messages");
     // const id = 1;
     const page = document.getElementById("page");

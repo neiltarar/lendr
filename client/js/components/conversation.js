@@ -1,6 +1,3 @@
-
-
-
 function renderConversation(productId) {
     const page = document.getElementById('page');
     page.innerHTML = '';
@@ -9,7 +6,10 @@ function renderConversation(productId) {
     smallContainer.classList.add("justify-content-center");
     smallContainer.classList.add("my-5");
    
+<<<<<<< HEAD
+=======
     console.log(productId)
+>>>>>>> 0df82043b550c8253f688cb4c0e3aaf1ba028441
     axios.get(`/api/conversations/product/${productId}`)
         .then((res) => {
             const conversation = res.data[0];
@@ -28,9 +28,8 @@ function renderConversation(productId) {
                             <p>${conversation.productname}</p>
                             <p class="text-muted">Message with: ${conversation.productowner}<p>
                         </div>
-                       
                      </div>
-                 `
+                 `;
                 smallContainer.appendChild(conversationDiv);
                 page.append(smallContainer);
 
@@ -40,29 +39,17 @@ function renderConversation(productId) {
             // 
             renderMessages(conversationId);
             postMessages();
-            
-
         })
         .catch(function (error) {
             console.log(error);
         })
-
-
-        
-
-
-
 }
 
 function createConversation(){
-
-    
     const formData = new FormData(conversationForm);
         console.log(formData);
-
         const data = Object.fromEntries(formData.entries());
         console.log(data);
-
         axios.post('/' , data) //endpoint
             .then((res) => {
                 page.innerHTML = '';
@@ -70,6 +57,6 @@ function createConversation(){
             .catch((err) => {
                 alert("couldnt post anything");
             });
-}
+};
 
 
