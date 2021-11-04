@@ -1,10 +1,10 @@
 const renderNewProduct = () => {
-    const page = document.getElementById("page");
-    page.innerHTML = ''
+  const page = document.getElementById("page");
+  page.innerHTML = ''
 
-    const form = document.createElement("form");
-    form.className = 'Form'
-    form.innerHTML = `
+  const form = document.createElement("form");
+  form.className = 'Form'
+  form.innerHTML = `
       <fieldset>
         <label for="name">Name:</label><br>
         <input type="text" name="name">
@@ -19,33 +19,52 @@ const renderNewProduct = () => {
       </fieldset>
       <fieldset>
         <label for="availability">Availability: </label><br>
-        <input type="text" name="availability">
+        <input type="date" name="availability">
       </fieldset>
       <fieldset>
-        <label for="category">Category: </label><br>
-        <input type="text" name="category">
+        <label for="image">Image: </label><br>
+        <input type="text" name="image">
+      </fieldset>
+      <fieldset>
+        <label for="category">Choose a category: </label><br>
+          <select name="category" id="category">
+            <option value="Appliance">Appliance</option>
+            <option value="Outdoor">Outdoor</option>
+            <option value="Exercise">Exericse</option>
+            <option value="Kitchen">Kitchen</option>
+          </select>
+      </fieldset>
+      <fieldset>
+        <label for="Price">Price: </label><br>
+        <input type="number" name="price">
       </fieldset>
       <input type="submit" class="button">
       `;
 
-    form.addEventListener("submit", (event) => {
-        event.preventDefault()
-        const formData = new FormData(form)
-        const data = Object.fromEntries(formData.entries())
+  form.addEventListener("submit", (event) => {
+    event.preventDefault()
+    const formData = new FormData(form)
+    const data = Object.fromEntries(formData.entries())
 
-        axios.post(`/api/users/products/host`, data).then((res) => {
-          console.log(res.status(200))
-          console.log("Product Added")
-          page.innerHTML = `<p>Product Added</p>`
-          setTimeout(function() {
-            page.innerHTML = "";
-            renderLoggednavBar();
-            renderHome();
-        }, 1000);
-        }).catch(err => {
-          console.log("You need to be logged in")
-        })
-        renderHome()
+    axios.post(`/api/users/products/host`, data).then((res) => {
+      console.log("Product Added")
+      console.log(res)
+      page.innerHTML = `<p style="color: green">Product successfully added!</p>`;
+      setTimeout(function () {
+        page.innerHTML = "";
+        renderLoggednavBar();
+        renderHome();
+      }, 1000);
+    }).catch(err => {
+      console.log("You need to be logged in")
+      page.innerHTML = `<p style="color: red">You need to be logged in to add a product</p>`;
+      setTimeout(function () {
+        page.innerHTML = "";
+        renderNavBar();
+        renderHome();
+      }, 1000);
     })
-    page.replaceChildren(form);
+    renderHome()
+  })
+  page.replaceChildren(form);
 };

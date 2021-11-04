@@ -3,22 +3,11 @@ const session = express.Router();
 
 session.get("/", (req, res) => {
     if (req.session.username) {
-        console.log(req.session.username)
+        res.status(200).json({message: `Welcome back, ${req.session.username}`, username: req.session.username, userId: req.session.userId});
+        
+    } else {
+        res.json({message: "You are not logged in"});
     }
-
-    // Sessions.getSession().then((sessions)=> {
-
-    //     if (sessions) {
-    //         for (const [key,value] of Object.entries(sessions)) {
-
-    //             if (key, value["username"] && value["userId"]) {
-    //                 return res.json(sessions)
-    //             } 
-    //         }
-    //     } else {
-    //         console.log("no user in session")
-    //     }
-    // });
 })
 
 session.delete("/" , (req, res) => {  

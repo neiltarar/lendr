@@ -1,7 +1,7 @@
 const renderSignUp = () => {
     const page = document.getElementById("page");
     const signupForm = document.createElement("form");
-    const signupMessage = document.createElement("div");
+    const signupMessage = document.createElement("h3");
 
     signupForm.innerHTML = `
         <fieldset>
@@ -22,11 +22,6 @@ const renderSignUp = () => {
         </fieldset>
         <input type="submit" value="sign up"></input>
     `;
-    //do we need a comments section for users?
-
-    signupMessage.innerHTML = `
-    <h3 style="color: green"> Successfully Logged In </h3>
-`;
 
 signupForm.addEventListener("submit" , (event) => {
     // preventDefault function prevents refreshing the page
@@ -37,17 +32,21 @@ signupForm.addEventListener("submit" , (event) => {
 
     // making post request to see if the user exists in the db
     axios.post('/api/users/signup', data) //redirects to this signup
-        .then((res) => {
-            console.log(res.status, "user successfully signed up")
+        .then((response) => {
+            console.log(response)
+            page.innerHTML = `
+                <h3 style="color: green"> Welcome to lendr! </h3>
+                `
+            console.log(signupMessage)
             setTimeout(function() {
                 page.innerHTML = "";
+                renderLogin();
                 renderNavBar();
-                renderHome();
             }, 1000);
         })
         .catch((err) => {
-            alert("Could not add user");
-
+            page.innerHTML = `
+                <h3 style="color: red"> Could not add user </h3>`
             setTimeout(function() {
                 page.innerHTML = "";
                 renderSignUp();

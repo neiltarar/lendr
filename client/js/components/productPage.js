@@ -1,3 +1,5 @@
+// const { default: axios } = require("axios");
+
 const productPage = (id) => {
     page.innerHTML = '';
     //Products div
@@ -30,14 +32,20 @@ const productPage = (id) => {
                 Contact Owner Name
             </button>
         `;
-        
-        // Add New Product Button
-        const addNewProduct = document.createElement('button') //Add button to link to add product page
-        addNewProduct.classList.add("btn", "btn-primary");
-        addNewProduct.innerText = `Add Product`
-        productBox.append(addNewProduct) //may need to append to different html element
-        addNewProduct.addEventListener("click", (event) => {
-            addNewProduct()
+
+        // Update Product Button
+        const updateProduct = document.createElement('button') //Add button to link to add product page
+        updateProduct.innerHTML = `<button type="button" class="button">Update Product</button`
+        productBox.append(updateProduct) //may need to append to different html element
+        updateProduct.addEventListener("click", (event) => {
+            id = product["id"]
+            console.log(id)
+
+            axios.get(`/api/products/${id}`).then((response) => {
+                console.log(response)
+                renderUpdateProduct(id)
+            })
+
         });
         // Delete Product Button
         const deleteProduct = document.createElement('button'); //delete product
@@ -47,16 +55,20 @@ const productPage = (id) => {
         // Delete button event listener
         deleteProduct.addEventListener("click", (event) => {
             id = product["id"];
+
             axios.delete(`/api/users/products/${id}`).then((res) => {
-                console.log(res)
                 if (res.status === 200) {
-                    page.innerHTML = `<p style="color: green">You successfully deleted the product</p>`;
+                    page.innerHTML = `<p style="color: green">Product deleted</p>`;
                     setTimeout(function () {
                         page.innerHTML = "";
                         renderHome();
                     }, 1000)
                 } else {
                     page.innerHTML = `<p style="color: red">You are not logged in</p>`;
+                    setTimeout(function () {
+                        page.innerHTML = "";
+                        renderHome();
+                    }, 1000)
                 };
             });
         });
@@ -64,7 +76,7 @@ const productPage = (id) => {
 
     // --------------- REVIEW SECTION OF THE PRODUCT --------------------------------
     // Axios get request to get all reviews
-    axios.get(`/api/products/reviews/${id}`).then((response) => {        
+    axios.get(`/api/products/reviews/${id}`).then((response) => {
         const reviewForm = document.createElement("form");
         const overallRating = document.createElement("p");
         const reviewUl = document.createElement("ul");

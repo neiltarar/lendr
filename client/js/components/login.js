@@ -1,7 +1,8 @@
 const renderLogin = () => {
     const page = document.getElementById("page");
     const loginForm = document.createElement("form");
-    const loginMessage = document.createElement("div");
+    const loginMessage = document.createElement("h3");
+    page.append(loginMessage)
 
     loginForm.innerHTML = `
         <fieldset>
@@ -16,10 +17,6 @@ const renderLogin = () => {
         <input type="submit" value="login"></input>
     `;
     
-    loginMessage.innerHTML = `
-        <h3 style="color: green"> Successfully Logged In </h3>
-    `;
-
     loginForm.addEventListener("submit" , (event) => {
         // preventDefault function prevents refreshing the page
         event.preventDefault();
@@ -29,7 +26,9 @@ const renderLogin = () => {
         // making post request to see if the user exists in the db
         axios.post('/api/users/login' , data) //endpoint
             .then((req,res) => {
-                console.log(req)
+                loginMessage.innerHTML = `
+                <h3 style="color: green"> ${req.data.message} </h3>
+            `;        
                 page.replaceChildren(loginMessage);
                 setTimeout(function() {
                     page.innerHTML = "";
@@ -37,8 +36,15 @@ const renderLogin = () => {
                     renderHome();
                 }, 1000);
             })
-            .catch((err) => {
-                alert("wrong username or password");
+            .catch((res) => {
+                loginMessage.innerHTML = `
+                <h3 style="color: red"> Invalid email or password </h3>`
+                page.replaceChildren(loginMessage);
+                setTimeout(function() {
+                    page.innerHTML = "";
+                    renderNavBar();
+                    renderLogin();
+                }, 1000);
         });
     });
     page.replaceChildren(loginForm);
@@ -46,15 +52,21 @@ const renderLogin = () => {
 
 function renderLogout() {
     axios.delete("/api/sessions").then((req, res) => {
-      page.innerHTML = `<p style="color: red">You are logged out!</p>`;
+      page.innerHTML = `<p style="color: red">${req.data.message}</p>`;
       setTimeout(function () {
         page.innerHTML = "";
-        renderNavBar();
+        renderLoggednavBar();
         renderHome();
       }, 1000)
-      .then((res) => {
-          console.log(res.data);
-      });
-    });
-  }
+    })
+    .catch((res) => {
+        page.innerHTML = `
+        <h3 style="color: red"> Could not logout </h3>`
+        setTimeout(function() {
+            page.innerHTML = "";
+            renderLoggednavBar();
+            renderHome();
+        }, 1000);
+  });
+}
 
