@@ -6,17 +6,25 @@ function renderConversation(productId) {
     smallContainer.classList.add("justify-content-center");
     smallContainer.classList.add("my-5");
    
+<<<<<<< HEAD
+=======
+    console.log(productId)
+>>>>>>> 0df82043b550c8253f688cb4c0e3aaf1ba028441
     axios.get(`/api/conversations/product/${productId}`)
         .then((res) => {
             const conversation = res.data[0];
+            console.log(conversation);
+            const conversationId = conversation.conversation_id;
             if(conversation){
                 console.log("conversation",conversation);
                 const conversationDiv = document.createElement('div');
+                
                 conversationDiv.classList.add('col-8');
                 conversationDiv.innerHTML = `
                      <div id="message-head" class="col d-flex justify-content-between py-4 border-bottom">
                         <h4>${conversation.subject} </h4>
                         <div> 
+                            ${conversation.conversation_id}
                             <p>${conversation.productname}</p>
                             <p class="text-muted">Message with: ${conversation.productowner}<p>
                         </div>
@@ -29,7 +37,7 @@ function renderConversation(productId) {
                 smallContainer.textContent = "no convo"
             }
             // 
-            renderMessages(productId);
+            renderMessages(conversationId);
             postMessages();
         })
         .catch(function (error) {

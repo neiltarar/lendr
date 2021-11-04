@@ -15,7 +15,7 @@ conversationsController.get("/product/:id", (req, res)=>{
     const sessionUserId = req.session.userId;
     const userEmail = req.session.username;
     console.log(sessionUserId, userEmail)
-    console.log("getting convo by product id", id);
+    console.log("getting convo by product id", id, sessionUserId);
     Conversations.getConvoData(id, sessionUserId).then((conversation) => {
         if(conversation){
             res.json(conversation);
