@@ -25,14 +25,7 @@ function renderHome() {
                     <fieldset>
                         <input type="text" class="rounded" placeholder="Enter Product" />
                     </fieldset>
-                    <fieldset>
                     <div id="map"></div>
-                    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-                     <script
-                         src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_MAPS_API_KEY')}}&callback=initMap&v=weekly"
-                         async
-                    ></script>
-                    </fieldset>
                 </form>
                 <input type="Submit" class="btn btn-primary rounded-pill">
             </div>
@@ -40,8 +33,10 @@ function renderHome() {
             </div>
         </div>
     </div>
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_MAPS_API_KEY')}}&callback=initMap&v=weekly"
+    async></script>
     `
-    "use strict";
 
     //https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple#maps_geocoding_simple-css
     //script to load api// https://stackoverflow.com/questions/60033669/call-google-maps-api-key-from-services-file

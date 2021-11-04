@@ -32,9 +32,8 @@ cloudinary.config({
   secure: true
 });
 
-//Google Maps // https://github.com/googlemaps/google-maps-services-js
-const {Client} = require("@googlemaps/google-maps-services-js");
-
+// //Google Maps // https://github.com/googlemaps/google-maps-services-js
+// const {Client} = require("@googlemaps/google-maps-services-js");
 // const client = new Client({});
 
 // client
@@ -51,6 +50,18 @@ const {Client} = require("@googlemaps/google-maps-services-js");
 //   .catch(e => {
 //     console.log(e);
 //   });
+
+//Node geo-coder//
+const NodeGeocoder = require('node-geocoder');
+  const options = {
+  provider: 'google',
+ 
+  // Optional depending on the providers
+  // fetch: customFetchImplementation,
+  apiKey: 'GOOGLE_MAPS_API_KEY', // for Mapquest, OpenCage, Google Premier
+  formatter: null // 'gpx', 'string', ...
+};
+const geocoderController = NodeGeocoder(options);
 
 app.use(express.static("client"));
 app.use(express.json());
@@ -76,13 +87,8 @@ app.use("/api/users" , usersController);
 app.use("/api/sessions" , sessionController);
 app.use("/api/products", productsController);
 app.use("/api/users/products" , usersProductsController);
-//conversations controller
-
-// const messagesController = require("./client/controllers/messages");
-
-//Conversations
-app.use("/api/conversations", conversationsController); //Which controller to use?
-//Messages
+app.use("/api/users/location", geocoderController);
+app.use("/api/conversations", conversationsController);
 app.use("/api/messages", messagesController);
 
 app.listen(port, () => {
