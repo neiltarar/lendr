@@ -1,6 +1,6 @@
 /* Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap');
-@import url('./reset.css');
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap");
+@import url("./reset.css");
 
 /*  Color Palette 
 
@@ -13,42 +13,41 @@ Light Grey : #f7f7f7;
 */
 /* General Classes */
 .relative {
-    position: relative;
+  position: relative;
 }
 
 .bold {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .bg-primary {
-    background-color: #4c9492 !important;
+  background-color: #4c9492 !important;
 }
 .bg-blue {
-    background-color: #1B2845 !important;
+  background-color: #1b2845 !important;
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #4c9492;
-    border-color: #4c9492;
+  color: #fff;
+  background-color: #4c9492;
+  border-color: #4c9492;
 }
 .btn-blue {
-    color: #fff;
-    background-color: #1B2845;
-    border-color: #1B2845;
+  color: #fff;
+  background-color: #1b2845;
+  border-color: #1b2845;
 }
 
 .bg-row {
-    background-color: #4c9492;
-    height: 400px;
-    position: relative;
+  background-color: #4c9492;
+  height: 400px;
+  position: relative;
 }
 
-
 body {
-    color: #212121;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 16px;
+  color: #212121;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 16px;
 }
 
 h1,
@@ -57,59 +56,56 @@ h3,
 h4,
 h5,
 h6 {
-    font-weight: 700;
-    letter-spacing: -0.75px;
-    margin-bottom: 20px;
-
+  font-weight: 700;
+  letter-spacing: -0.75px;
+  margin-bottom: 20px;
 }
 
 h1 {
-    font-size: 45px;
+  font-size: 45px;
 }
 
 h4 {
-    font-size: 22px;
-
+  font-size: 22px;
 }
 
 p {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 /* Navigation */
 header {
-    position: relative;
-    z-index: 99;
+  position: relative;
+  z-index: 99;
 }
 
 .navbar-light .navbar-nav .nav-link {
-    color: inherit;
+  color: inherit;
 }
 
 .navbar-light .navbar-nav .nav-link:hover {
-    color: #4c9492;
+  color: #4c9492;
 }
 
 .nav-link {
-    cursor: pointer;
-    color: #212121;
-    cursor: pointer;
+  cursor: pointer;
+  color: #212121;
+  cursor: pointer;
 }
 
 .nav-link:hover {
-    color: #4c9492;
+  color: #4c9492;
 }
 
 /* Footer */
 footer {
-    background-color: #f7f7f7;
+  background-color: #f7f7f7;
 }
 
 #page {
-    min-height: 500px;
-    margin-bottom: 80px;
-    /* position: relative; */
-
+  min-height: 500px;
+  margin-bottom: 80px;
+  /* position: relative; */
 }
 
 /* Form */
@@ -123,7 +119,7 @@ footer {
 } */
 /* Buttons */
 .btn {
-    padding: 10px 20px;
+  padding: 10px 20px;
 }
 
 /* HOME */
@@ -136,127 +132,130 @@ footer {
 px
 ; */
 
-.hero>.hero-col {
-    padding-top: 160px;
-    padding-bottom: 160px;
+.hero > .hero-col {
+  padding-top: 160px;
+  padding-bottom: 160px;
 }
 
-div.hero>div>div>div.bg-primary {
-    position: absolute;
-    right: 0;
-    height: 100%;
+div.hero > div > div > div.bg-primary {
+  position: absolute;
+  right: 0;
+  height: 100%;
 }
 
 .row.products-row {
-    margin-top: 80px;
+  margin-top: 80px;
 }
 
 .product-single {
-    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 14%);
-    width: 30%;
-    margin-right: 64px;
-    margin-bottom: 50px;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 14%);
+  width: 30%;
+  margin-right: 64px;
+  margin-bottom: 50px;
 }
 
 .product-single:nth-child(3n) {
-    margin-right: 0;
+  margin-right: 0;
 }
 
 .product-single img {
-    object-fit: cover;
+  object-fit: cover;
 }
 
 p.cat-tag {
-    position: absolute;
-    left: 0;
-    top: 49%;
-    padding: 15px;
-    background-color: white;
-    color: inherit;
-    font-size: 12px;
-    margin-bottom: 0;
-    text-transform: uppercase;
-
+  position: absolute;
+  left: 0;
+  top: 49%;
+  padding: 15px;
+  background-color: white;
+  color: inherit;
+  font-size: 12px;
+  margin-bottom: 0;
+  text-transform: uppercase;
 }
 
 /* Form */
 form.home-search {
-    width: 500px;
-    position: relative;
-
+  width: 500px;
+  position: relative;
 }
 
 form.home-search input[type="text"] {
-    width: 100%;
-    border: 2px solid #ededed;
-    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 14%);
-    height: 80px;
+  width: 100%;
+  border: 2px solid #ededed;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 14%);
+  height: 80px;
 }
 
 form.home-search button {
-    position: absolute;
-    right: 14px;
-    /* padding: 10px 15px; */
-    top: 17px;
+  position: absolute;
+  right: 14px;
+  /* padding: 10px 15px; */
+  top: 17px;
 }
 
 p.price-tag {
-    font-size: 25px;
+  font-size: 25px;
 }
-
 
 /* Conversations */
 .small-container {
-    width: 800px;
+  width: 800px;
 }
 
 .messages.small-container .row {
-    padding-top: 30px;
-    padding-bottom: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .messages {
-    padding: 50px;
-    margin-top: 42px;
+  padding: 50px;
+  margin-top: 42px;
 }
 
 .message {
-    padding: 20px 30px;
-    background-color: rgba(76, 146, 148, 0.5);
-    margin-bottom: 30px;
-    border-bottom-right-radius: 60px;
-    /* border-bottom-right-radius: 30px; */
-    border-top-left-radius: 45px;
+  padding: 20px 30px;
+  background-color: rgba(76, 146, 148, 0.5);
+  margin-bottom: 30px;
+  border-bottom-right-radius: 60px;
+  /* border-bottom-right-radius: 30px; */
+  border-top-left-radius: 45px;
 }
 
 .border-bottom {
-    border-bottom: 1px solid #f7f7f7 !important;
+  border-bottom: 1px solid #f7f7f7 !important;
 }
 
 form.post-message {
-    position: relative;
+  position: relative;
 }
 
 form.post-message textarea {
-    height: 60px;
+  height: 60px;
 }
 
 form.post-message button {
-    position: absolute;
-    right: 11px;
-    top: 6px;
+  position: absolute;
+  right: 11px;
+  top: 6px;
 }
 
 p.sent-by {
-    border-radius: 50%;
-    background-color: #1B2845;
-    width: 70px;
-    height: 70px;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    top: -26px;
-    left: -26px;
+  border-radius: 50%;
+  background-color: #1b2845;
+  width: 70px;
+  height: 70px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: -26px;
+  left: -26px;
+}
+
+.rating > span:hover ~ span:before {
+  content: "\2606";
+  position: absolute;
+  direction: rtl;
 }
