@@ -41,7 +41,7 @@ const renderNewProduct = () => {
         <input type="number" name="price">
       </fieldset>
       <input type="submit" class="button">
-      <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initAutocomplete&language=nl&output=json&key=AIzaSyD3a7VVKjs8NAlCM6EWEUGWCiaVEF1zTms" async defer></script>
+      <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initAutocomplete&language=nl&output=json&key=YOUR_API_KEY" async defer></script>
       `;
   //autocomplete
 
