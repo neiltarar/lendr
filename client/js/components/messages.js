@@ -1,5 +1,3 @@
-
-
 function renderMessages(productId) {
     console.log("rendering messages");
     // const id = 1;

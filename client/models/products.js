@@ -10,9 +10,11 @@ const ProductsList = {
     const values = [id];
     return db.query(sql, values).then((dbRes) => dbRes.rows[0]);
   },
-  getAllReviews(productId){
-    const sql = "SELECT (date,review) FROM reviews WHERE productid=$1 ORDER BY date DESC;";
-    return db.query(sql, [productId]).then((dbRes) => dbRes.rows);
+  getAllReviewsAndRatings(productId){
+    const sql = "SELECT (date, review, rating) FROM reviews WHERE productid=$1 ORDER BY date DESC;";
+    return db
+      .query(sql, [productId])
+      .then((dbRes) => dbRes.rows);
   }
 };
 module.exports = ProductsList; //exporting functions in one go as an object
