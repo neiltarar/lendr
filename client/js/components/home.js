@@ -33,101 +33,43 @@ function renderHome() {
             </div>
         </div>
     </div>
-    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_MAPS_API_KEY')}}&callback=initMap&v=weekly"
-    async></script>
     `
+    // // <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    // <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_MAPS_API_KEY')}}&callback=initMap&v=weekly" async></script>
 
-    //https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple#maps_geocoding_simple-css
-    //script to load api// https://stackoverflow.com/questions/60033669/call-google-maps-api-key-from-services-file
+    // //https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple#maps_geocoding_simple-css
+    // //script to load api// https://stackoverflow.com/questions/60033669/call-google-maps-api-key-from-services-file
 
-    // [START maps_geocoding_simple]
-    let map;
-    let marker;
-    let geocoder;
-    let responseDiv;
-    let response;
-
-    function initMap() {
-        map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 8,
-            center: { lat: -34.397, lng: 150.644 },
-            mapTypeControl: false,
-        });
-        geocoder = new google.maps.Geocoder();
-
-        const inputText = document.createElement("input");
-
-        inputText.type = "text";
-        inputText.placeholder = "Enter a location";
-
-        const submitButton = document.createElement("input");
-
-        submitButton.type = "button";
-        submitButton.value = "Geocode";
-        submitButton.classList.add("button", "button-primary");
-
-        const clearButton = document.createElement("input");
-
-        clearButton.type = "button";
-        clearButton.value = "Clear";
-        clearButton.classList.add("button", "button-secondary");
-        response = document.createElement("pre");
-        response.id = "response";
-        response.innerText = "";
-        responseDiv = document.createElement("div");
-        responseDiv.id = "response-container";
-        responseDiv.appendChild(response);
-
-        const instructionsElement = document.createElement("p");
-
-        instructionsElement.id = "instructions";
-        instructionsElement.innerHTML =
-            "<strong>Instructions</strong>: Enter an address in the textbox to geocode or click on the map to reverse geocode.";
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputText);
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(submitButton);
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(clearButton);
-        map.controls[google.maps.ControlPosition.LEFT_TOP].push(instructionsElement);
-        map.controls[google.maps.ControlPosition.LEFT_TOP].push(responseDiv);
-        marker = new google.maps.Marker({
-            map,
-        });
-        map.addListener("click", (e) => {
-            geocode({ location: e.latLng });
-        });
-        submitButton.addEventListener("click", () =>
-            geocode({ address: inputText.value })
-        );
-        clearButton.addEventListener("click", () => {
-            clear();
-        });
-        clear();
-    }
-
-    function clear() {
-        marker.setMap(null);
-        responseDiv.style.display = "none";
-    }
-
-    function geocode(request) {
-        clear();
-        geocoder
-            .geocode(request)
-            .then((result) => {
-                const { results } = result;
-
-                map.setCenter(results[0].geometry.location);
-                marker.setPosition(results[0].geometry.location);
-                marker.setMap(map);
-                responseDiv.style.display = "block";
-                response.innerText = JSON.stringify(result, null, 2);
-                return results;
-            })
-            .catch((e) => {
-                alert("Geocode was not successful for the following reason: " + e);
-            });
-    }
-    // [END maps_geocoding_simple]
+    // // [START maps_geocoding_simple]
+    // var map;
+    // var service;
+    // var infowindow;
+    
+    // function initMap() {
+    //   var sydney = new google.maps.LatLng(-33.867, 151.195);
+    
+    //   infowindow = new google.maps.InfoWindow();
+    
+    //   map = new google.maps.Map(
+    //       document.getElementById('map'), {center: sydney, zoom: 15});
+    
+    //   var request = {
+    //     query: 'Museum of Contemporary Art Australia',
+    //     fields: ['name', 'geometry'],
+    //   };
+    
+    //   var service = new google.maps.places.PlacesService(map);
+    
+    //   service.findPlaceFromQuery(request, function(results, status) {
+    //     if (status === google.maps.places.PlacesServiceStatus.OK) {
+    //       for (var i = 0; i < results.length; i++) {
+    //         createMarker(results[i]);
+    //       }
+    //       map.setCenter(results[0].geometry.location);
+    //     }
+    //   });
+    // }
+    // // [END maps_geocoding_simple]
 
     //Get search bar
     const searchBarButton = document.getElementsByClassName("btn btn-primary rounded-pill")

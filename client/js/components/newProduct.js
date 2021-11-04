@@ -15,7 +15,9 @@ const renderNewProduct = () => {
       </fieldset>
       <fieldset>
         <label for="address">Address:</label><br>
-        <input type="text" name="address">
+        <input type="text" id="address">
+        <input type="hidden" id="lat" value="">
+        <input type="hidden" id="lng" value="">
       </fieldset>
       <fieldset>
         <label for="availability">Availability: </label><br>
@@ -30,7 +32,7 @@ const renderNewProduct = () => {
           <select name="category" id="category">
             <option value="Appliance">Appliance</option>
             <option value="Outdoor">Outdoor</option>
-            <option value="Exercise">Exericse</option>
+            <option value="Exercise">Exercise</option>
             <option value="Kitchen">Kitchen</option>
           </select>
       </fieldset>
@@ -39,7 +41,25 @@ const renderNewProduct = () => {
         <input type="number" name="price">
       </fieldset>
       <input type="submit" class="button">
+      <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initAutocomplete&language=nl&output=json&key=AIzaSyD3a7VVKjs8NAlCM6EWEUGWCiaVEF1zTms" async defer></script>
       `;
+  //autocomplete
+
+  function initAutocomplete() {
+    const address = document.getElementById('address');
+    const autocomplete = new google.maps.places.Autocomplete(address);
+
+    autocomplete.addListener('place_changed', function() {
+      const place = autocomplete.getPlace();
+      console.log(place)
+      const latitude = place.geometry.location.lat();
+      console.log(latitude)
+      const longitude = place.geometry.location.lng();
+      document.getElementById('lat').value = latitude;
+      document.getElementById('lng').value = longitude;
+    });
+  }
+  //end form
 
   form.addEventListener("submit", (event) => {
     event.preventDefault()

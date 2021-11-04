@@ -28,6 +28,8 @@ CREATE TABLE IF NOT EXISTS products (
     name VARCHAR(20),
     description VARCHAR(50),
     address VARCHAR(100),
+    longitude DECIMAL,
+    latitude DECIMAL,
     availability DATE,
     imageURL VARCHAR(100),
     category VARCHAR(50),
@@ -84,9 +86,6 @@ CREATE TABLE  conversations (
     sessionUser_id INTEGER REFERENCES users(user_id),
     productID INTEGER
 );
-
-
-
 
 
 

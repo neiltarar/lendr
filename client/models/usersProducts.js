@@ -7,9 +7,9 @@ const usersProductsDB = {
             .query(sql, [email])
             .then((dbRes) => dbRes.rows);
     },
-    addNewProduct(name, description, address, availability, imageurl, category, price, userId) {
-        const sql = "INSERT INTO products(name, description, address, availability, imageurl, category, price, user_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8)";
-        const values = [name, description, address, availability, imageurl, category, price, userId];
+    addNewProduct(name, description, address, longitude, latitude, availability, imageurl, category, price, userId) {
+        const sql = "INSERT INTO products(name, description, address, longitude, latitude, availability, imageurl, category, price, user_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)";
+        const values = [name, description, address, longitude, latitude, availability, imageurl, category, price, userId];
         return db.query(sql, values).then((dbRes) => dbRes.rows[0]);
     },
     deleteProduct(id, userId) {
