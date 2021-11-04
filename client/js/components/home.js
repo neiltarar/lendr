@@ -26,18 +26,53 @@ function renderHome() {
                         <input type="text" class="rounded" placeholder="Enter Product" />
                     </fieldset>
                     <fieldset>
-                            <img class="sb-title-icon" src="https://fonts.gstatic.com/s/i/googlematerialicons/location_pin/v5/24px.svg" alt="">
-                            <span class="sb-title">Address Selection</span>
-                            <input type="text" placeholder="Address" id="location"/>
-                            <input type="text" placeholder="Apt, Suite, etc (optional)"/>
-                            <input type="text" placeholder="City" id="locality"/>
-                            <input type="text" class="half-input" placeholder="State/Province" id="administrative_area_level_1"/>
-                            <input type="text" class="half-input" placeholder="Zip/Postal code" id="postal_code"/>
-                            <input type="text" placeholder="Country" id="country"/>
-                            <button class="btn btn-primary rounded-pill">Checkout</button>
-                        <div class="map" id="map"></div>
+                        <div class="pac-card" id="pac-card">
+                        <div>
+                        <div id="title">Autocomplete search</div>
+                        <div id="type-selector" class="pac-controls">
+                            <input
+                            type="radio"
+                            name="type"
+                            id="changetype-all"
+                            checked="checked"
+                            />
+                            <label for="changetype-all">All</label>
+                
+                            <input type="radio" name="type" id="changetype-establishment" />
+                            <label for="changetype-establishment">establishment</label>
+                
+                            <input type="radio" name="type" id="changetype-address" />
+                            <label for="changetype-address">address</label>
+                
+                            <input type="radio" name="type" id="changetype-geocode" />
+                            <label for="changetype-geocode">geocode</label>
+                
+                            <input type="radio" name="type" id="changetype-cities" />
+                            <label for="changetype-cities">(cities)</label>
+                
+                            <input type="radio" name="type" id="changetype-regions" />
+                            <label for="changetype-regions">(regions)</label>
                         </div>
-                        <script src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_MAPS_API_KEY&libraries=places&callback=initMap&channel=GMPSB_addressselection_v1_cABC" async defer></script>  
+                        <br />
+                        <div id="strict-bounds-selector" class="pac-controls">
+                            <input type="checkbox" id="use-location-bias" value="" checked />
+                            <label for="use-location-bias">Bias to map viewport</label>
+                
+                            <input type="checkbox" id="use-strict-bounds" value="" />
+                            <label for="use-strict-bounds">Strict bounds</label>
+                        </div>
+                        </div>
+                        <div id="pac-container">
+                        <input id="pac-input" type="text" placeholder="Enter a location" />
+                        </div>
+                    </div>
+                    <div id="map"></div>
+                    <div id="infowindow-content">
+                        <span id="place-name" class="title"></span><br />
+                        <span id="place-address"></span>
+                    </div>
+                    <!-- GoogleMaps -->
+                    <script src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_MAPS_API_KEY&callback=initMap&libraries=places&v=weekly" async></script>
                     </fieldset>
                     <input type="search" class="btn btn-primary rounded-pill">
                 </form>
@@ -50,74 +85,115 @@ function renderHome() {
     "use strict";
 
     //https://jsfiddle.net/api/post/library/pure/
-function initMap() {
-  const componentForm = [
-    'location',
-    'locality',
-    'administrative_area_level_1',
-    'country',
-    'postal_code',
-  ];
-  const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 11,
-    center: { lat: 37.4221, lng: -122.0841 },
-    mapTypeControl: false,
-    fullscreenControl: true,
-    zoomControl: true,
-    streetViewControl: true
-  });
-  const marker = new google.maps.Marker({map: map, draggable: false});
-  const autocompleteInput = document.getElementById('location');
-  const autocomplete = new google.maps.places.Autocomplete(autocompleteInput, {
-    fields: ["address_components", "geometry", "name"],
-    types: ["address"],
-  });
-  autocomplete.addListener('place_changed', function () {
-    marker.setVisible(false);
-    const place = autocomplete.getPlace();
-    if (!place.geometry) {
-      // User entered the name of a Place that was not suggested and
-      // pressed the Enter key, or the Place Details request failed.
-      window.alert('No details available for input: \'' + place.name + '\'');
-      return;
-    }
-    renderAddress(place);
-    fillInAddress(place);
-  });
-
-  function fillInAddress(place) {  // optional parameter
-    const addressNameFormat = {
-      'street_number': 'short_name',
-      'route': 'long_name',
-      'locality': 'long_name',
-      'administrative_area_level_1': 'short_name',
-      'country': 'long_name',
-      'postal_code': 'short_name',
-    };
-    const getAddressComp = function (type) {
-      for (const component of place.address_components) {
-        if (component.types[0] === type) {
-          return component[addressNameFormat[type]];
+    function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: 40.749933, lng: -73.98633 },
+          zoom: 13,
+          mapTypeControl: false,
+        });
+        const card = document.getElementById("pac-card");
+        const input = document.getElementById("pac-input");
+        const biasInputElement = document.getElementById("use-location-bias");
+        const strictBoundsInputElement = document.getElementById("use-strict-bounds");
+        const options = {
+          fields: ["formatted_address", "geometry", "name"],
+          strictBounds: false,
+          types: ["establishment"],
+        };
+      
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(card);
+      
+        const autocomplete = new google.maps.places.Autocomplete(input, options);
+      
+        // Bind the map's bounds (viewport) property to the autocomplete object,
+        // so that the autocomplete requests use the current map bounds for the
+        // bounds option in the request.
+        autocomplete.bindTo("bounds", map);
+      
+        const infowindow = new google.maps.InfoWindow();
+        const infowindowContent = document.getElementById("infowindow-content");
+      
+        infowindow.setContent(infowindowContent);
+      
+        const marker = new google.maps.Marker({
+          map,
+          anchorPoint: new google.maps.Point(0, -29),
+        });
+      
+        autocomplete.addListener("place_changed", () => {
+          infowindow.close();
+          marker.setVisible(false);
+      
+          const place = autocomplete.getPlace();
+      
+          if (!place.geometry || !place.geometry.location) {
+            // User entered the name of a Place that was not suggested and
+            // pressed the Enter key, or the Place Details request failed.
+            window.alert("No details available for input: '" + place.name + "'");
+            return;
+          }
+      
+          // If the place has a geometry, then present it on a map.
+          if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+          } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);
+          }
+      
+          marker.setPosition(place.geometry.location);
+          marker.setVisible(true);
+          infowindowContent.children["place-name"].textContent = place.name;
+          infowindowContent.children["place-address"].textContent =
+            place.formatted_address;
+          infowindow.open(map, marker);
+        });
+      
+        // Sets a listener on a radio button to change the filter type on Places
+        // Autocomplete.
+        function setupClickListener(id, types) {
+          const radioButton = document.getElementById(id);
+      
+          radioButton.addEventListener("click", () => {
+            autocomplete.setTypes(types);
+            input.value = "";
+          });
         }
+      
+        setupClickListener("changetype-all", []);
+        setupClickListener("changetype-address", ["address"]);
+        setupClickListener("changetype-establishment", ["establishment"]);
+        setupClickListener("changetype-geocode", ["geocode"]);
+        setupClickListener("changetype-cities", ["(cities)"]);
+        setupClickListener("changetype-regions", ["(regions)"]);
+        biasInputElement.addEventListener("change", () => {
+          if (biasInputElement.checked) {
+            autocomplete.bindTo("bounds", map);
+          } else {
+            // User wants to turn off location bias, so three things need to happen:
+            // 1. Unbind from map
+            // 2. Reset the bounds to whole world
+            // 3. Uncheck the strict bounds checkbox UI (which also disables strict bounds)
+            autocomplete.unbind("bounds");
+            autocomplete.setBounds({ east: 180, west: -180, north: 90, south: -90 });
+            strictBoundsInputElement.checked = biasInputElement.checked;
+          }
+      
+          input.value = "";
+        });
+        strictBoundsInputElement.addEventListener("change", () => {
+          autocomplete.setOptions({
+            strictBounds: strictBoundsInputElement.checked,
+          });
+          if (strictBoundsInputElement.checked) {
+            biasInputElement.checked = strictBoundsInputElement.checked;
+            autocomplete.bindTo("bounds", map);
+          }
+      
+          input.value = "";
+        });
       }
-      return '';
-    };
-    document.getElementById('location').value = getAddressComp('street_number') + ' '
-              + getAddressComp('route');
-    for (const component of componentForm) {
-      // Location field is handled separately above as it has different logic.
-      if (component !== 'location') {
-        document.getElementById(component).value = getAddressComp(component);
-      }
-    }
-  }
-
-  function renderAddress(place) {
-    map.setCenter(place.geometry.location);
-    marker.setPosition(place.geometry.location);
-    marker.setVisible(true);
-  }
-}
+      
     //Get search bar
     const searchBarButton = document.createElement("button")
     const searchForm = document.getElementsByClassName("home-search mt-5")
