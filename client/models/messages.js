@@ -5,17 +5,14 @@ const Messages = {
         const sql = "SELECT * FROM messages";
         return db.query(sql).then((dbRes) => dbRes.rows);
     },
-    getMessagesByProductId(productid){
-        sql = `SELECT messages.message_id,messages.date, messages.content, messages.author_id, users.user_id, users.username as author
-        FROM messages 
-        JOIN conversations 
-        ON messages.author_id = conversations.sessionuser_id OR messages.author_id = conversations.productowner_id
+    getMessagesByProductId(conversationId){
+        sql = `SELECT * FROM messages 
         JOIN users
-        ON users.user_id = messages.author_id
-        WHERE conversations.productid = $1`
+            ON users.user_id = messages.author_id
+        WHERE conversation_id = $1`
         
         return db   
-               .query(sql, [productid])
+               .query(sql, [conversationId])
                .then((dbRes) => dbRes.rows);
     },
     createMessage(){
