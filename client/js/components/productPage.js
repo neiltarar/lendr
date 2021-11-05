@@ -104,6 +104,13 @@ const productPage = (id) => {
     if (!ratingSum) {
       ratingSum = 0;
     }
+
+    overallRating.innerHTML = `
+        <div class="rating">
+        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+        </div>
+        `;
+
     overallRating.innerText = ratingSum;
     reviewForm.innerHTML = `
                 <fieldset>
