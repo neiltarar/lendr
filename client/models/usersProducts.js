@@ -7,9 +7,9 @@ const usersProductsDB = {
             .query(sql, [email])
             .then((dbRes) => dbRes.rows);
     },
-    addNewProduct(name, description, address, availability, imageurl, category, price, userId) {
-        const sql = "INSERT INTO products(name, description, address, availability, imageurl, category, price, user_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8)";
-        const values = [name, description, address, availability, imageurl, category, price, userId];
+    addNewProduct(name, description, formattedaddress, longitude, latitude, availability, imageurl, category, price, userId) {
+        const sql = "INSERT INTO products(name, description, formattedaddress, longitude, latitude, availability, imageurl, category, price, user_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)";
+        const values = [name, description, formattedaddress, longitude, latitude, availability, imageurl, category, price, userId];
         return db.query(sql, values).then((dbRes) => dbRes.rows[0]);
     },
     deleteProduct(id, userId) {
@@ -17,11 +17,11 @@ const usersProductsDB = {
         const values = [id, userId];
         return db.query(sql, values);
     },
-    updateProductParameters(name, description, address, availability, image, category, price, productId, userId) {
-        const sql = "UPDATE products SET name = $1, description = $2, address = $3, availability = $4, imageurl = $5, category = $6, price = $7 WHERE id = $8 AND user_id = $9";
-        const values = [name, description, address, availability, image, category, price, productId, userId];
-        return db.query(sql, values).then((dbRes) => dbRes.rows[0]);
-    },
+    // updateProductParameters(name, description, address, availability, image, category, price, productId, userId) {
+    //     const sql = "UPDATE products SET name = $1, description = $2, address = $3, availability = $4, imageurl = $5, category = $6, price = $7 WHERE id = $8 AND user_id = $9";
+    //     const values = [name, description, address, availability, image, category, price, productId, userId];
+    //     return db.query(sql, values).then((dbRes) => dbRes.rows[0]);
+    // },
     getProductID(userId) {
         const sql = "SELECT (id) FROM products WHERE user_id = $1;";
         return db

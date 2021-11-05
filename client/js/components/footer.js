@@ -10,11 +10,7 @@ function renderFooter() {
             <li class="nav-item"><a href="https://github.com/xiomara-masmela" target="_blank" class="nav-link px-2 ">Xio</a></li>
         </ul>
     
-    
-    </di>
-    
-    
-    
+    </div>
     
     `
 }

@@ -25,12 +25,11 @@ const productPage = (id) => {
         productName.textContent = product["name"];
         productBox.append(productName);
 
-        
-
         const productDescription = document.createElement('p');
         productDescription.classList.add("py-5");
         productDescription.textContent = product["description"];
         productBox.append(productDescription);
+
         const productAddress = document.createElement('p');
         productAddress.innerHTML = `<span class="bold">Available:</span>${product["address"]}`;
         productBox.append(productAddress);
@@ -40,11 +39,12 @@ const productPage = (id) => {
                 Contact Owner Name
             </button>
         `;
-
+    });
         //Button container 
         const buttonContainer = document.createElement("div");
         buttonContainer.classList.add("button-container");
         productBox.append(buttonContainer);
+
         // Update Product Button
         const updateProduct = document.createElement('button') //Add button to link to add product page
         updateProduct.setAttribute("type", "button");
@@ -56,25 +56,43 @@ const productPage = (id) => {
         updateProduct.addEventListener("click", (event) => {
             id = product["id"]
             console.log(id)
-
             axios.get(`/api/products/${id}`).then((response) => {
                 console.log(response)
                 renderUpdateProduct(id)
-            })
-
+            });
         });
         // Delete Product Button
         const deleteProduct = document.createElement('button'); //delete product
         deleteProduct.classList.add("btn", "btn-outline-blue");
         buttonContainer.append(deleteProduct); //may need to append to different html element
         deleteProduct.innerText = `Delete Product`;
+        
+        const reviewContainer = document.createElement('div')
         productBox.append(reviewContainer);
-        // Delete button event listener
-        deleteProduct.addEventListener("click", (event) => {
-            id = product["id"];
+         // Delete button event listener
+         deleteProduct.addEventListener("click", (event) => {
+          id = product["id"];
+
+          axios.delete(`/api/users/products/${id}`).then((res) => {
+              if (res.status === 200) {
+                  page.innerHTML = `<p style="color: green">Product deleted</p>`;
+                  setTimeout(function () {
+                      page.innerHTML = "";
+                      renderHome();
+                  }, 1000)
+              } else {
+                  page.innerHTML = `<p style="color: red">You are not logged in</p>`;
+                  setTimeout(function () {
+                      page.innerHTML = "";
+                      renderHome();
+                  }, 1000)
+              };
+          });
+      });
 
   // --------------- REVIEW SECTION OF THE PRODUCT --------------------------------
   // Axios get request to get all reviews
+
   axios.get(`/api/products/reviews/${id}`).then((response) => {
     const reviewForm = document.createElement("form");
     const overallRating = document.createElement("h1");
@@ -136,11 +154,9 @@ const productPage = (id) => {
                     <input type="radio" class="form-check-input" id="4star" name="rating" value=4>
                     <label for="5star" class="form-check-label">5Star</label>
                     <input type="radio" class="form-check-input" id="5star" name="rating" value=5>
-
                 </fieldset>
                 <fieldset class="reviews">
                     <input type="hidden" name="productId" value= ${id} </input>
-
                     <textarea type="text" name="review" class="reviewInput" rows="4" cols="50"></textarea>
                 </fieldset>
                 <input type="submit" value="post" class="reviews btn btn-primary"></input>
@@ -178,3 +194,4 @@ const productPage = (id) => {
     productsRow.append(productBox);
     page.append(productsRow);
   });
+};

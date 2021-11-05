@@ -27,7 +27,9 @@ CREATE TABLE IF NOT EXISTS products (
     id serial PRIMARY KEY,
     name VARCHAR(20),
     description VARCHAR(50),
-    address TEXT,
+    formattedaddress VARCHAR(100),
+    longitude DECIMAL,
+    latitude DECIMAL,
     availability DATE,
     imageURL VARCHAR(100),
     category VARCHAR(50),
@@ -37,11 +39,14 @@ CREATE TABLE IF NOT EXISTS products (
             REFERENCES users(user_id)
 );
 
-INSERT INTO products(name, description, address, availability, imageURL, category, price, user_id) 
+INSERT INTO products(name, description, formattedaddress, availability, imageURL, category, price, user_id) 
     VALUES ('Lawnmower', 'Tool for gardening','1 Brisbane City', '1/11/2021','./src/001.jpg' ,'gardening', '35','1' );
 
-INSERT INTO products(name, description, address, availability, imageURL, category, price, user_id) 
+INSERT INTO products(name, description, formattedaddress, availability, imageURL, category, price, user_id) 
     VALUES ('Boat', 'Trip','2 Brisbane City', '2021-11-16','./src/001.jpg' ,'gardening', '35','3' );
+
+INSERT INTO products(name, description, formattedaddress, availability, longitude, latitude, imageURL, category, price, user_id) 
+    VALUES ('Trailer', '4x4','75 Main South Road, Drouin VIC', '2021-11-16', '145.85260', '-38.14333', './src/001.jpg' ,'Outdoor', '35','4' );
 
 
 
@@ -84,9 +89,6 @@ CREATE TABLE  conversations (
     sessionUser_id INTEGER REFERENCES users(user_id),
     productID INTEGER
 );
-
-
-
 
 
 

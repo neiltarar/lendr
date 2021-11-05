@@ -2,13 +2,13 @@ const renderNewProduct = () => {
   const page = document.getElementById("page");
   page.innerHTML = ''
   const formRow = document.createElement("div");
-    formRow.classList.add("row");
-    formRow.classList.add("mt-5");
-    formRow.classList.add("pt-5");
-    formRow.classList.add("justify-content-center");
-    formRow.classList.add("align-items-center");
-    const formCol= document.createElement("div");
-    formCol.classList.add("col-6");
+  formRow.classList.add("row");
+  formRow.classList.add("mt-5");
+  formRow.classList.add("pt-5");
+  formRow.classList.add("justify-content-center");
+  formRow.classList.add("align-items-center");
+  const formCol = document.createElement("div");
+  formCol.classList.add("col-6");
   const form = document.createElement("form");
   form.className = 'Form'
   form.innerHTML = `
@@ -21,12 +21,15 @@ const renderNewProduct = () => {
         <input class="w-100 form-control" type="text" name="description">
       </fieldset>
       <fieldset>
-        <label class="form-label" for="address">Address:</label><br>
-        <input class="w-100 form-control" type="text" name="address">
-      </fieldset>
-      <fieldset>
         <label class="form-label" for="availability">Availability: </label><br>
         <input class="w-100 form-control" type="date" name="availability">
+      </fieldset>
+      <fieldset>
+      <label class="form-label" for="address">Address:</label><br>
+      <input class="w-100 form-control" type="text" name="address">
+          <input type="hidden" id="lat" name="latitude" value="">
+          <input type="hidden" id="lng" name="longitude" value="">
+          <input type="hidden" id="formattedaddress" name="formattedaddress" value="">
       </fieldset>
       <fieldset>
         <label class="form-label" for="image">Image: </label><br>
@@ -37,7 +40,7 @@ const renderNewProduct = () => {
           <select class="form-select" name="category" id="category">
             <option value="Appliance">Appliance</option>
             <option value="Outdoor">Outdoor</option>
-            <option value="Exercise">Exericse</option>
+            <option value="Exercise">Exercise</option>
             <option value="Kitchen">Kitchen</option>
           </select>
       </fieldset>
@@ -54,26 +57,15 @@ const renderNewProduct = () => {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
-    try {
-      // const image = await getBase64(data.UploadImage);
-      const { name, description, availability, image, address, category, price } = data;
-      const res = await axios.post(`/api/users/products/host`, {
-        name,
-        description,
-        availability,
-        address,
-        image,
-        category,
-        price
-      });
-
+    axios.post(`/api/users/products/host`, data).then((res) => {
+      console.log("Product Added")
       page.innerHTML = `<p style="color: green">Product successfully added!</p>`;
       setTimeout(function () {
         page.innerHTML = "";
-        renderLoggednavBar();
+        renderNavBar();
         renderHome();
       }, 1000);
-    } catch (error) {
+    }).catch((error) => {
       console.log("You need to be logged in")
       page.innerHTML = `<p style="color: red">You need to be logged in to add a product</p>`;
       setTimeout(function () {
@@ -81,21 +73,10 @@ const renderNewProduct = () => {
         renderNavBar();
         renderHome();
       }, 1000);
-    }
-    renderHome();
-  })
-  // page.replaceChildren(form);
-  formCol.appendChild(form);
-    formRow.appendChild(formCol);
-    page.appendChild(formRow);
-};
-
-//Convert images 
-function getBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
+    });
   });
-}
+  initAutocomplete('address');
+  formCol.appendChild(form);
+  formRow.appendChild(formCol);
+  page.appendChild(formRow);
+};
