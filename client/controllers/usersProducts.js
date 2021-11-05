@@ -22,26 +22,38 @@ const { response } = require("express");
 };
 const geocoder = NodeGeocoder(options);
 
-usersProductsController.post('/review', sessionAuth, (req, res) => {
-    dateTime = date+" "+time;
-    const { rating, productId, review } = req.body;
-    const userEmail = req.session.username;
-    usersDB.getUser(userEmail).then((res) => {
-        const userId = res[0].user_id;
-        usersProductsDB.addReview(review, rating, dateTime, userId, productId);
-    });
-    
-    res.json({"status":"review added"});
-});
-usersProductsController.delete("/:id", sessionAuth, (req, res) => { //delete product by id
-    const id = req.params.id
-    const userId = req.session.userId
-    console.log(userId)
+const date =
+  today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+const time =
+  today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
-    usersProductsDB.deleteProduct(id, userId).then(() => {
-            res.status(200).send()
-            console.log(`deleted product: ${id}`)
-    })
+usersProductsController.post("/review", sessionAuth, (req, res, next) => {
+  dateTime = date + " " + time;
+  let { rating, productId, review } = req.body;
+  console.log(req.body);
+  // If no rating is chosen it assigns it to 0 to avoid rendering NAN on the webpage.
+  if (rating === undefined) {
+    rating = 0;
+  }
+  const userEmail = req.session.username;
+  usersDB.getUser(userEmail).then((res) => {
+    const userId = res[0].user_id;
+    usersProductsDB.addReview(review, rating, dateTime, userId, productId);
+  });
+
+  res.json({ status: "review added" });
+});
+
+usersProductsController.delete("/:id", sessionAuth, (req, res) => {
+  //delete product by id
+  const id = req.params.id;
+  const userId = req.session.userId;
+  console.log(userId);
+
+  usersProductsDB.deleteProduct(id, userId).then(() => {
+    res.status(200).send();
+    console.log(`deleted product: ${id}`);
+  });
 });
 
 usersProductsController.post("/host", sessionAuth, (req, res) => { //add product
@@ -132,9 +144,9 @@ usersProductsController.post("/host", sessionAuth, (req, res) => { //add product
 //         });
 //     }
 // });
-async function geocode(address) {
-    const geocodedresponse = await geocoder.geocode(address)
-    return geocodedresponse;
-}
+// async function geocode(address) {
+//     const geocodedresponse = await geocoder.geocode(address)
+//     return geocodedresponse;
+// }
 //Need to add update product by ONE Parameter
 module.exports = usersProductsController;

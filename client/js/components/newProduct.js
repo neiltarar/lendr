@@ -1,36 +1,43 @@
 const renderNewProduct = () => {
   const page = document.getElementById("page");
   page.innerHTML = ''
-
+  const formRow = document.createElement("div");
+  formRow.classList.add("row");
+  formRow.classList.add("mt-5");
+  formRow.classList.add("pt-5");
+  formRow.classList.add("justify-content-center");
+  formRow.classList.add("align-items-center");
+  const formCol = document.createElement("div");
+  formCol.classList.add("col-6");
   const form = document.createElement("form");
   form.className = 'Form'
   form.innerHTML = `
       <fieldset>
-        <label for="name">Name:</label><br>
-        <input type="text" placeholder="name" name="name">
+        <label class="form-label"for="name">Name:</label><br>
+        <input class="w-100 form-control" type="text" name="name">
       </fieldset>
       <fieldset>
-        <label for="description">Description:</label><br>
-        <input type="text" placeholder="description" name="description">
+        <label class="form-label" for="description">Description:</label><br>
+        <input class="w-100 form-control" type="text" name="description">
       </fieldset>
       <fieldset>
-        <label for="availability">Availability: </label><br>
-        <input type="date" name="availability">
+        <label class="form-label" for="availability">Availability: </label><br>
+        <input class="w-100 form-control" type="date" name="availability">
       </fieldset>
       <fieldset>
-        <label for="address">Address:</label><br>
-          <input type="text" id="address">
+      <label class="form-label" for="address">Address:</label><br>
+      <input class="w-100 form-control" type="text" name="address">
           <input type="hidden" id="lat" name="latitude" value="">
           <input type="hidden" id="lng" name="longitude" value="">
           <input type="hidden" id="formattedaddress" name="formattedaddress" value="">
       </fieldset>
       <fieldset>
-        <label for="image">Image: </label><br>
-        <input type="text" placeholder="image" name="image">
+        <label class="form-label" for="image">Image: </label><br>
+        <input class="w-100 form-control" type="text" name="image">
       </fieldset>
       <fieldset>
-        <label for="category">Choose a category: </label><br>
-          <select name="category" id="category">
+        <label class="form-label" for="category">Choose a category: </label><br>
+          <select class="form-select" name="category" id="category">
             <option value="Appliance">Appliance</option>
             <option value="Outdoor">Outdoor</option>
             <option value="Exercise">Exercise</option>
@@ -38,16 +45,17 @@ const renderNewProduct = () => {
           </select>
       </fieldset>
       <fieldset>
-        <label for="Price">Price/hr: </label><br>
-        <input type="number" placeholder="price" name="price">
+        <label class="form-label"for="Price">Price: </label><br>
+        <input class="w-100 form-control"type="number" name="price">
       </fieldset>
-      <input type="submit" class="button">
+      
+      <input type="submit" class="btn btn-blue w-100">
       `;
 
-  form.addEventListener("submit", (event) => {
-    event.preventDefault()
-    const formData = new FormData(form)
-    const data = Object.fromEntries(formData.entries())
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
 
     axios.post(`/api/users/products/host`, data).then((res) => {
       console.log("Product Added")
@@ -57,7 +65,7 @@ const renderNewProduct = () => {
         renderLoggednavBar();
         renderHome();
       }, 1000);
-    }).catch(err => {
+    }).catch((error) => {
       console.log("You need to be logged in")
       page.innerHTML = `<p style="color: red">You need to be logged in to add a product</p>`;
       setTimeout(function () {
@@ -65,9 +73,10 @@ const renderNewProduct = () => {
         renderNavBar();
         renderHome();
       }, 1000);
-    })
-    renderHome()
-  })
-  page.replaceChildren(form);
+    });
+  });
   initAutocomplete('address');
+  formCol.appendChild(form);
+  formRow.appendChild(formCol);
+  page.appendChild(formRow);
 };
