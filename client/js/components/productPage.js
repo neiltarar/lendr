@@ -39,8 +39,6 @@ const productPage = (id) => {
     productBox.append(updateProduct); //may need to append to different html element
     updateProduct.addEventListener("click", (event) => {
       id = product["id"];
-      console.log(id);
-
       axios.get(`/api/products/${id}`).then((response) => {
         console.log(response);
         renderUpdateProduct(id);
@@ -85,11 +83,11 @@ const productPage = (id) => {
     const reviewRatings = [];
     productReview.forEach((review) => {
       const productReviewDateTime = review.row
-        .split(",")[0]
+        .split(",")[1]
         .replace(/['"]+/g, "");
-      const productReview = review.row.split(",")[1].replace(/['"]+/g, "");
+      const productReview = review.row.split(",")[2].replace(/['"]+/g, "");
       const productReviewRating = review.row
-        .split(",")[2]
+        .split(",")[3]
         .replace(/['")]+/g, "");
       reviewRatings.push(parseInt(productReviewRating));
       const reviewElement = document.createElement("li");
@@ -103,6 +101,9 @@ const productPage = (id) => {
       return acc;
     }, 0);
     ratingSum = ratingTotal / reviewRatings.length;
+    if (!ratingSum) {
+      ratingSum = 0;
+    }
     overallRating.innerText = ratingSum;
     reviewForm.innerHTML = `
                 <fieldset>
@@ -137,7 +138,6 @@ const productPage = (id) => {
       axios
         .post("/api/users/products/review", data) //endpoint
         .then((res) => {
-          console.log("response" + res);
           page.innerHTML = "";
           page.innerHTML = `<p style="color: green"> Review is submitted.</p>`;
           setTimeout(function () {
@@ -151,6 +151,7 @@ const productPage = (id) => {
         });
     });
   });
+
   productsRow.append(productBox);
   page.append(productsRow);
 };
