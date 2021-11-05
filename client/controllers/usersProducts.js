@@ -45,9 +45,9 @@ usersProductsController.delete("/:id", sessionAuth, (req, res) => { //delete pro
 });
 
 usersProductsController.post("/host", sessionAuth, (req, res) => { //add product
-    const { name, description, address, availability, image, category, price } = req.body
-
+    const { name, description, availability, formattedaddress, longitude, latitude, image, category, price } = req.body
     console.log(req.body)
+
     const userId = req.session.userId //getting user_id from sessions
     console.log(userId)
 
@@ -57,8 +57,15 @@ usersProductsController.post("/host", sessionAuth, (req, res) => { //add product
     } else if (description === undefined || description === '' || description.length > 50) {
         res.status(400).json({ message: 'description not defined' })
         return
-    } else if (address === undefined || address === '') {
-        console.log("address not defined")
+    } else if (formattedaddress === undefined || formattedaddress === '') {
+        console.log(formattedaddress)
+        console.log("formatted address not found")
+        return
+    } else if (longitude === undefined || longitude === '') {
+        console.log("longitude not found")
+        return
+    } else if (latitude === undefined || latitude === '') {
+        console.log("latitude not found")
         return
     } else if (availability === undefined || availability === '') {
         res.status(400).json({ message: 'availability not defined' })
@@ -72,17 +79,24 @@ usersProductsController.post("/host", sessionAuth, (req, res) => { //add product
         res.status(400).json({ message: 'price not defined' })
     } else {
         console.log("adding product")
-        geocode(address).then((geocodedaddress) => {
-            console.log(geocodedaddress)
+        // geocode(address).then((geocodedaddress) => {
+        //     console.log(geocodedaddress)
 
-            usersProductsDB.addNewProduct(name, description, address, geocodedaddress[0].longitude, geocodedaddress[0].latitude, availability, image, category, price, userId).then((products) => {
+            usersProductsDB.addNewProduct(name, description, formattedaddress, longitude, latitude, availability, image, category, price, userId).then((products) => {
                 res.status(201).send(products)
-                console.log(products)
                 console.log(`added product: ${name}`);
             })
-        });
-    }
-}); 
+        };
+    });
+// geocode(address).then((geocodedaddress) => {
+//     console.log(geocodedaddress)
+
+//     usersProductsDB.addNewProduct(name, description, address, geocodedaddress[0].longitude, geocodedaddress[0].latitude, availability, image, category, price, userId).then((products) => {
+//         res.status(201).send(products)
+//         console.log(products)
+//         console.log(`added product: ${name}`);
+//     })
+// });
 
 // usersProductsController.patch("/:id", sessionAuth, (req, res) => { //update product all parameters
 //     const { name, description, address, availability, image, category, price } = req.body

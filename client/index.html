@@ -24,6 +24,7 @@
     <script src="./js/components/messages.js"></script>
     <script src="./js/components/updateProduct.js"></script>
     <script src="./js/components/productsNearYou.js"></script>
+    <script src="./js/components/distance.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBpXXQG3i_r5ALmaMObXENF8CgJ43zTd0&libraries=places"></script>
@@ -47,7 +48,7 @@
           console.log(longitude)
           document.getElementById('lat').value = latitude;
           document.getElementById('lng').value = longitude;
-          return longitude + latitude
+          document.getElementById('formattedaddress').value = place["formatted_address"];
         });
       };
     </script>

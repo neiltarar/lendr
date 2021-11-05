@@ -20,8 +20,9 @@ const renderNewProduct = () => {
       <fieldset>
         <label for="address">Address:</label><br>
           <input type="text" id="address">
-          <input type="hidden" id="lat" value="">
-          <input type="hidden" id="lng" value="">
+          <input type="hidden" id="lat" name="latitude" value="">
+          <input type="hidden" id="lng" name="longitude" value="">
+          <input type="hidden" id="formattedaddress" name="formattedaddress" value="">
       </fieldset>
       <fieldset>
         <label for="image">Image: </label><br>
@@ -47,11 +48,9 @@ const renderNewProduct = () => {
     event.preventDefault()
     const formData = new FormData(form)
     const data = Object.fromEntries(formData.entries())
-    console.log(data)
 
     axios.post(`/api/users/products/host`, data).then((res) => {
       console.log("Product Added")
-      console.log(res)
       page.innerHTML = `<p style="color: green">Product successfully added!</p>`;
       setTimeout(function () {
         page.innerHTML = "";

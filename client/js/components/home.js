@@ -34,8 +34,9 @@ function renderHome() {
                     <fieldset>
                         <label for="address">Your Address:</label><br>
                             <input type="text" id="address"></input>
-                            <input type="hidden" id="lat" value=""></input>
-                            <input type="hidden" id="lng" value=""></input>
+                            <input type="hidden" id="lat" value="" name="lat"></input>
+                            <input type="hidden" id="lng" value="" name="lng"></input>
+                            <input type="hidden" id="formattedaddress" value="">
                     </fieldset>
                 </form>
                 <input type="Submit" class="btn btn-primary rounded-pill">
@@ -50,10 +51,8 @@ function renderHome() {
         event.preventDefault()
         const formData = new FormData(form)
         const data = Object.fromEntries(formData.entries())
-        const longitude = document.getElementById("lng").value
-        const latitude = document.getElementById("lat").value
 
-        productsNearYou(data, longitude, latitude);
+        productsNearYou(data);
     });
 
     //Products div
