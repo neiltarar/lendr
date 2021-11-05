@@ -1,6 +1,7 @@
 // const { default: axios } = require("axios");
 
 const productPage = (id) => {
+
     page.innerHTML = '';
     //Products div
     const productsRow = document.createElement('div');
@@ -72,60 +73,58 @@ const productPage = (id) => {
         deleteProduct.addEventListener("click", (event) => {
             id = product["id"];
 
-            axios.delete(`/api/users/products/${id}`).then((res) => {
-                if (res.status === 200) {
-                    page.innerHTML = `<p style="color: green">Product deleted</p>`;
-                    setTimeout(function () {
-                        page.innerHTML = "";
-                        renderHome();
-                    }, 1000)
-                } else {
-                    page.innerHTML = `<p style="color: red">You are not logged in</p>`;
-                    setTimeout(function () {
-                        page.innerHTML = "";
-                        renderHome();
-                    }, 1000)
-                };
-            });
-        });
+  // --------------- REVIEW SECTION OF THE PRODUCT --------------------------------
+  // Axios get request to get all reviews
+  axios.get(`/api/products/reviews/${id}`).then((response) => {
+    const reviewForm = document.createElement("form");
+    const overallRating = document.createElement("h1");
+    const reviewUl = document.createElement("ul");
+    reviewUl.classList.add("reviews");
+    reviewUl.classList.add("list-group", "list-group-flush");
+    productBox.appendChild(overallRating);
+    const productReview = response.data;
+    // We want to get all the ratings for the product and divide it to the sum of the reviews to get the average rating
+    const reviewRatings = [];
+    productReview.forEach((review) => {
+      const productReviewDateTime = review.row
+        .split(",")[1]
+        .split(" ")[0]
+        .replace(/['"]+/g, "");
+      const productReview = review.row.split(",")[2].replace(/['"]+/g, "");
+      const productReviewRating = review.row
+        .split(",")[3]
+        .replace(/['")]+/g, "");
+      if (productReviewRating !== NaN) {
+        reviewRatings.push(parseInt(productReviewRating));
+      }
+      const reviewElement = document.createElement("li");
+      reviewElement.classList.add("list-group-item");
+      reviewElement.innerHTML = `<span class="reviewDateTime">${productReviewDateTime}</span> <br><br> ${productReview}`;
+      reviewUl.append(reviewElement);
     });
-    
-    // --------------- REVIEW SECTION OF THE PRODUCT --------------------------------
-    // Axios get request to get all reviews
-    const reviewContainer = document.createElement("div");
-    reviewContainer.classList.add("reviews")
-    const reviewTitle = document.createElement("h2");
-    reviewTitle.textContent = "Product Reviews";
-    reviewContainer.append(reviewTitle);
-    
 
-    axios.get(`/api/products/reviews/${id}`).then((response) => {
-        const reviewForm = document.createElement("form");
-        const overallRating = document.createElement("p");
-        const reviewUl = document.createElement("ul");
-        reviewUl.classList.add("list-group", "list-group-flush");
-        reviewContainer.append(overallRating);
-        const productReview = response.data;
-        const reviewRatings = [];
-        productReview.forEach(review => {
-            const productReviewDateTime = review.row.split(",")[0].replace(/['"]+/g, '');
-            const productReview = review.row.split(",")[1].replace(/['"]+/g, '');
-            const productReviewRating = review.row.split(",")[2].replace(/['")]+/g, '');
-            reviewRatings.push(parseInt(productReviewRating));
-            const reviewElement = document.createElement("li");
-            reviewElement.classList.add("list-group-item", "py-4");
-            reviewElement.innerText = productReview;
-            reviewUl.append(reviewElement);
-            
-        });
-        reviewContainer.append(reviewUl)
-        const ratingTotal = reviewRatings.reduce((curr, acc) => {
-                acc += curr
-                return acc
-            },0);
-        ratingSum = ratingTotal/reviewRatings.length;
-        overallRating.innerText = ratingSum;
-        reviewForm.innerHTML = `
+    productBox.append(reviewUl);
+    const ratingTotal = reviewRatings.reduce((curr, acc) => {
+      acc += curr;
+      return acc;
+    }, 0);
+    ratingSum = ratingTotal / reviewRatings.length;
+    // If there is no rating it changes the value to 0 from NaN
+    if (!ratingSum) {
+      ratingSum = 0;
+    }
+    starRatingRatio = Math.ceil((ratingSum * 100) / 5);
+    if (starRatingRatio - Math.floor(starRatingRatio / 10) * 10 > 4) {
+      starRatingRatio = Math.ceil(starRatingRatio / 10) * 10;
+    } else {
+      starRatingRatio = parseInt(starRatingRatio / 10, 10) * 10;
+    }
+    overallRating.innerHTML = `
+    <span class="stars-container stars-${starRatingRatio}">★★★★★</span>
+        `;
+
+    // overallRating.innerText = ratingSum;
+    reviewForm.innerHTML = `
                 <fieldset>
                     <label for="1star" class="form-check-label">1Star</label>
                     <input type="radio" class="form-check-input" id="1star" name="rating" value=1>
@@ -137,42 +136,45 @@ const productPage = (id) => {
                     <input type="radio" class="form-check-input" id="4star" name="rating" value=4>
                     <label for="5star" class="form-check-label">5Star</label>
                     <input type="radio" class="form-check-input" id="5star" name="rating" value=5>
+
                 </fieldset>
-                <fieldset>
+                <fieldset class="reviews">
                     <input type="hidden" name="productId" value= ${id} </input>
-                    <label for="review" class="form-label">Review</label><br>
-                    <input type="text" class="form-control w-100"  name="review" placeholder="Write your review">
+
+                    <textarea type="text" name="review" class="reviewInput" rows="4" cols="50"></textarea>
                 </fieldset>
-                <input type="submit" class="btn btn-blue"  value="Submit Review"></input>
+                <input type="submit" value="post" class="reviews btn btn-primary"></input>
                 </div>
                 `;
-        reviewContainer.append(reviewForm);
-        // Review submit button event listener
-        reviewForm.addEventListener("submit", (event) => {
-            // preventDefault function prevents refreshing the page
-            event.preventDefault();
-            // capturing input data in the form
-            const reviewData = new FormData(reviewForm);
-            const data = Object.fromEntries(reviewData.entries());
-            // making post request to see if the user exists in the db
-            axios.post('/api/users/products/review', data) //endpoint
-                .then((res) => {
-                    page.innerHTML = '';
-                    page.innerHTML = `<p style="color: green"> Review is submitted.</p>`;
-                    setTimeout(function () {
-                        productPage(id);
-                    }, 1000);
-                })
-                .catch((err) => {
-                    console.log("error: " + err)
-                    console.log("review response: " + res)
-                    // alert("You need to login to write a review");
-                });
-        });
-        
-    });    
-    
-    
+    productBox.append(reviewForm);
+    // Review submit button event listener
+    reviewForm.addEventListener("submit", (event) => {
+      // preventDefault function prevents refreshing the page
+      event.preventDefault();
+      // capturing input data in the form
+      const reviewData = new FormData(reviewForm);
+      const data = Object.fromEntries(reviewData.entries());
+      // making post request to see if the user exists in the db
+      // with if condition we are preventing an empty review to be posted
+      if (data["review"] !== "") {
+        axios
+          .post("/api/users/products/review", data) //endpoint
+          .then((res) => {
+            page.innerHTML = "";
+            page.innerHTML = `<p style="color: green"> Review is submitted.</p>`;
+            setTimeout(function () {
+              productPage(id);
+            }, 1000);
+          })
+          .catch((err) => {
+            console.log("error: " + err);
+            console.log("review response: " + res);
+            alert("You need to login to write a review");
+          });
+      } else {
+        alert("You can't post an empty review!");
+      }
+    });
     productsRow.append(productBox);
     page.append(productsRow);
-};
+  });

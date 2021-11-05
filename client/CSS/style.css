@@ -1,6 +1,6 @@
 /* Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap');
-@import url('./reset.css');
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap");
+@import url("./reset.css");
 
 /*  Color Palette 
 
@@ -13,11 +13,11 @@ Light Grey : #d2d2d2;
 */
 /* General Classes */
 .relative {
-    position: relative;
+  position: relative;
 }
 
 .bold {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .bg-primary {
@@ -25,7 +25,7 @@ Light Grey : #d2d2d2;
 }
 
 .bg-blue {
-    background-color: #1B2845 !important;
+  background-color: #1b2845 !important;
 }
 
 .btn-primary {
@@ -35,9 +35,9 @@ Light Grey : #d2d2d2;
 }
 
 .btn-blue {
-    color: #fff;
-    background-color: #1B2845;
-    border-color: #1B2845;
+  color: #fff;
+  background-color: #1b2845;
+  border-color: #1b2845;
 }
 .btn-outline-blue {
     color: #1B2845;
@@ -63,11 +63,10 @@ Light Grey : #d2d2d2;
     position: relative;
 }
 
-
 body {
-    color: #212121;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 16px;
+  color: #212121;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 16px;
 }
 
 h1,
@@ -76,29 +75,27 @@ h3,
 h4,
 h5,
 h6 {
-    font-weight: 700;
-    letter-spacing: -0.75px;
-    margin-bottom: 20px;
-
+  font-weight: 700;
+  letter-spacing: -0.75px;
+  margin-bottom: 20px;
 }
 
 h1 {
-    font-size: 45px;
+  font-size: 45px;
 }
 
 h4 {
-    font-size: 22px;
-
+  font-size: 22px;
 }
 
 p {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 /* Navigation */
 header {
-    position: relative;
-    z-index: 99;
+  position: relative;
+  z-index: 99;
 }
 
 /* img {
@@ -115,9 +112,9 @@ header {
 }
 
 .nav-link {
-    cursor: pointer;
-    color: #212121;
-    cursor: pointer;
+  cursor: pointer;
+  color: #212121;
+  cursor: pointer;
 }
 
 .nav-link:hover {
@@ -134,7 +131,6 @@ footer {
     min-height: 551px;
     margin-bottom: 80px;
     /* position: relative; */
-
 }
 
 /* Form */
@@ -172,34 +168,34 @@ label.form-label {
 px
 ; */
 
-.hero>.hero-col {
-    padding-top: 160px;
-    padding-bottom: 160px;
+.hero > .hero-col {
+  padding-top: 160px;
+  padding-bottom: 160px;
 }
 
-div.hero>div>div>div.bg-primary {
-    position: absolute;
-    right: 0;
-    height: 100%;
+div.hero > div > div > div.bg-primary {
+  position: absolute;
+  right: 0;
+  height: 100%;
 }
 
 .row.products-row {
-    margin-top: 80px;
+  margin-top: 80px;
 }
 
 .product-single {
-    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 14%);
-    width: 30%;
-    margin-right: 64px;
-    margin-bottom: 50px;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 14%);
+  width: 30%;
+  margin-right: 64px;
+  margin-bottom: 50px;
 }
 
 .product-single:nth-child(3n) {
-    margin-right: 0;
+  margin-right: 0;
 }
 
 .product-single img {
-    object-fit: cover;
+  object-fit: cover;
 }
 button#productImage, 
 .imageButton {
@@ -215,104 +211,101 @@ button#openConversation {
 }
 
 p.cat-tag {
-    position: absolute;
-    left: 0;
-    top: 49%;
-    padding: 15px;
-    background-color: white;
-    color: inherit;
-    font-size: 12px;
-    margin-bottom: 0;
-    text-transform: uppercase;
-
+  position: absolute;
+  left: 0;
+  top: 49%;
+  padding: 15px;
+  background-color: white;
+  color: inherit;
+  font-size: 12px;
+  margin-bottom: 0;
+  text-transform: uppercase;
 }
 
 /* Form */
 form.home-search {
-    width: 500px;
-    position: relative;
-
+  width: 500px;
+  position: relative;
 }
 
 form.home-search input[type="text"] {
-    width: 100%;
-    border: 2px solid #ededed;
-    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 14%);
-    height: 80px;
+  width: 100%;
+  border: 2px solid #ededed;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 14%);
+  height: 80px;
 }
 
 form.home-search button {
-    position: absolute;
-    right: 14px;
-    /* padding: 10px 15px; */
-    top: 17px;
+  position: absolute;
+  right: 14px;
+  /* padding: 10px 15px; */
+  top: 17px;
 }
 
 p.price-tag {
-    font-size: 25px;
+  font-size: 25px;
 }
-
 
 /* Conversations */
 .small-container {
-    width: 800px;
+  width: 800px;
 }
 
 .messages.small-container .row {
-    padding-top: 30px;
-    padding-bottom: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .messages {
-    padding: 50px;
-    margin-top: 42px;
+  padding: 50px;
+  margin-top: 42px;
 }
 
 .message {
-    padding: 20px 30px;
-    background-color: rgba(76, 146, 148, 0.5);
-    margin-bottom: 30px;
-    border-bottom-right-radius: 60px;
-    /* border-bottom-right-radius: 30px; */
-    border-top-left-radius: 45px;
+  padding: 20px 30px;
+  background-color: rgba(76, 146, 148, 0.5);
+  margin-bottom: 30px;
+  border-bottom-right-radius: 60px;
+  /* border-bottom-right-radius: 30px; */
+  border-top-left-radius: 45px;
 }
 
 .border-bottom {
-    border-bottom: 1px solid #f7f7f7 !important;
+  border-bottom: 1px solid #f7f7f7 !important;
 }
 
 form.post-message {
-    position: relative;
+  position: relative;
 }
 
 form.post-message textarea {
-    height: 60px;
+  height: 60px;
 }
 
 form.post-message button {
-    position: absolute;
-    right: 11px;
-    top: 6px;
+  position: absolute;
+  right: 11px;
+  top: 6px;
 }
 
 p.sent-by {
-    border-radius: 50%;
-    background-color: #1B2845;
-    width: 70px;
-    height: 70px;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    top: -26px;
-    left: -26px;
+  border-radius: 50%;
+  background-color: #1b2845;
+  width: 70px;
+  height: 70px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: -26px;
+  left: -26px;
 }
 
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
 #map {
-    height: 100%;
+  height: 100%;
 }
 
 /* Optional: Makes the sample page fill the window. */
@@ -395,3 +388,124 @@ img.productPage-Image {
     right: 0;
     top: 443px;
 }
+
+/******************************** Star rating system rendering settings ************************
+/* use reverse flexbox to take advantage of flex-direction: reverse */
+.star-rating {
+  display: flex;
+  align-items: center;
+  width: 160px;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin: 40px auto 10px auto;
+  position: relative;
+}
+/* hide the inputs */
+.star-rating input {
+  display: none;
+}
+/* set properties of all labels */
+.star-rating > label {
+  width: 30px;
+  height: 30px;
+  font-family: Arial;
+  font-size: 30px;
+  transition: 0.2s ease;
+  color: orange;
+}
+/* give label a hover state */
+.star-rating label:hover {
+  color: #ff69b4;
+  transition: 0.2s ease;
+}
+.star-rating label:active::before {
+  transform: scale(1.1);
+}
+
+/* set shape of unselected label */
+.star-rating label::before {
+  content: "\2606";
+  position: absolute;
+  top: 0px;
+  line-height: 26px;
+}
+/* set full star shape for checked label and those that come after it */
+.star-rating input:checked ~ label:before {
+  content: "\2605";
+}
+
+@-moz-document url-prefix() {
+  .star-rating input:checked ~ label:before {
+    font-size: 36px;
+    line-height: 21px;
+  }
+}
+.btn {
+  margin: 10px;
+}
+
+.productsBox {
+  text-align: center;
+}
+
+.reviewDateTime {
+  color: #707070;
+}
+
+.stars-container {
+  position: relative;
+  display: inline-block;
+  color: transparent;
+}
+
+.stars-container:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "★★★★★";
+  color: lightgray;
+}
+
+.stars-container:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "★★★★★";
+  color: gold;
+  overflow: hidden;
+}
+
+.stars-0:after {
+  width: 0%;
+}
+.stars-10:after {
+  width: 10%;
+}
+.stars-20:after {
+  width: 20%;
+}
+.stars-30:after {
+  width: 30%;
+}
+.stars-40:after {
+  width: 40%;
+}
+.stars-50:after {
+  width: 50%;
+}
+.stars-60:after {
+  width: 60%;
+}
+.stars-70:after {
+  width: 70%;
+}
+.stars-80:after {
+  width: 80%;
+}
+.stars-90:after {
+  width: 90%;
+}
+.stars-100:after {
+  width: 100;
+}
+

@@ -1,19 +1,17 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
 
-const sessionAuth = require('./client/middleware/sessionAuth');
-const sessionLogger = require('./client/middleware/logger');
-const sessionController = require('./client/controllers/sessions');
-const usersController = require('./client/controllers/users');
-const productsController = require('./client/controllers/products')
-const usersProductsController = require('./client/controllers/usersProducts');
-
-const db = require('./client/database/db');
+const sessionAuth = require("./client/middleware/sessionAuth");
+const sessionLogger = require("./client/middleware/logger");
+const sessionController = require("./client/controllers/sessions");
+const usersController = require("./client/controllers/users");
+const productsController = require("./client/controllers/products");
+const usersProductsController = require("./client/controllers/usersProducts");
+const db = require("./client/database/db");
 const dotenv = require("dotenv");
 dotenv.config();
 const expressSession = require("express-session");
-
 
 // Connect to the DB and create session Table
 const connectPgSimple = require("connect-pg-simple");
@@ -23,10 +21,9 @@ const pgSession = connectPgSimple(expressSession);
 const conversationsController = require("./client/controllers/conversations");
 const messagesController = require("./client/controllers/messages");
 
+
 //Images controller
 // const imagesController = require("./client/controllers/images");
-
-
 
 //Cloudinary 
 const cloudinary = require('cloudinary');
@@ -34,9 +31,11 @@ const imagesController = express.Router();
 cloudinary.config({ 
   cloud_name: process.env.CLOUD_NAME, 
   api_key: process.env.API_KEY, 
+
   api_secret: process.env.API_SECRET,
-  secure: true
+  secure: true,
 });
+
 
 imagesController.get("/", (req, res) => {
   res.json({ message: "Hey! This is your server response!" });
@@ -86,25 +85,28 @@ app.use(express.json({limit:"10mb"}));
 const oneDay = 1000 * 60 * 60 * 24;
 
 app.use(
-    expressSession({
-      store: new pgSession({
-        pool: db, // Connects to our postgres db
-        createTableIfMissing: true, // Creates a session table in your database (go look at it!)
-      }),
-      secret: process.env.EXPRESS_SESSION_SECRET_KEY,
-      cookie: { maxAge: oneDay },
-      resave: false, //gets rid of deprecated messages
-      saveUninitialized: false //gets rid of deprecated messages
-    })
-  );
+  expressSession({
+    store: new pgSession({
+      pool: db, // Connects to our postgres db
+      createTableIfMissing: true, // Creates a session table in your database (go look at it!)
+    }),
+    secret: process.env.EXPRESS_SESSION_SECRET_KEY,
+    cookie: { maxAge: oneDay },
+    resave: false, //gets rid of deprecated messages
+    saveUninitialized: false, //gets rid of deprecated messages
+  })
+);
 
-app.use("/" , sessionLogger);
-app.use("/api/users" , usersController);
-app.use("/api/sessions" , sessionController);
+app.use("/", sessionLogger);
+app.use("/api/users", usersController);
+app.use("/api/sessions", sessionController);
 app.use("/api/products", productsController);
-app.use("/api/users/products" , usersProductsController);
-// app.use("/api/users/location", geocoderController);
-app.use("/api/conversations", conversationsController);
+app.use("/api/users/products", usersProductsController);
+//conversations controller
+
+//Conversations
+app.use("/api/conversations", conversationsController); //Which controller to use?
+//Messages
 app.use("/api/messages", messagesController);
 app.use("/api/images", imagesController);
 

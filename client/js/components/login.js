@@ -15,7 +15,7 @@ const renderLogin = () => {
     const loginMessage = document.createElement("h3");
     page.append(loginMessage)
 
-    loginForm.innerHTML = `
+  loginForm.innerHTML = `
         <fieldset>
             <label for="email" class="form-label">Email:</label><br>
             <input class="w-100 form-control" type="text" name="email" placeholder="Type your email">
@@ -79,20 +79,21 @@ function renderLogout() {
       
       
       `;
+      
+      setTimeout(function () {
+        page.innerHTML = "";
+        renderNavBar();
+        renderHome();
+      }, 1000);
+    })
+    .catch((res) => {
+      page.innerHTML = `
+        <h3 style="color: red"> Could not logout </h3>
+        `;
       setTimeout(function () {
         page.innerHTML = "";
         renderLoggednavBar();
         renderHome();
-      }, 1000)
-    })
-    .catch((res) => {
-        page.innerHTML = `
-        <h3 style="color: red"> Could not logout </h3>`
-        setTimeout(function() {
-            page.innerHTML = "";
-            renderLoggednavBar();
-            renderHome();
-        }, 1000);
-  });
+      }, 1000);
+    });
 }
-
