@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS products (
     id serial PRIMARY KEY,
     name VARCHAR(20),
     description VARCHAR(50),
-    address VARCHAR(100),
+    address TEXT,
     availability DATE,
     imageURL VARCHAR(100),
     category VARCHAR(50),

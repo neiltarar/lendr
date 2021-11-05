@@ -6,6 +6,7 @@ const connectPgSimple = require("connect-pg-simple");
 const usersProductsController = express.Router();
 // Get date and time to use in reviews
 const today = new Date();
+
 const date =
   today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 const time =
