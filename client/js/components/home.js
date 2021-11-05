@@ -1,4 +1,8 @@
 function renderHome() {
+    const page = document.getElementById('page');
+    // Clear the contents of the page element before we rerender the new content
+    page.innerHTML = '';
+
     axios.get(`/api/sessions`).then((res) => {
         const paragraph = document.getElementsByTagName("p")
         paragraph[0].innerHTML = `${res.data.message}`
@@ -6,11 +10,7 @@ function renderHome() {
         console.log(username)
         const userId = res.data.userId //giving us the userId variable
         console.log(userId)
-    })
-    const page = document.getElementById('page');
-    // Clear the contents of the page element before we rerender the new content
-    page.innerHTML = '';
-    //Search Form 
+    });
 
     //Form div
     const formRow = document.createElement('div');
@@ -51,8 +51,16 @@ function renderHome() {
         event.preventDefault()
         const formData = new FormData(form)
         const data = Object.fromEntries(formData.entries())
+        console.log(data["item"])
 
-        productsNearYou(data);
+        if (data["item"] === undefined || data["item"] === '') {
+            console.log("not defined")
+            alert("Could not find item")
+            renderHome();
+        } else {
+            productsNearYou(data);
+            console.log("getting products near you!")
+        }
     });
 
     //Products div
