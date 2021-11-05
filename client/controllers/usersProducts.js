@@ -22,11 +22,6 @@ const { response } = require("express");
 };
 const geocoder = NodeGeocoder(options);
 
-const date =
-  today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
-const time =
-  today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-
 usersProductsController.post("/review", sessionAuth, (req, res, next) => {
   dateTime = date + " " + time;
   let { rating, productId, review } = req.body;

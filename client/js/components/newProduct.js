@@ -62,7 +62,7 @@ const renderNewProduct = () => {
       page.innerHTML = `<p style="color: green">Product successfully added!</p>`;
       setTimeout(function () {
         page.innerHTML = "";
-        renderLoggednavBar();
+        renderNavBar();
         renderHome();
       }, 1000);
     }).catch((error) => {

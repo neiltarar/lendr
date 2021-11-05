@@ -66,6 +66,8 @@ const productPage = (id) => {
         deleteProduct.classList.add("btn", "btn-outline-blue");
         buttonContainer.append(deleteProduct); //may need to append to different html element
         deleteProduct.innerText = `Delete Product`;
+        
+        const reviewContainer = document.createElement('div')
         productBox.append(reviewContainer);
          // Delete button event listener
          deleteProduct.addEventListener("click", (event) => {
@@ -90,6 +92,7 @@ const productPage = (id) => {
 
   // --------------- REVIEW SECTION OF THE PRODUCT --------------------------------
   // Axios get request to get all reviews
+
   axios.get(`/api/products/reviews/${id}`).then((response) => {
     const reviewForm = document.createElement("form");
     const overallRating = document.createElement("h1");

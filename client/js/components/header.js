@@ -1,4 +1,14 @@
 function renderNavBar() {
+    axios.get(`/api/sessions`)
+    .then((res) => {
+        renderLoggedInNavbar();
+    })
+    .catch(err => {
+        renderNotLoggedInNavbar();
+    });
+}
+
+function renderNotLoggedInNavbar() {
     const header = document.getElementById('header-nav');
     header.innerHTML=`
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -16,12 +26,10 @@ function renderNavBar() {
             </div>
         </div>
         </div>
-  </nav>
-    
-    `;
+    </nav>`;
 };
 
-function renderLoggednavBar() {
+function renderLoggedInNavbar() {
   const header = document.getElementById('header-nav');
   header.innerHTML=`
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
