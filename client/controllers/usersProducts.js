@@ -10,7 +10,7 @@ const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 //Node geo-coder//
 const dotenv = require("dotenv");
-const key = process.env.GOOGLE_API_KEY
+const key = process.env.GEOCODING_API_KEY
 const NodeGeocoder = require('node-geocoder');
 const { response } = require("express");
   const options = {
@@ -58,7 +58,7 @@ usersProductsController.post("/host", sessionAuth, (req, res) => { //add product
         res.status(400).json({ message: 'description not defined' })
         return
     } else if (address === undefined || address === '') {
-        res.status(400).json({ message: 'address not defined' })
+        console.log("address not defined")
         return
     } else if (availability === undefined || availability === '') {
         res.status(400).json({ message: 'availbility not defined' })

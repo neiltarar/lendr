@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
+const dotenv = require("dotenv");
 const sessionAuth = require('./client/middleware/sessionAuth');
 const sessionLogger = require('./client/middleware/logger');
 const sessionController = require('./client/controllers/sessions');
@@ -10,7 +11,6 @@ const productsController = require('./client/controllers/products')
 const usersProductsController = require('./client/controllers/usersProducts');
 
 const db = require('./client/database/db');
-const dotenv = require("dotenv");
 dotenv.config();
 const expressSession = require("express-session");
 
@@ -31,26 +31,6 @@ cloudinary.config({
   api_secret: process.env.API_SECRET,
   secure: true
 });
-
-// //Google Maps // https://github.com/googlemaps/google-maps-services-js
-// const {Client} = require("@googlemaps/google-maps-services-js");
-// const client = new Client({});
-
-// client
-//   .elevation({
-//     params: {
-//       locations: [{ lat: 45, lng: -110 }],
-//       key: process.env.GOOGLE_MAPS_API_KEY
-//     },
-//     timeout: 1000 // milliseconds
-//   }, axiosInstance)
-//   .then(r => {
-//     console.log(r.data.results[0].elevation);
-//   })
-//   .catch(e => {
-//     console.log(e);
-//   });
-
 
 app.use(express.static("client"));
 app.use(express.json());
