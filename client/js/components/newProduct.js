@@ -7,11 +7,11 @@ const renderNewProduct = () => {
   form.innerHTML = `
       <fieldset>
         <label for="name">Name:</label><br>
-        <input type="text" name="name">
+        <input type="text" placeholder="name" name="name">
       </fieldset>
       <fieldset>
         <label for="description">Description:</label><br>
-        <input type="text" name="description">
+        <input type="text" placeholder="description" name="description">
       </fieldset>
       <fieldset>
         <label for="availability">Availability: </label><br>
@@ -25,20 +25,20 @@ const renderNewProduct = () => {
       </fieldset>
       <fieldset>
         <label for="image">Image: </label><br>
-        <input type="text" name="image">
+        <input type="text" placeholder="image" name="image">
       </fieldset>
       <fieldset>
         <label for="category">Choose a category: </label><br>
           <select name="category" id="category">
             <option value="Appliance">Appliance</option>
             <option value="Outdoor">Outdoor</option>
-            <option value="Exercise">Exericse</option>
+            <option value="Exercise">Exercise</option>
             <option value="Kitchen">Kitchen</option>
           </select>
       </fieldset>
       <fieldset>
-        <label for="Price">Price: </label><br>
-        <input type="number" name="price">
+        <label for="Price">Price/hr: </label><br>
+        <input type="number" placeholder="price" name="price">
       </fieldset>
       <input type="submit" class="button">
       `;
@@ -47,6 +47,7 @@ const renderNewProduct = () => {
     event.preventDefault()
     const formData = new FormData(form)
     const data = Object.fromEntries(formData.entries())
+    console.log(data)
 
     axios.post(`/api/users/products/host`, data).then((res) => {
       console.log("Product Added")

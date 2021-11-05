@@ -61,7 +61,7 @@ usersProductsController.post("/host", sessionAuth, (req, res) => { //add product
         console.log("address not defined")
         return
     } else if (availability === undefined || availability === '') {
-        res.status(400).json({ message: 'availbility not defined' })
+        res.status(400).json({ message: 'availability not defined' })
         return
     } else if (image === undefined || image === '') {
         res.status(400).json({ message: 'imageurl not defined' })

@@ -15,7 +15,11 @@ function renderHome() {
     //Form div
     const formRow = document.createElement('div');
     formRow.classList.add('hero');
-    formRow.innerHTML = `
+    const form = document.createElement("form");
+    form.className = 'Form'
+    formRow.append(form)
+
+    form.innerHTML = `
     <div class="container"> 
         <div class="row">
             <div class="col-md-4 hero-col"> 
@@ -23,13 +27,15 @@ function renderHome() {
                 <p>Lorem ipsum lorem ipsum lorem lorem </p>
                 <form class="home-search mt-5">
                     <fieldset>
-                        <input type="text" class="rounded" placeholder="Enter Product" />
+                    <fieldset>
+                        <label for="name">Name:</label><br>
+                            <input type="text" class="rounded" placeholder="Find item" name="item">
                     </fieldset>
                     <fieldset>
-                        <label for="address">Address:</label><br>
-                            <input type="text" id="address">
-                            <input type="hidden" id="lat" value="">
-                            <input type="hidden" id="lng" value="">
+                        <label for="address">Your Address:</label><br>
+                            <input type="text" id="address"></input>
+                            <input type="hidden" id="lat" value=""></input>
+                            <input type="hidden" id="lng" value=""></input>
                     </fieldset>
                 </form>
                 <input type="Submit" class="btn btn-primary rounded-pill">
@@ -38,12 +44,17 @@ function renderHome() {
             </div>
         </div>
     </div>
-    `
+    `;
+  
+    form.addEventListener("submit", (event) => {
+        event.preventDefault()
+        const formData = new FormData(form)
+        const data = Object.fromEntries(formData.entries())
+        const longitude = document.getElementById("lng").value
+        const latitude = document.getElementById("lat").value
 
-    //Get search bar
-    const searchBarButton = document.getElementsByClassName("btn btn-primary rounded-pill")
-    console.log(searchBarButton)
-    searchBarButton.innerHTML = "Search"
+        productsNearYou(data, longitude, latitude);
+    });
 
     //Products div
     const productsRow = document.createElement('div');

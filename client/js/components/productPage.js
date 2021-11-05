@@ -34,19 +34,19 @@ const productPage = (id) => {
         `;
 
         // Update Product Button
-        const updateProduct = document.createElement('button') //Add button to link to add product page
-        updateProduct.innerHTML = `<button type="button" class="button">Update Product</button`
-        productBox.append(updateProduct) //may need to append to different html element
-        updateProduct.addEventListener("click", (event) => {
-            id = product["id"]
-            console.log(id)
+        // const updateProduct = document.createElement('button') //Add button to link to add product page
+        // updateProduct.innerHTML = `<button type="button" class="button">Update Product</button`
+        // productBox.append(updateProduct) //may need to append to different html element
+        // updateProduct.addEventListener("click", (event) => {
+        //     id = product["id"]
+        //     console.log(id)
 
-            axios.get(`/api/products/${id}`).then((response) => {
-                console.log(response)
-                renderUpdateProduct(id)
-            })
+        //     axios.get(`/api/products/${id}`).then((response) => {
+        //         console.log(response)
+        //         renderUpdateProduct(id)
+        //     })
 
-        });
+        // });
         // Delete Product Button
         const deleteProduct = document.createElement('button'); //delete product
         deleteProduct.classList.add("btn", "btn-primary");
