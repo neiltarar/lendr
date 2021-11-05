@@ -7,7 +7,7 @@
 Primary : #4c9294
 Primary Dark : #26474A
 Black: #0B110D
-Light Grey : #f7f7f7;
+Light Grey : #d2d2d2;
 
 
 */
@@ -37,6 +37,23 @@ Light Grey : #f7f7f7;
 .btn-blue {
     color: #fff;
     background-color: #1B2845;
+    border-color: #1B2845;
+}
+.btn-outline-blue {
+    color: #1B2845;
+    background-color: transparent;
+    border-color: #1B2845;
+}
+.btn-outline-blue:hover {
+    color: #fff;
+    background-color: #1B2845;
+    border-color: #1B2845;
+}
+
+
+.btn-blue:hover {
+    color: #1B2845;
+    background-color: transparent;
     border-color: #1B2845;
 }
 
@@ -84,6 +101,10 @@ header {
     z-index: 99;
 }
 
+/* img {
+    width: 100%;
+    height: auto;
+} */
 
 .navbar-dark .navbar-nav .nav-link {
     color: #fff;
@@ -105,7 +126,8 @@ header {
 
 /* Footer */
 footer {
-    background-color: #f7f7f7;
+    background-color: transparent;
+    border-top: 1px solid #d2d2d2;
 }
 
 #page {
@@ -118,8 +140,8 @@ footer {
 /* Form */
 label.form-label {
     font-weight: 600;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    margin-top: 25px;
+        margin-bottom: 15px;
 }
 
 /* Buttons */
@@ -179,7 +201,8 @@ div.hero>div>div>div.bg-primary {
 .product-single img {
     object-fit: cover;
 }
-button#productImage {
+button#productImage, 
+.imageButton {
     padding: 0;
     border: 0;
     background-color: transparent;
@@ -358,4 +381,17 @@ body {
     overflow: hidden;
     padding: 1rem;
     font-size: medium;
+}
+
+
+/* Product page */
+img.productPage-Image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+} 
+.button-container {
+    position: absolute;
+    right: 0;
+    top: 443px;
 }

@@ -17,7 +17,7 @@ function renderHome() {
     formRow.classList.add('hero');
     formRow.innerHTML = `
     <div class="container"> 
-        <div class="row">
+        <div class="row mt-5">
             <div class="col-md-4 hero-col"> 
                 <h1>Lorem ipsum </h1>
                 <p>Lorem ipsum lorem ipsum lorem lorem </p>
@@ -174,31 +174,10 @@ function renderHome() {
             productBox.classList.add("relative");
             productBox.classList.add("rounded");
 
-            productBox.innerHTML = `
-                <a>
-                    <button type="button" class="button" id="productImage"><img width=388 height=250  src=${product.imageurl} class="rounded-top" alt="${product.name}"/></button>
-                </a>
-                <div class="px-3 py-3">
-                <p class="cat-tag">${product.category}</p>
-                <h4 class="pt-1 pb-1">${product.name}</h4>
-                <p class="pb-3"><span class="bold ">Available:</span> <span>${product.availability} </span> </p>
-                <button type="button" class="buttonlink" id="openConversation" onClick="renderConversation()" value="${product.id}">
-                    Contact Owner
-                </button>
-                <p class="price-tag text-end border-top pt-3"><span class="bold"> $${product.price}</span><span>/hour</span> </p>
-                </div>
+            const productImage = document.createElement('a')
             
-            
-            `
-
-            // const productName = document.createElement('h2')
-            // productName.textContent = product["name"]
-            // productBox.append(productName)
-
-            // const productImage = document.createElement('a')
-            // productBox.append(productImage)
-            // productImage.innerHTML = `<button type="button" class="button">Product Page[Image]</button>`;
-            const productImage = document.getElementById("productImage");
+            productImage.innerHTML = `<button type="button" class="imageButton"><img width=388 height=250  src=${product.imageurl} class="rounded-top" alt="${product.name}"/></button>`;
+            // const productImage = document.getElementById("productImage");
             if (productImage){
                 productImage.addEventListener("click", (event) => { //takes us to product page
                     id = product["id"]
@@ -212,6 +191,29 @@ function renderHome() {
     
 
             }
+            productBox.append(productImage);
+
+            const productInfo = document.createElement("div");
+
+            productInfo.innerHTML = `
+                <div class="px-3 py-3">
+                <p class="cat-tag">${product.category}</p>
+                <h4 class="pt-1 pb-1">${product.name}</h4>
+                <p class="pb-3"><span class="bold ">Available:</span> <span>${product.availability} </span> </p>
+                <button type="button" class="buttonlink" id="openConversation" onClick="renderConversation()" value="${product.id}">
+                    Contact Owner
+                </button>
+                <p class="price-tag text-end border-top pt-3"><span class="bold"> $${product.price}</span><span>/hour</span> </p>
+                </div>
+            
+            
+            `
+            productBox.append(productInfo);
+            // const productName = document.createElement('h2')
+            // productName.textContent = product["name"]
+            // productBox.append(productName)
+
+            
             
             // const productAddress = document.createElement('h3')
             // productAddress.textContent = product["address"]
@@ -232,7 +234,7 @@ function renderHome() {
                 })
 
             }
-           
+            
             productsContainer.append(productBox);
             productsRow.append(productsContainer);
             page.append(productsRow);

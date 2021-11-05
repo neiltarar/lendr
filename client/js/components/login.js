@@ -24,7 +24,7 @@ const renderLogin = () => {
             <label for="password" class="form-label">Password: </label><br>
             <input class="w-100 form-control" type="password" name="password" Placeholder="Type your password">
         </fieldset>
-        <input type="submit" value="Login" class="btn btn-primary w-100"></input>
+        <input type="submit" value="Login" class="btn btn-blue w-100"></input>
     `;
     
     loginForm.addEventListener("submit" , (event) => {

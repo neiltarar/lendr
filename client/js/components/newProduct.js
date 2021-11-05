@@ -46,7 +46,7 @@ const renderNewProduct = () => {
         <input class="w-100 form-control"type="number" name="price">
       </fieldset>
       
-      <input type="submit" class="btn btn-primary w-100">
+      <input type="submit" class="btn btn-blue w-100">
       `;
 
   form.addEventListener("submit", async (event) => {

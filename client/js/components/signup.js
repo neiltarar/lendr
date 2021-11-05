@@ -29,7 +29,7 @@ const renderSignUp = () => {
             <label class="form-label" for="confirm_password">Confirm password:</label><br>
             <input class="w-100 form-control" type="password" name="confirm_password" placeholder="Confirm your password">
         </fieldset>
-        <input type="submit" value="Sign up" class="btn btn-primary w-100"></input>
+        <input type="submit" value="Sign up" class="btn btn-blue w-100"></input>
     `;
 
 signupForm.addEventListener("submit" , (event) => {
