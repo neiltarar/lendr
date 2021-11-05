@@ -253,9 +253,3 @@ p.sent-by {
   top: -26px;
   left: -26px;
 }
-
-.rating > span:hover ~ span:before {
-  content: "\2606";
-  position: absolute;
-  direction: rtl;
-}

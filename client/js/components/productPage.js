@@ -92,11 +92,6 @@ const productPage = (id) => {
       return acc;
     }, 0);
     ratingSum = ratingTotal / reviewRatings.length;
-    overallRating.innerHTML = `
-        <div class="rating">
-        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-        </div>
-        `;
     reviewForm.innerHTML = `
                 <fieldset>
                     <label for="1star">1Star</label>
