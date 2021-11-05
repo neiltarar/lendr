@@ -35,7 +35,8 @@ const productPage = (id) => {
 
     // Update Product Button
     const updateProduct = document.createElement("button"); //Add button to link to add product page
-    updateProduct.innerHTML = `<button type="button" class="button">Update Product</button`;
+    updateProduct.classList.add("btn", "btn-primary", "border");
+    updateProduct.innerText = `Update Product`;
     productBox.append(updateProduct); //may need to append to different html element
     updateProduct.addEventListener("click", (event) => {
       id = product["id"];
@@ -46,7 +47,7 @@ const productPage = (id) => {
     });
     // Delete Product Button
     const deleteProduct = document.createElement("button"); //delete product
-    deleteProduct.classList.add("btn", "btn-primary");
+    deleteProduct.classList.add("btn", "btn-primary", "border");
     productBox.append(deleteProduct); //may need to append to different html element
     deleteProduct.innerText = `Delete Product`;
     // Delete button event listener
@@ -75,15 +76,18 @@ const productPage = (id) => {
   // Axios get request to get all reviews
   axios.get(`/api/products/reviews/${id}`).then((response) => {
     const reviewForm = document.createElement("form");
-    const overallRating = document.createElement("p");
+    const overallRating = document.createElement("h1");
     const reviewUl = document.createElement("ul");
+    reviewUl.classList.add("reviews");
     reviewUl.classList.add("list-group", "list-group-flush");
     productBox.appendChild(overallRating);
     const productReview = response.data;
+    // We want to get all the ratings for the product and divide it to the sum of the reviews to get the average rating
     const reviewRatings = [];
     productReview.forEach((review) => {
       const productReviewDateTime = review.row
         .split(",")[1]
+        .split(" ")[0]
         .replace(/['"]+/g, "");
       const productReview = review.row.split(",")[2].replace(/['"]+/g, "");
       const productReviewRating = review.row
@@ -92,7 +96,7 @@ const productPage = (id) => {
       reviewRatings.push(parseInt(productReviewRating));
       const reviewElement = document.createElement("li");
       reviewElement.classList.add("list-group-item");
-      reviewElement.innerText = productReview;
+      reviewElement.innerHTML = `<span class="reviewDateTime">${productReviewDateTime}</span> <br><br> ${productReview}`;
       reviewUl.append(reviewElement);
     });
     productBox.append(reviewUl);
@@ -101,36 +105,45 @@ const productPage = (id) => {
       return acc;
     }, 0);
     ratingSum = ratingTotal / reviewRatings.length;
+    // If there is no rating it changes the value to 0 from NaN
     if (!ratingSum) {
       ratingSum = 0;
     }
 
+    starRatingRatio = Math.ceil((ratingSum * 100) / 5);
+    if (starRatingRatio - Math.floor(starRatingRatio / 10) * 10 > 4) {
+      starRatingRatio = Math.ceil(starRatingRatio / 10) * 10;
+      console.log("after process: " + starRatingRatio);
+    } else {
+      starRatingRatio = parseInt(starRatingRatio / 10, 10) * 10;
+    }
     overallRating.innerHTML = `
-        <div class="rating">
-        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-        </div>
+    <span class="stars-container stars-${starRatingRatio}">★★★★★</span>
         `;
 
-    overallRating.innerText = ratingSum;
+    // overallRating.innerText = ratingSum;
     reviewForm.innerHTML = `
-                <fieldset>
-                    <label for="1star">1Star</label>
-                    <input type="radio" id="1star" name="rating" value=1>
-                    <label for="2star">2Star</label>
-                    <input type="radio" id="1star" name="rating" value=2>
-                    <label for="3star">3Star</label>
-                    <input type="radio" id="3star" name="rating" value=3>
-                    <label for="4star">4Star</label>
-                    <input type="radio" id="4star" name="rating" value=4>
-                    <label for="5star">5Star</label>
-                    <input type="radio" id="5star" name="rating" value=5>
+                <fieldset class="star-rating">
+                    <input type="radio" name="rating" id="star-a" value="5"/>
+                    <label for="star-a"></label>
+            
+                    <input type="radio" name="rating" id="star-b" value="4"/>
+                    <label for="star-b"></label>
+                
+                    <input type="radio" name="rating" id="star-c" value="3"/>
+                    <label for="star-c"></label>
+                
+                    <input type="radio" name="rating" id="star-d" value="2"/>
+                    <label for="star-d"></label>
+                
+                    <input type="radio" name="ratin" id="star-e" value="1"/>
+                    <label for="star-e"></label>
                 </fieldset>
-                <fieldset>
+                <fieldset class="reviews">
                     <input type="hidden" name="productId" value= ${id} </input>
-                    <label for="review">review</label><br>
-                    <input type="text" name="review">
+                    <textarea type="text" name="review" class="reviewInput" rows="4" cols="50"></textarea>
                 </fieldset>
-                <input type="submit" value="post"></input>
+                <input type="submit" value="post" class="reviews btn btn-primary"></input>
                 </div>
                 `;
     productBox.append(reviewForm);
@@ -142,20 +155,25 @@ const productPage = (id) => {
       const reviewData = new FormData(reviewForm);
       const data = Object.fromEntries(reviewData.entries());
       // making post request to see if the user exists in the db
-      axios
-        .post("/api/users/products/review", data) //endpoint
-        .then((res) => {
-          page.innerHTML = "";
-          page.innerHTML = `<p style="color: green"> Review is submitted.</p>`;
-          setTimeout(function () {
-            productPage(id);
-          }, 1000);
-        })
-        .catch((err) => {
-          console.log("error: " + err);
-          console.log("review response: " + res);
-          alert("You need to login to write a review");
-        });
+      // with if condition we are preventing an empty review to be posted
+      if (data["review"] !== "") {
+        axios
+          .post("/api/users/products/review", data) //endpoint
+          .then((res) => {
+            page.innerHTML = "";
+            page.innerHTML = `<p style="color: green"> Review is submitted.</p>`;
+            setTimeout(function () {
+              productPage(id);
+            }, 1000);
+          })
+          .catch((err) => {
+            console.log("error: " + err);
+            console.log("review response: " + res);
+            alert("You need to login to write a review");
+          });
+      } else {
+        alert("You can't post an empty review!");
+      }
     });
   });
 
