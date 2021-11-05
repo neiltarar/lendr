@@ -45,10 +45,7 @@ const renderNewProduct = () => {
         <label class="form-label"for="Price">Price: </label><br>
         <input class="w-100 form-control"type="number" name="price">
       </fieldset>
-      <fieldset>
-        <label class="form-label"class="form-label" for="customFile">Default file input example</label>
-        <input class="w-100 form-control" type="file" class="form-control" id="UploadImage" name="UploadImage"/>
-      </fieldset>
+      
       <input type="submit" class="btn btn-primary w-100">
       `;
 
@@ -58,8 +55,8 @@ const renderNewProduct = () => {
     const data = Object.fromEntries(formData.entries());
 
     try {
-      const image = await getBase64(data.UploadImage);
-      const { name, description, availability, address, category, price } = data;
+      // const image = await getBase64(data.UploadImage);
+      const { name, description, availability, image, address, category, price } = data;
       const res = await axios.post(`/api/users/products/host`, {
         name,
         description,

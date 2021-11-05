@@ -179,6 +179,17 @@ div.hero>div>div>div.bg-primary {
 .product-single img {
     object-fit: cover;
 }
+button#productImage {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+}
+button#openConversation {
+    background: none;
+    border: 0;
+    color: #4c9294;
+    margin-bottom: 15px;
+}
 
 p.cat-tag {
     position: absolute;
