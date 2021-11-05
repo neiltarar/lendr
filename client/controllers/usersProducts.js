@@ -8,6 +8,7 @@ const usersProductsController = express.Router();
 const today = new Date();
 const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+const cloudinary = require("cloudinary");
 
 usersProductsController.post('/review', sessionAuth, (req, res) => {
     dateTime = date+" "+time;
@@ -57,6 +58,26 @@ usersProductsController.post("/host", sessionAuth, (req, res) => { //add product
     } else if (price === undefined || price === '' ) { 
         res.status(400).json({ message: 'price not defined' })
     } else {
+        // todo: save image onto cloudinary before saving to the database
+        console.log(image);
+        function uploadToCloudinary(image){
+            cloudinary.uploader.upload(image, result => {
+
+                // This will return the output after the code is exercuted both in the terminal and web browser
+                // When successful, the output will consist of the metadata of the uploaded file one after the other. These include the name, type, size and many more.
+                console.log(result)
+                if (result.public_id) {
+                
+                // The results in the web browser will be returned inform of plain text formart. We shall use the util that we required at the top of this code to do this.
+                    res.writeHead(200, { 'content-type': 'text/plain' });
+                    res.write('received uploads:\n\n');
+                    res.end(util.inspect({ fields: fields, files: files }));
+                }
+            });
+
+        }
+        
+        // provide a random name to the image
         usersProductsDB.addNewProduct(name, description, address, availability, image, category, price, userId).then((products) => {
             res.status(201).send(products)
             console.log(products)

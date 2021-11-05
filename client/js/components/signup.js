@@ -1,26 +1,35 @@
 const renderSignUp = () => {
     const page = document.getElementById("page");
+    page.innerHTML = "";
+    const formRow = document.createElement("div");
+    formRow.classList.add("row");
+    formRow.classList.add("mt-5");
+    formRow.classList.add("pt-5");
+    formRow.classList.add("justify-content-center");
+    formRow.classList.add("align-items-center");
+    const formCol= document.createElement("div");
+    formCol.classList.add("col-4");
     const signupForm = document.createElement("form");
     const signupMessage = document.createElement("h3");
 
     signupForm.innerHTML = `
         <fieldset>
-            <label for="username">username:</label><br>
-            <input type="text" name="username">
+            <label class="form-label" for="username">Username:</label><br>
+            <input class="w-100 form-control" type="text" name="username" placeholder="Type your username or email">
         </fieldset>
         <fieldset>
-            <label for="email" placeholder="me@example.com">email:</label><br>
-            <input type="text" name="email">
+            <label class="form-label" for="email" >Email:</label><br>
+            <input class="w-100 form-control" type="text" name="email" placeholder="me@example.com">
         </fieldset>
         <fieldset>
-            <label for="password">password:</label><br>
-            <input type="password" name="password">
+            <label class="form-label" for="password">Password:</label><br>
+            <input class="w-100 form-control" type="password" name="password" placeholder="Type your password">
         </fieldset>
         <fieldset>
-            <label for="confirm_password">confirm password:</label><br>
-            <input type="password" name="confirm_password">
+            <label class="form-label" for="confirm_password">Confirm password:</label><br>
+            <input class="w-100 form-control" type="password" name="confirm_password" placeholder="Confirm your password">
         </fieldset>
-        <input type="submit" value="sign up"></input>
+        <input type="submit" value="Sign up" class="btn btn-primary w-100"></input>
     `;
 
 signupForm.addEventListener("submit" , (event) => {
@@ -54,6 +63,9 @@ signupForm.addEventListener("submit" , (event) => {
             }, 1000);
     });
 });
-page.replaceChildren(signupForm);
+    // page.replaceChildren(signupForm);
+    formCol.appendChild(signupForm);
+    formRow.appendChild(formCol);
+    page.appendChild(formRow);
 };
 
