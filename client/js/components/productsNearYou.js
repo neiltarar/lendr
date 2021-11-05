@@ -128,7 +128,6 @@ const productsNearYou = (data) => {
                     });
             } else {
                 console.log("keep looking")
-                renderHome();
             };
         });
     });
