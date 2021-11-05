@@ -116,5 +116,7 @@ function renderHome() {
             })
         });
     });
+
+    initAutocomplete('address');
 };
 

@@ -19,9 +19,9 @@ const renderNewProduct = () => {
       </fieldset>
       <fieldset>
         <label for="address">Address:</label><br>
-          <input type="text" id="productaddress">
-          <input type="hidden" id="productlat" value="">
-          <input type="hidden" id="productlng" value="">
+          <input type="text" id="address">
+          <input type="hidden" id="lat" value="">
+          <input type="hidden" id="lng" value="">
       </fieldset>
       <fieldset>
         <label for="image">Image: </label><br>
@@ -69,4 +69,5 @@ const renderNewProduct = () => {
     renderHome()
   })
   page.replaceChildren(form);
+  initAutocomplete('address');
 };

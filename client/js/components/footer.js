@@ -10,11 +10,7 @@ function renderFooter() {
             <li class="nav-item"><a href="#" class="nav-link px-2 ">Xio</a></li>
         </ul>
     
-    
-    </di>
-    
-    
-    
+    </div>
     
     `
 }
