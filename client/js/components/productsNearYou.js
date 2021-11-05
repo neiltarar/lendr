@@ -24,7 +24,7 @@ const productsNearYou = (data) => {
         </div>
     </div>
     `;
-  
+
     form.addEventListener("submit", (event) => {
         event.preventDefault()
         const formData = new FormData(form)
@@ -65,7 +65,7 @@ const productsNearYou = (data) => {
 
     axios.get(`/api/products`).then((response) => { //showing all products
         console.log('data', response.data)
-        
+
         let userLng = data["lng"]
         let userLat = data["lat"]
         let userReqItem = data["item"]
@@ -75,49 +75,61 @@ const productsNearYou = (data) => {
             productsContainer.append(productBox)
             productBox.className = 'productsBox'
 
-            const productName = document.createElement('h2')
-            productName.textContent = product["name"]
-            productBox.append(productName)
+            const productTitle = product["name"]
+            const firstLetterProduct = productTitle.substring(0, 1)
+            const firstLetterItem = userReqItem.substring(0, 1)
 
-            const productImage = document.createElement('a')
-            productBox.append(productImage)
-            productImage.innerHTML = `<button type="button" class="button">Product Page[Image]</button>`;
-            productImage.addEventListener("click", (event) => { //takes us to product page
-                id = product["id"]
-                console.log(id)
+            if (firstLetterProduct === firstLetterItem) {
+                console.log("match found")
+                const productName = document.createElement('h2')
+                productName.textContent = productTitle
+                productBox.append(productName)
 
-                axios.get(`/api/products/${id}`).then((response) => {
-                    console.log(response)
-                    productPage(id)
-                })
-            })
+                console.log(productTitle.substring(0, 1));
 
-            const productAddress = document.createElement('h3')
-            productAddress.textContent = product["address"]
-            productBox.append(productAddress)
+                const productImage = document.createElement('a')
+                productBox.append(productImage)
+                productImage.innerHTML = `<button type="button" class="button">Product Page[Image]</button>`;
+                productImage.addEventListener("click", (event) => { //takes us to product page
+                    id = product["id"]
+                    console.log(id)
 
-            const productLongitude = product["longitude"]
-            const productLatitude = product["latitude"]
+                    axios.get(`/api/products/${id}`).then((response) => {
+                        console.log(response)
+                        productPage(id)
+                    });
+                });
 
-            distanceAway = (distance(userLat, userLng, productLatitude, productLongitude))
+                    const productAddress = document.createElement('h3')
+                    productAddress.textContent = product["address"]
+                    productBox.append(productAddress)
 
-            const productDistance=document.createElement("h3")
-            console.log(productDistance)
-            productDistance.textContent = `${distanceAway} km`
-            productBox.append(productDistance)
+                    const productLongitude = product["longitude"]
+                    const productLatitude = product["latitude"]
 
-            //Conversation button
-            const conversationButton = document.createElement("button");
-            conversationButton.textContent = "Contact Owner";
-            conversationButton.setAttribute("id", "contact-owner-button");
-            conversationButton.value = product["id"];
-            productBox.append(conversationButton);
-            //open messages page
-            conversationButton.addEventListener("click", (event) => {
-                const productId = product["id"];
-                renderConversation(productId);
-            })
+                    distanceAway = (distance(userLat, userLng, productLatitude, productLongitude))
+
+                    const productDistance = document.createElement("h3")
+                    console.log(productDistance)
+                    productDistance.textContent = `${distanceAway} km`
+                    productBox.append(productDistance)
+
+                    //Conversation button
+                    const conversationButton = document.createElement("button");
+                    conversationButton.textContent = "Contact Owner";
+                    conversationButton.setAttribute("id", "contact-owner-button");
+                    conversationButton.value = product["id"];
+                    productBox.append(conversationButton);
+
+                    //open messages page
+                    conversationButton.addEventListener("click", (event) => {
+                        const productId = product["id"];
+                        renderConversation(productId);
+                    });
+            } else {
+                console.log("keep looking")
+                renderHome();
+            };
         });
     });
 };
-
