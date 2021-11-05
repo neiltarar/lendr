@@ -23,13 +23,29 @@ const pgSession = connectPgSimple(expressSession);
 const conversationsController = require("./client/controllers/conversations");
 const messagesController = require("./client/controllers/messages");
 
+//Images controller
+// const imagesController = require("./client/controllers/images");
+
+
+
 //Cloudinary 
 const cloudinary = require('cloudinary');
+const imagesController = express.Router();
 cloudinary.config({ 
   cloud_name: process.env.CLOUD_NAME, 
   api_key: process.env.API_KEY, 
   api_secret: process.env.API_SECRET,
   secure: true
+});
+
+imagesController.get("/", (req, res) => {
+  res.json({ message: "Hey! This is your server response!" });
+});
+
+// image upload API
+imagesController.post('/', (req, res) => {
+  cloudinary.v2.uploader.upload(`data:image/png;base64,${req.body.image}`,
+      function (error, result) { console.log(result, error); });
 });
 
 // //Google Maps // https://github.com/googlemaps/google-maps-services-js
@@ -64,7 +80,7 @@ const NodeGeocoder = require('node-geocoder');
 const geocoderController = NodeGeocoder(options);
 
 app.use(express.static("client"));
-app.use(express.json());
+app.use(express.json({limit:"10mb"}));
 
 // creating 24 hours from milliseconds
 const oneDay = 1000 * 60 * 60 * 24;
@@ -90,6 +106,7 @@ app.use("/api/users/products" , usersProductsController);
 // app.use("/api/users/location", geocoderController);
 app.use("/api/conversations", conversationsController);
 app.use("/api/messages", messagesController);
+app.use("/api/images", imagesController);
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`);

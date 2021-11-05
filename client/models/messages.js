@@ -15,7 +15,7 @@ const Messages = {
                .query(sql, [conversationId])
                .then((dbRes) => dbRes.rows);
     },
-    createMessage(){
+    postMessage(userId, conversationId){
         
     }
 }
