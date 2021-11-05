@@ -2,20 +2,6 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Two Factor Authentication
-const speakeasy = require("speakeasy");
-const qrcode = require("qrcode");
-const secret = speakeasy.generateSecret({
-  name: "Lendr.com",
-});
-
-console.log(secret);
-// Create a QR code of the secretkey generated above
-qrcode.toDataURL(secret.otpauth_url, function (err, data) {
-  if (err) throw err;
-  // console.log(data);
-});
-
 const sessionAuth = require("./client/middleware/sessionAuth");
 const sessionLogger = require("./client/middleware/logger");
 const sessionController = require("./client/controllers/sessions");

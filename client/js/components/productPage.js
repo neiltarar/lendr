@@ -41,7 +41,6 @@ const productPage = (id) => {
     updateProduct.addEventListener("click", (event) => {
       id = product["id"];
       axios.get(`/api/products/${id}`).then((response) => {
-        console.log(response);
         renderUpdateProduct(id);
       });
     });
@@ -93,7 +92,9 @@ const productPage = (id) => {
       const productReviewRating = review.row
         .split(",")[3]
         .replace(/['")]+/g, "");
-      reviewRatings.push(parseInt(productReviewRating));
+      if (productReviewRating !== NaN) {
+        reviewRatings.push(parseInt(productReviewRating));
+      }
       const reviewElement = document.createElement("li");
       reviewElement.classList.add("list-group-item");
       reviewElement.innerHTML = `<span class="reviewDateTime">${productReviewDateTime}</span> <br><br> ${productReview}`;
@@ -109,11 +110,9 @@ const productPage = (id) => {
     if (!ratingSum) {
       ratingSum = 0;
     }
-
     starRatingRatio = Math.ceil((ratingSum * 100) / 5);
     if (starRatingRatio - Math.floor(starRatingRatio / 10) * 10 > 4) {
       starRatingRatio = Math.ceil(starRatingRatio / 10) * 10;
-      console.log("after process: " + starRatingRatio);
     } else {
       starRatingRatio = parseInt(starRatingRatio / 10, 10) * 10;
     }
