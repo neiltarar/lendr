@@ -14,7 +14,7 @@ const productPage = (id) => {
     console.log(product);
     const productImage = document.createElement("img");
     productImage.classList.add("productPage-Image");
-    productImage.src = product["imageurl"];
+    productImage.src = "./src/images/001.jpg";
     productBox.append(productImage);
     //ADDING THE PRODUCT IMAGE
 
