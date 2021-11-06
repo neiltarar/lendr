@@ -26,10 +26,10 @@ const renderNewProduct = () => {
       </fieldset>
       <fieldset>
       <label class="form-label" for="address">Address:</label><br>
-      <input class="w-100 form-control" type="text" name="address">
-          <input type="hidden" id="lat" name="latitude" value="">
-          <input type="hidden" id="lng" name="longitude" value="">
-          <input type="hidden" id="formattedaddress" name="formattedaddress" value="">
+      <input class="w-100 form-control" type="text" id="address" name="address"></input>
+          <input type="hidden" id="lat" name="latitude" value=""></input>
+          <input type="hidden" id="lng" name="longitude" value=""></input>
+          <input type="hidden" id="formattedaddress" name="formattedaddress" value=""></input>
       </fieldset>
       <fieldset>
         <label class="form-label" for="image">Image: </label><br>
@@ -74,9 +74,9 @@ const renderNewProduct = () => {
         renderHome();
       }, 1000);
     });
-    initAutocomplete('address');
   });
   formCol.appendChild(form);
   formRow.appendChild(formCol);
   page.appendChild(formRow);
+  initAutocomplete('address');
 };

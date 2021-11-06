@@ -19,19 +19,9 @@ const productsNearYou = (data) => {
                 <h1>Lorem ipsum </h1>
                 <p>Lorem ipsum lorem ipsum lorem lorem </p>
             </div>
-            <div class="col-md-8 d-flex justify-content-center  hero-col"> 
-            </div>
         </div>
     </div>
     `;
-
-    form.addEventListener("submit", (event) => {
-        event.preventDefault()
-        const formData = new FormData(form)
-        const data = Object.fromEntries(formData.entries())
-
-        productsNearYou(data);
-    });
 
     //Products div
     const productsRow = document.createElement('div');
@@ -42,24 +32,7 @@ const productsNearYou = (data) => {
     productsContainer.classList.add('d-flex');
     productsContainer.classList.add('flex-wrap');
     productsRow.append(productsContainer);
-    //Single Product
-    productsContainer.innerHTML = `
-    <div class="product-single relative rounded"> 
-        <a>
-            <img width=388 height=250  src="./src/001.jpg" class="rounded-top" alt="Product Title"/>
-            <div class="px-3 py-3">
-            <p class="cat-tag">Category</p>
-            <h4 class="pt-1 pb-1">Product Title</h4>
-            <p class="pb-3"><span class="bold ">Available:</span> <span>1/11/2021 </span> </p>
-            <button type="button" class="link" id="openConversation" data-toggle="modal" data-target="#exampleModal" onClick="renderConversation()" value="1">
-                Contact Owner Name
-            </button>
-            <p class="price-tag text-end border-top pt-3"><span class="bold"> $35</span><span>/hour</span> </p>
-            </div>
-        </a>
-    </div>
-    
-    `
+
     page.append(formRow);
     page.append(productsRow);
 
@@ -72,8 +45,10 @@ const productsNearYou = (data) => {
 
         response.data.forEach(product => {
             const productBox = document.createElement('div')
-            productsContainer.append(productBox)
-            productBox.className = 'productsBox'
+            productBox.className = 'productsBox';
+            productBox.classList.add("product-single");
+            productBox.classList.add("relative");
+            productBox.classList.add("rounded");
 
             const productTitle = product["name"]
             const firstLetterProduct = productTitle.substring(0, 1)
@@ -87,48 +62,58 @@ const productsNearYou = (data) => {
 
                 console.log(productTitle.substring(0, 1));
 
+                const productLongitude = product["longitude"]
+                const productLatitude = product["latitude"]
+
+                distanceAway = (distance(userLat, userLng, productLatitude, productLongitude))
+
+
                 const productImage = document.createElement('a')
                 productBox.append(productImage)
-                productImage.innerHTML = `<button type="button" class="button">Product Page[Image]</button>`;
-                productImage.addEventListener("click", (event) => { //takes us to product page
-                    id = product["id"]
-                    console.log(id)
+                productImage.innerHTML = `<button type="button" class="imageButton"><img width=388 height=250  src="./src/images/001.jpg" class="rounded-top" alt="lawn mover"/></button>`;
+                
+                if (productImage) {
+                    productImage.addEventListener("click", (event) => { //takes us to product page
+                        id = product["id"]
+                        console.log(id)
 
-                    axios.get(`/api/products/${id}`).then((response) => {
-                        console.log(response)
-                        productPage(id)
+                        axios.get(`/api/products/${id}`).then((response) => {
+                            console.log(response)
+                            productPage(id)
+                        });
                     });
-                });
+                }
+                productBox.append(productImage);
 
-                    const productAddress = document.createElement('h3')
-                    productAddress.textContent = product["address"]
-                    productBox.append(productAddress)
+                const productInfo = document.createElement("div");
 
-                    const productLongitude = product["longitude"]
-                    const productLatitude = product["latitude"]
+                productInfo.innerHTML = `
+                            <div class="px-3 py-3">
+                            <p class="cat-tag">${product.category}</p>
+                            <h4 class="pt-1 pb-1">${product.name}</h4>
+                            <h4 class="pt-1 pb-1">${distanceAway} km</h4>
+                            <p class="pb-3"><span class="bold ">Available:</span> <span>${product.availability} </span> </p>
+                            <button type="button" class="buttonlink" id="openConversation" onClick="renderConversation()" value="${product.id}">
+                                Contact Owner
+                            </button>
+                            <p class="price-tag text-end border-top pt-3"><span class="bold"> $${product.price}</span><span>/hour</span> </p>
+                            </div> 
+                        `;
+                productBox.append(productInfo);
 
-                    distanceAway = (distance(userLat, userLng, productLatitude, productLongitude))
-
-                    const productDistance = document.createElement("h3")
-                    console.log(productDistance)
-                    productDistance.textContent = `${distanceAway} km`
-                    productBox.append(productDistance)
-
-                    //Conversation button
-                    const conversationButton = document.createElement("button");
-                    conversationButton.textContent = "Contact Owner";
-                    conversationButton.setAttribute("id", "contact-owner-button");
-                    conversationButton.value = product["id"];
-                    productBox.append(conversationButton);
-
-                    //open messages page
-                    conversationButton.addEventListener("click", (event) => {
-                        const productId = product["id"];
-                        renderConversation(productId);
-                    });
+                const conversationButton = document.getElementById("contact-owner");
+                if (conversationButton) {
+                  conversationButton.addEventListener("click", (event) => {
+                    const productId = product["id"];
+                    renderConversation(productId);
+                  });
+                }
             } else {
                 console.log("keep looking")
             };
+            productsContainer.append(productBox);
+            productsRow.append(productsContainer);
+            page.append(productsRow);
         });
     });
 };
