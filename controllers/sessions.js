@@ -6,7 +6,7 @@ session.get("/", (req, res) => {
         res.status(200).json({message: `Welcome back, ${req.session.username}`, username: req.session.username, userId: req.session.userId});
         
     } else {
-        res.status(4).json({message: "You are not logged in"});
+        res.status(401).json({message: "You are not logged in"});
     }
 })
 
