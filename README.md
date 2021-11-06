@@ -172,8 +172,8 @@ Project Link: [https://github.com/aniltarar/lendr](https://github.com/aniltarar/
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* [https://generalassemb.ly/](GA Team)
-* [https://developers.google.com/maps](Google Maps APIs)
-* [https://github.com/Colt/YelpCamp](Yelp Camp Video tutorial)
+*  [https://generalassemb.ly/](https://generalassemb.ly/)
+*  [https://developers.google.com/maps](https://developers.google.com/maps)
+*  [https://github.com/Colt/YelpCamp](https://github.com/Colt/YelpCamp)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
