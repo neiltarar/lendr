@@ -51,7 +51,7 @@ const renderNewProduct = () => {
       
       <input type="submit" class="btn btn-blue w-100">
       `;
-nn
+
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const formData = new FormData(form);
@@ -74,8 +74,8 @@ nn
         renderHome();
       }, 1000);
     });
+    initAutocomplete('address');
   });
-  initAutocomplete('address');
   formCol.appendChild(form);
   formRow.appendChild(formCol);
   page.appendChild(formRow);
