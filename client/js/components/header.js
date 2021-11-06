@@ -13,7 +13,7 @@ function renderNotLoggedInNavbar() {
     header.innerHTML=`
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-        <a class="navbar-brand" onClick="renderHome()"><img height="60" width="60" src="./src/images/logo.png"alt="logo"/></a>
+        <a class="navbar-brand" onClick="renderHome()"><img height="60" width="60" src="./src/images/Logov2.png"alt="logo"/></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -34,7 +34,7 @@ function renderLoggedInNavbar() {
   header.innerHTML=`
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container">
-      <a class="navbar-brand" onClick="renderHome()"><img height="60" width="60" src="./src/images/logo.png"alt="logo"/></a>
+      <a class="navbar-brand" onClick="renderHome()"><img height="60" width="60" src="./src/images/Logov2.png"alt="logo"/></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
       </button>
