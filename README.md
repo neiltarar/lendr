@@ -2,7 +2,7 @@
 <br />
 <div align="center">
 
-![Logo](client/src/Logov2.png)
+![Logo](client/src/images/Logov2.png)
 
 <h3 align="center">A world of devices at your door step</h3>
 

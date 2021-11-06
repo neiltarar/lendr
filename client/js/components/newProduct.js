@@ -51,7 +51,7 @@ const renderNewProduct = () => {
       
       <input type="submit" class="btn btn-blue w-100">
       `;
-
+nn
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const formData = new FormData(form);
