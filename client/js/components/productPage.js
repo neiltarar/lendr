@@ -37,54 +37,55 @@ const productPage = (id) => {
                 Contact Owner Name
             </button>
         `;
-  });
-  //Button container
-  const buttonContainer = document.createElement("div");
-  buttonContainer.classList.add("button-container");
-  productBox.append(buttonContainer);
+    //Button container
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("button-container");
+    productBox.append(buttonContainer);
 
-  // Update Product Button
-  const updateProduct = document.createElement("button"); //Add button to link to add product page
-  updateProduct.setAttribute("type", "button");
-  updateProduct.textContent = "Update Product";
-  updateProduct.classList.add("btn");
-  updateProduct.classList.add("btn-blue");
-  // updateProduct.innerHTML = `<button type="button" class="btn btn-blue">Update Product</button`
-  buttonContainer.append(updateProduct); //may need to append to different html element
-  updateProduct.addEventListener("click", (event) => {
-    id = product["id"];
-    console.log(id);
-    axios.get(`/api/products/${id}`).then((response) => {
-      console.log(response);
-      renderUpdateProduct(id);
+    // Update Product Button
+    const updateProduct = document.createElement("button"); //Add button to link to add product page
+    updateProduct.setAttribute("type", "button");
+    updateProduct.textContent = "Update Product";
+    updateProduct.classList.add("btn");
+    updateProduct.classList.add("btn-blue");
+    // updateProduct.innerHTML = `<button type="button" class="btn btn-blue">Update Product</button`
+    buttonContainer.append(updateProduct); //may need to append to different html element
+    updateProduct.addEventListener("click", (event) => {
+      id = product["id"];
+      console.log(id);
+      axios.get(`/api/products/${id}`).then((response) => {
+        console.log(response);
+        renderUpdateProduct(id);
+      });
     });
-  });
-  // Delete Product Button
-  const deleteProduct = document.createElement("button"); //delete product
-  deleteProduct.classList.add("btn", "btn-outline-blue");
-  buttonContainer.append(deleteProduct); //may need to append to different html element
-  deleteProduct.innerText = `Delete Product`;
+    // Delete Product Button
+    const deleteProduct = document.createElement("button"); //delete product
+    deleteProduct.classList.add("btn", "btn-outline-blue");
+    buttonContainer.append(deleteProduct); //may need to append to different html element
+    deleteProduct.innerText = `Delete Product`;
 
-  const reviewContainer = document.createElement("div");
-  productBox.append(reviewContainer);
-  // Delete button event listener
-  deleteProduct.addEventListener("click", (event) => {
-    id = product["id"];
+    const reviewContainer = document.createElement("div");
+    productBox.append(reviewContainer);
+    // Delete button event listener
+    deleteProduct.addEventListener("click", (event) => {
+      id = product["id"];
+      console.log("deleted")
 
-    axios.delete(`/api/users/products/${id}`).then((res) => {
-      if (res.status === 200) {
-        page.innerHTML = `<p style="color: green">Product deleted</p>`;
-        setTimeout(function () {
-          page.innerHTML = "";
-          renderHome();
-        }, 1000);
-      } else {
-        page.innerHTML = `<p style="color: red">You are not logged in</p>`;
-        setTimeout(function () {
-          page.innerHTML = "";
-          renderHome();
-        }, 1000);
-      }
+      axios.delete(`/api/users/products/${id}`).then((res) => {
+        if (res.status === 200) {
+          page.innerHTML = `<p style="color: green">Product deleted</p>`;
+          setTimeout(function () {
+            page.innerHTML = "";
+            renderHome();
+          }, 1000);
+        } else {
+          page.innerHTML = `<p style="color: red">You are not logged in</p>`;
+          setTimeout(function () {
+            page.innerHTML = "";
+            renderHome();
+          }, 1000);
+        }
+      });
     });
   });
 

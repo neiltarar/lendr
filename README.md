@@ -2,7 +2,7 @@
 <br />
 <div align="center">
 
-![Logo](client/src/Logov2.png)
+![Logo](client/src/images/Logov2.png)
 
 <h3 align="center">A world of devices at your door step</h3>
 
@@ -47,11 +47,11 @@
 
 <a href="https://trello.com/b/axePQPg6/lendr"><strong>Trello Board</strong></a>
 
-![Figma Screenshot](client/src/Homepage_Lendr.png)
+![Figma Screenshot](client/src/images/Homepage_Lendr.png)
 
-This project is designed to allow users to rent local household items that they may not have on hand at home in order to minimise waste. We want to create a single page application that allows users to add, update and delete products and view products locally using their location.
+This project is designed to allow users to rent local household items that they may not have on hand at home in order to minimise waste. We want to create a single page application that allows users to add and delete products and view products locally using their location.
 
-Users can signup/login/logout securely and will only be able to add, update, delete products with an account. They should be able to leave reviews for other users and search products via category, price and availability.
+Users can signup/login/logout securely and will only be able to add and delete products with an account. They should be able to leave reviews for other users and search products via category, price and availability.
 
 New products should be featured on the homepage with price/hr and the user hosting them, along with their current review.
 
@@ -72,7 +72,7 @@ New products should be featured on the homepage with price/hr and the user hosti
 How to get started using Lendr:
 
 ### Prerequisites
-.
+
 * npm
   ```sh
   npm install npm@latest -g
@@ -80,7 +80,7 @@ How to get started using Lendr:
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
+1. Get two google API Keys for geocoding and places at [Google Maps Api](https://developers.google.com/maps/documentation/javascript/get-api-key)
 2. Clone the repo
    ```sh
    git clone https://github.com/aniltarar/lendr
@@ -89,9 +89,24 @@ How to get started using Lendr:
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
+
+4. Create a local database called lendr
+   ```sh
+   createdb lendr
+   ```
+
+5. Create a local database called lendr
+   ```sh
+   createdb lendr
+   ```
+
+6. Enter your APIs and keys in `.env` file
    ```js
-   const API_KEY = 'ENTER YOUR API';
+   EXPRESS_SESSION_SECRET_KEY='ENTER SESSION KEY';
+   DB_PASSWORD='DB_PASSWORD';
+   DB_USERNAME='DB_USERNAME';
+   GOOGLE_API_KEY = 'ENTER YOUR API';
+   GEOCODING_API_KEY = 'ENTER YOUR API';
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>

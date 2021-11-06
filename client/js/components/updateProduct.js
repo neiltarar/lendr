@@ -52,7 +52,7 @@ const renderUpdateProduct = (id) => {
         page.innerHTML = `<p>${message}/p>`
         setTimeout(function () {
           page.innerHTML = "";
-          renderLoggednavBar();
+          renderNavBar();
           renderHome();
         }, 1000);
       }).catch(err => {

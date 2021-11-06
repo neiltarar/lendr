@@ -45,7 +45,7 @@ const renderLogin = () => {
                 page.replaceChildren(loginMessage);
                 setTimeout(function() {
                     page.innerHTML = "";
-                    renderLoggednavBar();
+                    renderNavBar();
                     renderHome();
                 }, 1000);
             })
@@ -92,7 +92,7 @@ function renderLogout() {
         `;
       setTimeout(function () {
         page.innerHTML = "";
-        renderLoggednavBar();
+        renderNavBar();
         renderHome();
       }, 1000);
     });
