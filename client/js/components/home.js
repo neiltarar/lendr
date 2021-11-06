@@ -28,12 +28,12 @@ function renderHome() {
                 <form class="home-search mt-5">
                     <fieldset>
                     <fieldset>
-                        <label for="name">Name:</label><br>
-                            <input type="text" class="rounded" placeholder="Find item" name="item">
+                      <label class="form-label"for="name">Name:</label><br>
+                      <input class="w-100 form-control" placeholder="Find item" type="text" name="item">
                     </fieldset>
                     <fieldset>
-                        <label for="address">Your Address:</label><br>
-                            <input type="text" id="address"></input>
+                      <label class="form-label" for="address">Address:</label><br>
+                      <input class="w-100 form-control" type="text" id="address" name="address"></input>
                             <input type="hidden" id="lat" value="" name="lat"></input>
                             <input type="hidden" id="lng" value="" name="lng"></input>
                             <input type="hidden" id="formattedaddress" value="">
