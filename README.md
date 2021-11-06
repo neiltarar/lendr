@@ -95,12 +95,7 @@ How to get started using Lendr:
    createdb lendr
    ```
 
-5. Create a local database called lendr
-   ```sh
-   createdb lendr
-   ```
-
-6. Enter your APIs and keys in `.env` file
+5. Enter your APIs and keys in `.env` file
    ```js
    EXPRESS_SESSION_SECRET_KEY='ENTER SESSION KEY';
    DB_PASSWORD='DB_PASSWORD';
@@ -110,16 +105,6 @@ How to get started using Lendr:
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -132,16 +117,26 @@ Need to have:
     - Bcrypt passwords   
 - Find local products
     - Use location API
-    - Find item based on availability, price & category
+    - Find item based on name
 - User Interface
     - Leave reviews
 
 Nice to have:
 
 - UI
-    - Calendar selection  
-- User interface
-    - Message other users
+    - Calendar selection
+    - Search base on availability and price
+    - map embed
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+# Future Improvements
+
+Improvement | Technology
+------------- | -------------
+Two Factor Authentication  | Speaksy Library 
+Cloud Storage for Images  | Cloudinary
+Geo Location Adding a Map   <br> showing the location <br>of the product | Google Geo Location
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -163,17 +158,6 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
 <!-- CONTACT -->
 ## Contact
 
@@ -188,8 +172,8 @@ Project Link: [https://github.com/aniltarar/lendr](https://github.com/aniltarar/
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []()
-* []()
-* []()
+* [https://generalassemb.ly/](GA Team)
+* [https://developers.google.com/maps](Google Maps APIs)
+* [https://github.com/Colt/YelpCamp](Yelp Camp Video tutorial)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
