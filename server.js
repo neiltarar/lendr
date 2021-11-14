@@ -19,7 +19,7 @@ const pgSession = connectPgSimple(expressSession);
 
 //conversations controller
 const conversationsController = require("./controllers/conversations");
-const messagesController = require("./controllers/messages");
+// const messagesController = require("./controllers/messages");
 
 //Images controller
 // const imagesController = require("./client/controllers/images");
@@ -74,7 +74,7 @@ app.use("/api/sessions", sessionController);
 app.use("/api/products", productsController);
 app.use("/api/users/products", usersProductsController);
 app.use("/api/conversations", conversationsController);
-app.use("/api/messages", messagesController);
+// app.use("/api/messages", messagesController);
 app.use("/api/images", imagesController);
 
 app.listen(port, () => {
