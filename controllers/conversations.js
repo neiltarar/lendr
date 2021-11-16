@@ -7,9 +7,11 @@ conversationsController.get(`/product/:id`, (req, res) => {
   console.log("req received: " + req.params.id);
   const productId = req.params.id;
   const username = req.session.username;
-  // res.json(username);
+  // username: `${username}`, products: `${product}`
+
   productsDB.getById(productId).then((product) => {
-    res.json(product);
+    // const response = product + username;
+    res.json({ user: username, products: product });
   });
 });
 
