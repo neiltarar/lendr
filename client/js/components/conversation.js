@@ -9,14 +9,20 @@ function renderConversation(productId) {
   page.append(form);
   axios.get(`/api/conversations/product/${productId}`).then((res) => {
     console.log(
-      "username: " + res.data["user"] + " data: " + res.data["products"]["name"]
+      "username: " +
+        res.data["user"] +
+        " data: " +
+        res.data["products"]["name"] +
+        "owner: " +
+        res.data["products"]["user_id"]
     );
-    const productName = res.data["name"];
-    const productId = res.data["id"];
+    const receiver = res.data["products"]["user_id"];
+    const productName = res.data["products"]["name"];
+    const productId = res.data["products"]["id"];
     form.innerHTML = `
       <form class="was-validated">
         <div class="mb-3">
-          <label for="validationTextarea" class="form-label">Sucbject: ${res.data} - ID:${productId}</label>
+          <label for="validationTextarea" class="form-label">Sucbject: ${productName} - ID:${productId}</label>
           <textarea name="message" class="form-control is-invalid" id="validationTextarea" placeholder="Type your message..." required></textarea>
           <div class="invalid-feedback">
             You cannot leave the message area blank.
