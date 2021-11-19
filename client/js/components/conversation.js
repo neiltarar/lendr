@@ -5,17 +5,12 @@ function renderConversation(productId) {
   formRow.classList.add("hero");
   const form = document.createElement("form");
   form.className = "Form, was-validated";
+  const message = document.createElement("p");
+  page.append(message);
   formRow.append(form);
   page.append(form);
+  message.innerText = "hi";
   axios.get(`/api/conversations/product/${productId}`).then((res) => {
-    console.log(
-      "username: " +
-        res.data["user"] +
-        " data: " +
-        res.data["products"]["name"] +
-        "owner: " +
-        res.data["products"]["user_id"]
-    );
     const receiver = res.data["products"]["user_id"];
     const productName = res.data["products"]["name"];
     const productId = res.data["products"]["id"];

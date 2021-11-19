@@ -12,10 +12,15 @@ conversationsController.get(`/product/:id`, (req, res) => {
   usersDB.getUser(username).then((user) => {
     userID = user[0].user_id;
   });
+  // Get product information to be put on the conversations database
   productsDB.getById(productId).then((product) => {
-    // Check if a conversation has
+    // check if any conversation has started for the given product
     conversationsDB.getByProductId(productId).then((res) => {
-      if (productId !== res.productid && userID !== res.sessionuser_id) {
+      if (
+        res === undefined ||
+        (productId !== res.productid && userID !== res.sessionuser_id)
+      ) {
+        // if this is the message create a conversation in conversations DB
         conversationsDB.insertConversation(
           product.name,
           product.user_id,
@@ -24,6 +29,7 @@ conversationsController.get(`/product/:id`, (req, res) => {
         );
       }
     });
+
     res.json({ user: username, products: product });
   });
 });
