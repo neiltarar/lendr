@@ -48,6 +48,27 @@ INSERT INTO products(name, description, formattedaddress, availability, imageURL
 INSERT INTO products(name, description, formattedaddress, availability, longitude, latitude, imageURL, category, price, user_id) 
     VALUES ('Trailer', '4x4','75 Main South Road, Drouin VIC', '2021-11-16', '145.85260', '-38.14333', './src/001.jpg' ,'Outdoor', '35','4' );
 
+-- ****** CONVERSATIONS ******
+DROP TABLE IF EXISTS conversations;
+
+CREATE TABLE  conversations (
+    conversation_id serial PRIMARY KEY,
+    subject VARCHAR(200),
+    productOwner_id INTEGER REFERENCES users(user_id),
+    sessionUser_id INTEGER REFERENCES users(user_id),
+    productID INTEGER
+);
+
+
+
+-- Get the product owner name and session current user name and messages
+-- SELECT conversations.conversation_id, conversations.subject, conversations.productid, conversations.sessionUser_id , products.id as productId, products.name as productName, users.user_id as productOwner_id, users.username as productOwner
+--         FROM conversations
+--         JOIN products 
+--             ON conversations.productID=products.id 
+--         JOIN users
+--             ON conversations.productOwner_id= users.user_id
+--         WHERE products.id = 1 AND productOwner_id = 1 AND conversations.sessionUser_id = 1 ;
 
 
 
@@ -65,41 +86,16 @@ INSERT INTO messages(date, content, author_id, conversation_id) VALUES ('2021-11
 INSERT INTO messages(date, content, author_id, conversation_id) VALUES ('2021-11-01','HI yes, it is', '1', '1');
 INSERT INTO messages(date, content, author_id, conversation_id) VALUES ('2021-11-01','When can I get it?', '2', '1');
 
-SELECT messages.message_id, messages.date, messages.content, messages.author_id, messages.conversation_id, users.user_id, users.username
-        FROM messages
-        JOIN users 
-            ON messages.author_id = users.user_id
-        WHERE messages.conversation_id = 1;
+-- SELECT messages.message_id, messages.date, messages.content, messages.author_id, messages.conversation_id, users.user_id, users.username
+--         FROM messages
+--         JOIN users 
+--             ON messages.author_id = users.user_id
+--         WHERE messages.conversation_id = 1;
 
-SELECT conversations.conversation_id, conversations.productowner_id, conversations.productid, conversations.sessionuser_id, messages.message_id, messages.date, messages.content, messages.author_id
- FROM conversations 
-    JOIN messages 
-        ON messages.author_id = conversations.productowner_id OR messages.author_id = conversations.sessionuser_id;
-
-
-
-
--- ****** CONVERSATIONS ******
-DROP TABLE IF EXISTS conversations;
-
-CREATE TABLE  conversations (
-    conversation_id serial PRIMARY KEY,
-    subject VARCHAR(200),
-    productOwner_id INTEGER REFERENCES users(user_id),
-    sessionUser_id INTEGER REFERENCES users(user_id),
-    productID INTEGER
-);
-
-
-
--- Get the product owner name and session current user name and messages
-SELECT conversations.conversation_id, conversations.subject, conversations.productid, conversations.sessionUser_id , products.id as productId, products.name as productName, users.user_id as productOwner_id, users.username as productOwner
-        FROM conversations
-        JOIN products 
-            ON conversations.productID=products.id 
-        JOIN users
-            ON conversations.productOwner_id= users.user_id
-        WHERE products.id = 1 AND productOwner_id = 1 AND conversations.sessionUser_id = 1 ;
+-- SELECT conversations.conversation_id, conversations.productowner_id, conversations.productid, conversations.sessionuser_id, messages.message_id, messages.date, messages.content, messages.author_id
+--  FROM conversations 
+--     JOIN messages 
+--         ON messages.author_id = conversations.productowner_id OR messages.author_id = conversations.sessionuser_id;
 
  
 --***** REVIEWS ******

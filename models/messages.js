@@ -1,23 +1,11 @@
-const db = require('../database/db');
+const db = require("../database/db");
 
 const Messages = {
-    getAll(){
-        const sql = "SELECT * FROM messages";
-        return db.query(sql).then((dbRes) => dbRes.rows);
-    },
-    getMessagesByProductId(conversationId){
-        sql = `SELECT * FROM messages 
-        JOIN users
-            ON users.user_id = messages.author_id
-        WHERE conversation_id = $1`
-        
-        return db   
-               .query(sql, [conversationId])
-               .then((dbRes) => dbRes.rows);
-    },
-    postMessage(userId, conversationId){
-        
-    }
-}
+  insertMessage(date, content, auther_id, conversation_id) {
+    const sql = `INSERT INTO messages (date, content, author_id, conversation_id) values ($1, $2, $3, $4);`;
+    const values = [date, content, auther_id, conversation_id];
+    return db.query(sql, values);
+  },
+};
 
 module.exports = Messages;
