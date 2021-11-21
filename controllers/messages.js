@@ -4,20 +4,8 @@ const Messages = require("../models/messages");
 const sessionAuth = require("../middleware/sessionAuth");
 
 messagesController.post("/", (req, res) => {
-  console.log("request: " + req);
-  res.json({});
-});
-
-messagesController.get("/conversation/:id", (req, res) => {
-  const id = req.params.id;
-  // const authorId = req.session.userId;
-  console.log("getting messages by convo id", id);
-  // const conversationId = 1;
-  Messages.getMessagesByProductId(id)
-    .then((messages) => {
-      res.json(messages);
-    })
-    .catch((err) => console.log(err));
+  console.log("here is the request: " + req.body["message"]);
+  res.json({ status: `OK` });
 });
 
 module.exports = messagesController;

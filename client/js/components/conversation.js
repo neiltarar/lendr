@@ -15,11 +15,10 @@ function renderConversation(productId) {
       const receiver = res.data["products"]["user_id"];
       const productName = res.data["products"]["name"];
       const productId = res.data["products"]["id"];
-      const conversation_Id = res.data["products"]["conversation_Id"];
       form.innerHTML = `
       <form class="was-validated">
         <div class="mb-3">
-          <label for="validationTextarea" class="form-label">Sucbject: ${productName} - ID:${productId} ConvoId: ${res.data["products"]["id"]}</label>
+          <label for="validationTextarea" class="form-label">Sucbject: ${productName} - ID:${productId} </label>
           <textarea name="message" class="form-control is-invalid" id="validationTextarea" placeholder="Type your message..." required></textarea>
           <div class="invalid-feedback">
             You cannot leave the message area blank.
@@ -35,16 +34,17 @@ function renderConversation(productId) {
         const data = Object.fromEntries(formData.entries());
         const messageBox = document.getElementById("validationTextarea");
         messageBox.value = "";
+        console.log(data["message"]);
         axios
-          .post("api/messages/", {
-            message: "test",
+          .post("/api/messages/", {
+            message: data["message"],
           })
           .then((res) => {
-            console.log("this should be received: " + res);
+            console.log("response: " + res.data["status"]);
           });
-
-        // console.log(data["message"]);
       });
+
+      // console.log(data["message"]);
     })
     .catch((res) => {
       form.innerHTML = "<div> You need to login to send messages </div>";
