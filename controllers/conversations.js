@@ -6,7 +6,7 @@ const conversationsDB = require("../models/conversations");
 const usersDB = require("../models/users");
 const sessionAuth = require("../middleware/sessionAuth");
 
-conversationsController.get(`/product/:id`, (req, res) => {
+conversationsController.get(`/product/:id`, sessionAuth, (req, res) => {
   const productId = req.params.id;
   const username = req.session.username;
   let userID;
@@ -29,15 +29,10 @@ conversationsController.get(`/product/:id`, (req, res) => {
           userID,
           productId
         );
-        conversationsDB
-          .getConversationId(product.user_id, userID, productId)
-          .then((res) => {
-            conversationId = res[0].conversation_id;
-            console.log(conversationId);
-          });
       }
     });
     res.json({
+      user_id: userID,
       user: username,
       products: product,
     });

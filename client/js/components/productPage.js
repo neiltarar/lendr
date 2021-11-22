@@ -1,5 +1,3 @@
-// const { default: axios } = require("axios");
-
 const productPage = (id) => {
   page.innerHTML = "";
   //Products div
@@ -69,7 +67,7 @@ const productPage = (id) => {
     // Delete button event listener
     deleteProduct.addEventListener("click", (event) => {
       id = product["id"];
-      console.log("deleted")
+      console.log("deleted");
 
       axios.delete(`/api/users/products/${id}`).then((res) => {
         if (res.status === 200) {
