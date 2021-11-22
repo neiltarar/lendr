@@ -49,8 +49,6 @@ function renderConversation(productId) {
             console.log("response: " + res.data["status"]);
           });
       });
-
-      // console.log(data["message"]);
     })
     .catch((res) => {
       form.innerHTML = "<div> You need to login to send messages </div>";

@@ -1,16 +1,17 @@
 function renderNavBar() {
-    axios.get(`/api/sessions`)
+  axios
+    .get(`/api/sessions`)
     .then((res) => {
-        renderLoggedInNavbar();
+      renderLoggedInNavbar();
     })
-    .catch(err => {
-        renderNotLoggedInNavbar();
+    .catch((err) => {
+      renderNotLoggedInNavbar();
     });
 }
 
 function renderNotLoggedInNavbar() {
-    const header = document.getElementById('header-nav');
-    header.innerHTML=`
+  const header = document.getElementById("header-nav");
+  header.innerHTML = `
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
         <a class="navbar-brand" onClick="renderHome()"><img height="60" width="60" src="./src/images/Logov2.png"alt="logo"/></a>
@@ -27,11 +28,11 @@ function renderNotLoggedInNavbar() {
         </div>
         </div>
     </nav>`;
-};
+}
 
 function renderLoggedInNavbar() {
-  const header = document.getElementById('header-nav');
-  header.innerHTML=`
+  const header = document.getElementById("header-nav");
+  header.innerHTML = `
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container">
       <a class="navbar-brand" onClick="renderHome()"><img height="60" width="60" src="./src/images/Logov2.png"alt="logo"/></a>
@@ -42,10 +43,11 @@ function renderLoggedInNavbar() {
           <div class="navbar-nav justify-content-end w-100">
           <a class="nav-link" aria-current="page" onClick="renderHome()">Home</a>
           <a onClick="renderNewProduct()" class="nav-link" href="#">Host an Item</a>
+          <a onClick="renderMyMessages()" class="nav-link" href="#">My Messages</a>
           <a onClick="renderLogout()" class="nav-link" href="#">Log Out</a>
           </div>
       </div>
       </div>
 </nav>
   `;
-};
+}

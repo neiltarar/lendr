@@ -3,17 +3,13 @@ const express = require("express");
 const conversationsController = express.Router();
 const productsDB = require("../models/products");
 const conversationsDB = require("../models/conversations");
-const usersDB = require("../models/users");
 const sessionAuth = require("../middleware/sessionAuth");
 
 conversationsController.get(`/product/:id`, sessionAuth, (req, res) => {
   const productId = req.params.id;
   const username = req.session.username;
-  let userID;
+  const userID = req.session.userId;
   let conversationId;
-  usersDB.getUser(username).then((user) => {
-    userID = user[0].user_id;
-  });
   // Get product information to be put on the conversations database
   productsDB.getById(productId).then((product) => {
     // check if any conversation has started for the given product

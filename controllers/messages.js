@@ -3,6 +3,7 @@ const messagesController = express.Router();
 const MessagesDB = require("../models/messages");
 const conversationsDB = require("../models/conversations");
 const sessionAuth = require("../middleware/sessionAuth");
+const { content } = require("googleapis/build/src/apis/content");
 const today = new Date();
 
 messagesController.post("/", (req, res) => {
@@ -19,4 +20,12 @@ messagesController.post("/", (req, res) => {
   res.json({ status: `OK` });
 });
 
+messagesController.get("/", (req, res) => {
+  const userId = req.session.userId;
+  const username = req.session.username;
+  MessagesDB.getAllMessages(userId).then((content) => {
+    console.log(content);
+    res.json({ message: content, userName: username });
+  });
+});
 module.exports = messagesController;
