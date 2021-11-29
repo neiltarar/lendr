@@ -337,7 +337,7 @@ img.productPage-Image {
     height: 400px;
     object-fit: cover;
 } 
-.button-container {
+. {
     position: absolute;
     right: 0;
     top: 443px;
@@ -401,7 +401,12 @@ img.productPage-Image {
 .productsBox {
   text-align: center;
 }
-
+.productlist-row {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+} 
 .reviewDateTime {
   color: #707070;
 }

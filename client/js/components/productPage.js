@@ -1,5 +1,3 @@
-// const { default: axios } = require("axios");
-
 const productPage = (id) => {
   page.innerHTML = "";
   //Products div
@@ -9,28 +7,44 @@ const productPage = (id) => {
   const productBox = document.createElement("div");
   productBox.className = "productsBox col-9 relative";
 
+  const productInfo = document.createElement("div");
+  productInfo.classList.add("products-row");
+  productBox.append(productInfo)
+
   axios.get(`/api/products/${id}`).then((response) => {
     const product = response.data;
-    console.log(product);
+    console.log("getting" + product);
+
     const productImage = document.createElement("img");
     productImage.classList.add("productPage-Image");
     productImage.src = "./src/images/001.jpg";
-    productBox.append(productImage);
+    productInfo.append(productImage);
     //ADDING THE PRODUCT IMAGE
 
     const productName = document.createElement("h1");
     productName.classList.add("mt-3");
     productName.textContent = product["name"];
-    productBox.append(productName);
+    productInfo.append(productName);
 
-    const productDescription = document.createElement("p");
-    productDescription.classList.add("py-5");
-    productDescription.textContent = product["description"];
-    productBox.append(productDescription);
+    const productList = document.createElement("dl")
+    productList.classList.add("productlist-row")
+    productInfo.append(productList)
 
-    const productAddress = document.createElement("p");
-    productAddress.innerHTML = `<span class="bold">Available:</span>${product["address"]}`;
-    productBox.append(productAddress);
+    const productDescription = document.createElement("dd");
+    productDescription.classList.add("col-sm-9");
+    productDescription.textContent = `Description: ${product["description"]}`;
+    productList.append(productDescription);
+
+    const productAddress = document.createElement("dd");
+    productAddress.classList.add("col-sm-9")
+    productAddress.textContent = `Location: ${product["formattedaddress"]}`
+    productList.append(productAddress);
+
+    const productAvailability = document.createElement("dd");
+    productAvailability.classList.add("col-sm-9")
+    productAvailability.textContent = `Availability: ${product["availability"]}`
+    productList.append(productAvailability);
+
     ownerButton = document.createElement("button");
     ownerButton.innerHTML = `
         <button type="button" class="link" id="openConversation" data-toggle="modal" data-target="#exampleModal" onClick="renderMessages()" value="1">
@@ -40,7 +54,7 @@ const productPage = (id) => {
     //Button container
     const buttonContainer = document.createElement("div");
     buttonContainer.classList.add("button-container");
-    productBox.append(buttonContainer);
+    productInfo.append(buttonContainer);
 
     // Update Product Button
     const updateProduct = document.createElement("button"); //Add button to link to add product page
