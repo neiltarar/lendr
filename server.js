@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 const sessionAuth = require("./middleware/sessionAuth");
 const sessionLogger = require("./middleware/logger");
@@ -30,7 +30,6 @@ const imagesController = express.Router();
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.API_KEY,
-
   api_secret: process.env.API_SECRET,
   secure: true,
 });

@@ -128,7 +128,7 @@ function renderHome() {
                 <p class="cat-tag">${product.category}</p>
                 <h4 class="pt-1 pb-1">${product.name}</h4>
                 <p class="pb-3"><span class="bold ">Available:</span> <span>${product.availability} </span> </p>
-                <button type="button" class="buttonlink" id="openConversation" onClick="renderConversation()" value="${product.id}">
+                <button type="button" class="buttonlink" id="openConversation" onClick="renderConversation(${product.id})" value="${product.id}">
                     Contact Owner
                 </button>
                 <p class="price-tag text-end border-top pt-3"><span class="bold"> $${product.price}</span><span>/hour</span> </p>
