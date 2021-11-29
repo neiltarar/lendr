@@ -24,7 +24,7 @@ const geocoder = NodeGeocoder(options);
 
 usersProductsController.post("/review", sessionAuth, (req, res, next) => {
     dateTime = date + " " + time;
-    let { rating, productId, review } = req.body;
+    let { rating, productId, review } = req.body; 
     console.log(req.body);
     // If no rating is chosen it assigns it to 0 to avoid rendering NAN on the webpage.
     if (rating === undefined) {
