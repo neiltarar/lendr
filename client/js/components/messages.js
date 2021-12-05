@@ -2,21 +2,26 @@ function renderMyMessages() {
   const page = document.getElementById("page");
   page.innerHTML = "";
   const form = document.createElement("form");
-
+  const subject = document.createElement("div");
   form.classList.add("row");
   form.classList.add("justify-content-center");
 
   axios.get("/api/messages").then((res) => {
+    const content = res.data["message"][0]["row"].split(",")[2];
+    const conversatuibSubject = content;
+    subject.innerHTML = `<p class="text-muted text-end">Subject:${conversatuibSubject}</p>`;
+    page.appendChild(subject);
     res.data["message"].forEach((data) => {
+      // HTML Elements being created for each message
       const messageDiv = document.createElement("div");
       messageDiv.classList.add("col-8");
       const messageBody = document.createElement("div");
       messageBody.classList.add("row");
       messageBody.classList.add("justify-content-center");
 
+      // Message Information Processed for each message
       const content = data["row"].split(",");
       const author = res.data["userID"];
-      const subject = content[2];
       const date = content[1].split(" ")[0].replace(/['"']+/g, "");
       const message = content[0].replace(/['("']+/g, "");
       const currentUserName = res.data["userName"];
@@ -26,7 +31,7 @@ function renderMyMessages() {
       axios.get(`/api/messages/${sentById}`).then((response) => {
         const sentBy = response.data["sentBy"];
         messageDiv.innerHTML = `
-                  <p class="text-muted text-end">Subject:${subject}</>
+                  
                   <p class="message"> <span id="message-date">${date}</span> - <span id="message-content">${message}</span></p>
                   <p class="sent-by"> ${sentBy}</p>
                   `;
@@ -41,7 +46,7 @@ function renderMyMessages() {
                 </div>
               </div>
             </form>
-            <button class="justify-content-end btn btn-primary rounded-pill"><i class="fa fa-paper-plane"></i> </button>
+            <button onClick="document.location.reload(true)" class="justify-content-end btn btn-primary rounded-pill"><i class="fa fa-paper-plane"></i> </button>
           </div>`;
         form.addEventListener("submit", (event) => {
           event.preventDefault();
