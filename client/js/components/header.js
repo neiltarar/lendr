@@ -24,6 +24,7 @@ function renderNotLoggedInNavbar() {
             <a class="nav-link" onClick="renderLogin()">Host an Item</a>
             <a class="nav-link" onClick="renderLogin()">Log in</a>
             <a class="nav-link" onClick="renderSignUp()">Sign up</a>
+            
             </div>
         </div>
         </div>
@@ -45,6 +46,7 @@ function renderLoggedInNavbar() {
           <a onClick="renderNewProduct()" class="nav-link" href="#">Host an Item</a>
           <a onClick="renderMyMessages()" class="nav-link" href="#">My Messages</a>
           <a onClick="renderLogout()" class="nav-link" href="#">Log Out</a>
+          <a class="nav-link" onClick="uploadimage()">Upload Image</a>
           </div>
       </div>
       </div>

@@ -1,3 +1,4 @@
 renderNavBar();
 renderHome();
+
 renderFooter();
