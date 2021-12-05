@@ -21,7 +21,7 @@ function renderConversation(productId) {
       <form class="was-validated">
         <div class="mb-3">
           <label type="hidden" id="user_id" >${user_id}</label>
-          <label for="validationTextarea" class="form-label">Sucbject: ${productName} - ID:${productId} </label>
+          <label for="validationTextarea" class="form-label">Subject: ${productName} - ID:${productId} </label>
           <textarea name="message" class="form-control is-invalid" id="validationTextarea" placeholder="Type your message..." required></textarea>
           <div class="invalid-feedback">
             You cannot leave the message area blank.

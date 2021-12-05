@@ -7,9 +7,9 @@ const Messages = {
     return db.query(sql, values);
   },
   getAllMessages(sessionuser_id) {
-    const sql = `SELECT (conversations.subject, date, content, author_id) FROM messages
+    const sql = `SELECT (content, date, conversations.subject, author_id, conversations.conversation_id) FROM messages
     INNER JOIN conversations ON (messages.conversation_id = conversations.conversation_id)
-    WHERE conversations.sessionuser_id = $1;
+    WHERE conversations.sessionuser_id = $1 OR conversations.productowner_id = $1;
     `;
     const value = [sessionuser_id];
     return db.query(sql, value).then((dbRes) => dbRes.rows);
