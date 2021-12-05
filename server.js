@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 3001;
-
 const sessionAuth = require("./middleware/sessionAuth");
 const sessionLogger = require("./middleware/logger");
 const sessionController = require("./controllers/sessions");
