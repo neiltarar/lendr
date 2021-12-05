@@ -7,7 +7,7 @@ function renderHome() {
     const paragraph = document.getElementsByTagName("p");
     paragraph[0].innerHTML = `${res.data.message}`;
     const username = res.data.username; //giving us the username variable
-    console.log(username);
+    // console.log(username);
     const userId = res.data.userId; //giving us the userId variable
     console.log(userId);
   });
@@ -51,7 +51,7 @@ function renderHome() {
     event.preventDefault();
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
-    console.log(data["item"]);
+    // console.log(data["item"]);
 
     if (data["item"] === undefined || data["item"] === "") {
       console.log("not defined");
@@ -59,7 +59,7 @@ function renderHome() {
       renderHome();
     } else {
       productsNearYou(data);
-      console.log("getting products near you!");
+      // console.log("getting products near you!");
     }
   });
 
@@ -93,9 +93,9 @@ function renderHome() {
 
   axios.get(`/api/products`).then((response) => {
     //showing all products
-    console.log("data", response.data);
+    // console.log("data", response.data);
     response.data.forEach((product) => {
-      console.log(product);
+      // console.log(product);
       const productBox = document.createElement("div");
 
       productBox.className = "productsBox";
@@ -111,7 +111,7 @@ function renderHome() {
         productImage.addEventListener("click", (event) => {
           //takes us to product page
           id = product["id"];
-          console.log(id);
+          // console.log(id);
 
           axios.get(`/api/products/${id}`).then((response) => {
             console.log(response);

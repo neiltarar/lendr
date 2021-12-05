@@ -22,11 +22,22 @@ const conversationsController = require("./controllers/conversations");
 const messagesController = require("./controllers/messages");
 
 //Images controller
-// const imagesController = require("./client/controllers/images");
+const imagesController = require("./controllers/images");
+
+
+
+app.use(express.static("client"));
+app.use(express.json({ limit: "10mb" }));
+
+// creating 24 hours from milliseconds
+const oneDay = 1000 * 60 * 60 * 24;
+
 
 //Cloudinary
-const cloudinary = require("cloudinary");
-const imagesController = express.Router();
+const cloudinary = require("cloudinary").v2;
+
+
+// // cloudinary configuration
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.API_KEY,
@@ -35,25 +46,34 @@ cloudinary.config({
   secure: true,
 });
 
-imagesController.get("/", (req, res) => {
-  res.json({ message: "Hey! This is your server response!" });
-});
-
-// image upload API
-imagesController.post("/", (req, res) => {
-  cloudinary.v2.uploader.upload(
-    `data:image/png;base64,${req.body.image}`,
-    function (error, result) {
-      console.log(result, error);
+app.get("/api/images", (req, res) => {
+    res.json({ message: "image upload" });
+  });
+  
+  // image upload API
+  app.post("/api/images", (req, res) => {
+    console.log(req.body)
+    const data = {
+        image: req.body.image, 
+        }
+        console.log(data)
+        // upload image here
+        cloudinary.uploader.upload(data.image)
+        .then((result) => {
+            response.status(200).send({
+              message: "success",
+              result,
+            });
+          }).catch((error) => {
+            response.status(500).send({
+              message: "failure",
+              error,
+            });
+          });
     }
   );
-});
 
-app.use(express.static("client"));
-app.use(express.json({ limit: "10mb" }));
-
-// creating 24 hours from milliseconds
-const oneDay = 1000 * 60 * 60 * 24;
+//Cloudinary end
 
 app.use(
   expressSession({
@@ -75,7 +95,7 @@ app.use("/api/products", productsController);
 app.use("/api/users/products", usersProductsController);
 app.use("/api/conversations", conversationsController);
 app.use("/api/messages", messagesController);
-app.use("/api/images", imagesController);
+// app.use("/api/images", imagesController);
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`);
