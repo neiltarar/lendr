@@ -22,7 +22,7 @@ function renderHome() {
   form.innerHTML = `
     <div class="container"> 
         <div class="row mt-5">
-            <div class="col-md-4 hero-col"> 
+            <div class="col-md-10 col-lg-4 hero-col"> 
                 <h1>Lorem ipsum </h1>
                 <p>Lorem ipsum lorem ipsum lorem lorem </p>
                 <form class="home-search mt-5">

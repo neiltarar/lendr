@@ -14,7 +14,7 @@ function renderMyMessages() {
     res.data["message"].forEach((data) => {
       // HTML Elements being created for each message
       const messageDiv = document.createElement("div");
-      messageDiv.classList.add("col-8");
+      messageDiv.classList.add("col-md-8");
       const messageBody = document.createElement("div");
       messageBody.classList.add("row");
       messageBody.classList.add("justify-content-center");
@@ -32,11 +32,11 @@ function renderMyMessages() {
         const sentBy = response.data["sentBy"];
         messageDiv.innerHTML = `
                   
-                  <p class="message"> <span id="message-date">${date}</span> - <span id="message-content">${message}</span></p>
+                  <p class="message"> <span id="message-date">${date}</span> - <span id="message-content"><p>${message}</p></span></p>
                   <p class="sent-by"> ${sentBy}</p>
                   `;
         form.innerHTML = `
-          <div class="col-8">
+          <div class="col-md-8">
             <form class="was-validated">
               <div class="mb-3">
                 <label for="validationTextarea" class="form-label">Hi ${currentUserName}</label>

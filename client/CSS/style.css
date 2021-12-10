@@ -192,9 +192,12 @@ div.hero > div > div > div.bg-primary {
 .product-single:nth-child(3n) {
   margin-right: 0;
 }
-
+button.imageButton {
+  width: 100%;
+}
 .product-single img {
   object-fit: cover;
+  width: 100%;
 }
 button#productImage,
 .imageButton {
@@ -344,9 +347,8 @@ img.productPage-Image {
   object-fit: cover;
 }
 .button-container {
-  position: absolute;
-  right: 0;
-  top: 443px;
+  display: flex;
+  justify-content: end;
 }
 
 /******************************** Star rating system rendering settings ************************
@@ -472,4 +474,38 @@ img.productPage-Image {
 }
 .stars-100:after {
   width: 100;
+}
+
+
+.navbar-dark .navbar-toggler {
+  border-color: none;
+}
+
+/* Media queries */
+
+
+
+@media only screen and (min-width: 769px)  and (max-width: 1048px) {
+  .product-single {
+    width: 40%;
+    margin-right: 30px;
+  }
+}
+
+
+
+
+@media only screen and (max-width: 768px) {
+  .product-single {
+    width: 100%;
+    margin-right: 0;
+    flex-direction: row;
+    display: flex;
+    margin-bottom: 30px;
+  }
+  p.cat-tag {
+    top: 0;
+    left: 39%;
+  }
+
 }

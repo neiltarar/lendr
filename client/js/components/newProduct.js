@@ -8,7 +8,7 @@ const renderNewProduct = () => {
   formRow.classList.add("justify-content-center");
   formRow.classList.add("align-items-center");
   const formCol = document.createElement("div");
-  formCol.classList.add("col-6");
+  formCol.classList.add("col-md-6");
   const form = document.createElement("form");
   form.className = 'Form'
   form.innerHTML = `
