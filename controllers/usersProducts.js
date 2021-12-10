@@ -82,8 +82,6 @@ usersProductsController.post(
   function (req, res, next) {
     // req.file is the `profile-file` file
     console.log(JSON.stringify(req.file.path));
-    res.json({ status: "image uploaded" });
-    next();
   }
 );
 
