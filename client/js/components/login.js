@@ -8,7 +8,8 @@ const renderLogin = () => {
     formRow.classList.add("justify-content-center");
     formRow.classList.add("align-items-center");
     const formCol= document.createElement("div");
-    formCol.classList.add("col-4");
+    formCol.classList.add("col-sm-10");
+    formCol.classList.add("col-md-4");
 
     const loginForm = document.createElement("form");
     loginForm.classList.add("w-100")

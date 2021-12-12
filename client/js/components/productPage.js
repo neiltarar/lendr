@@ -5,7 +5,7 @@ const productPage = (id) => {
   productsRow.classList.add("row");
   productsRow.classList.add("products-row");
   const productBox = document.createElement("div");
-  productBox.className = "productsBox col-9 relative";
+  productBox.className = "productsBox col-12 relative";
 
   const productInfo = document.createElement("div");
   productInfo.classList.add("products-row");
@@ -23,25 +23,27 @@ const productPage = (id) => {
 
     const productName = document.createElement("h1");
     productName.classList.add("mt-3");
+    productName.classList.add("text-start");
     productName.textContent = product["name"];
     productInfo.append(productName);
 
     const productList = document.createElement("dl")
-    productList.classList.add("productlist-row")
-    productInfo.append(productList)
+    productList.classList.add("productlist-row");
+    productList.classList.add("text-start");
+    productInfo.append(productList);
 
     const productDescription = document.createElement("dd");
-    productDescription.classList.add("col-sm-9");
+    productDescription.classList.add("col-sm-12");
     productDescription.textContent = `Description: ${product["description"]}`;
     productList.append(productDescription);
 
     const productAddress = document.createElement("dd");
-    productAddress.classList.add("col-sm-9")
+    productAddress.classList.add("col-sm-12")
     productAddress.textContent = `Location: ${product["formattedaddress"]}`
     productList.append(productAddress);
 
     const productAvailability = document.createElement("dd");
-    productAvailability.classList.add("col-sm-9")
+    productAvailability.classList.add("col-sm-12")
     productAvailability.textContent = `Availability: ${product["availability"]}`
     productList.append(productAvailability);
 
@@ -130,6 +132,7 @@ const productPage = (id) => {
       }
       const reviewElement = document.createElement("li");
       reviewElement.classList.add("list-group-item");
+      reviewElement.classList.add("text-left");
       reviewElement.innerHTML = `<span class="reviewDateTime">${productReviewDateTime}</span> <br><br> ${productReview}`;
       reviewUl.append(reviewElement);
     });
