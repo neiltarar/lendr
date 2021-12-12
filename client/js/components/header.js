@@ -14,19 +14,17 @@ function renderNotLoggedInNavbar() {
   header.innerHTML = `
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-        <a class="navbar-brand" onClick="renderHome()"><img height="60" width="60" src="./src/images/Logov2.png"alt="logo"/></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav justify-content-end w-100">
-            <a class="nav-link" aria-current="page" onClick="renderHome()">Home</a>
-            <a class="nav-link" onClick="renderLogin()">Host an Item</a>
-            <a class="nav-link" onClick="renderLogin()">Log in</a>
-            <a class="nav-link" onClick="renderSignUp()">Sign up</a>
-            
+          <a class="navbar-brand" onClick="renderHome()"><img height="60" width="60" src="./src/images/Logov2.png"alt="logo"/></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav justify-content-end w-100">
+                <a class="nav-link" aria-current="page" onClick="renderHome()">Home</a>
+                <a class="nav-link" onClick="renderLogin()">Host an Item</a>
+                <a class="nav-link" onClick="renderLogin()">Log in</a>
+                <a class="nav-link" onClick="renderSignUp()">Sign up</a>    
             </div>
-        </div>
         </div>
     </nav>`;
 }
@@ -42,11 +40,10 @@ function renderLoggedInNavbar() {
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav justify-content-end w-100">
-          <a class="nav-link" aria-current="page" onClick="renderHome()">Home</a>
-          <a onClick="renderNewProduct()" class="nav-link" href="#">Host an Item</a>
-          <a onClick="renderMyMessages()" class="nav-link" href="#">My Messages</a>
-          <a onClick="renderLogout()" class="nav-link" href="#">Log Out</a>
-          <a class="nav-link" onClick="uploadimage()">Upload Image</a>
+            <a class="nav-link" aria-current="page" onClick="renderHome()">Home</a>
+            <a onClick="renderNewProduct()" class="nav-link" href="#">Host an Item</a>
+            <a onClick="renderMyMessages()" class="nav-link" href="#">My Messages</a>
+            <a onClick="renderLogout()" class="nav-link" href="#">Log Out</a>
           </div>
       </div>
       </div>
