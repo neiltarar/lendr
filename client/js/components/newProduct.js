@@ -40,7 +40,11 @@ const renderNewProduct = () => {
         </div>
         <div>
           <label class="form-label">Upload Product Image</label>
-          <input class="w-100 form-control" type="file" name="product-image" required/>
+          <input class="w-100 form-control" type="file" name="product-image" />
+        </div>
+        <div>
+          <label class="form-label"for="description">Description: </label><br>
+          <input class="w-100 form-control" type="text" name="description">
         </div>
         <div>
           <label class="form-label"for="Price">Price: </label><br>

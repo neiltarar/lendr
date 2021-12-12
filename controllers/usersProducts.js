@@ -79,9 +79,32 @@ usersProductsController.delete("/:id", sessionAuth, (req, res) => {
 usersProductsController.post(
   "/host",
   upload.single("product-image"),
+  // req.file is the `profile-file` file
   function (req, res, next) {
-    // req.file is the `profile-file` file
-    console.log(JSON.stringify(req.file.path));
+    const {
+      name,
+      availability,
+      address,
+      latitude,
+      longitude,
+      formattedaddress,
+      category,
+      description,
+      price,
+    } = req.body;
+
+    const userId = req.session.userId;
+    const imageurl = req.file.path;
+    usersProductsDB.addNewProduct(
+      name,
+      description,
+      address,
+      availability,
+      imageurl,
+      category,
+      price,
+      userId
+    );
   }
 );
 

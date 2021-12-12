@@ -6,6 +6,7 @@ function handleSubmit(event) {
     const data = Object.fromEntries(formData.entries());
     axios.post("/", "product image").then((res) => {
       console.log("host new item response: ", res);
+      renderHome();
     });
   });
 }

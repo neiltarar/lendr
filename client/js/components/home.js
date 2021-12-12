@@ -105,7 +105,6 @@ function renderHome() {
 
       const productImage = document.createElement("a");
 
-      productImage.innerHTML = `<button type="button" class="imageButton"><img width=388 height=250  src="./src/images/001.jpg" class="rounded-top" alt="lawn mover"/></button>`;
       // const productImage = document.getElementById("productImage");
       if (productImage) {
         productImage.addEventListener("click", (event) => {
@@ -119,6 +118,7 @@ function renderHome() {
           });
         });
       }
+      productImage.innerHTML = `<button type="button" class="imageButton"><img width=388 height=250  src="${product.imageurl}" class="rounded-top" alt="lawn mover"/></button>`;
       productBox.append(productImage);
 
       const productInfo = document.createElement("div");
